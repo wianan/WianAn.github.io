@@ -1,0 +1,1273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>PicGo+Github搭建图床</title>
+    <url>/2022/04/25/ImageBed/</url>
+    <content><![CDATA[<h1 id="我为什么要搭建图床"><a href="#我为什么要搭建图床" class="headerlink" title="我为什么要搭建图床"></a>我为什么要搭建图床</h1><h2 id="1-认识图床"><a href="#1-认识图床" class="headerlink" title="1 认识图床"></a>1 认识图床</h2><p>图床简而言之就是用于储存图片的。</p>
+<p>网站、APP的所有图片都是储存在服务器，然后获得图片地址，就能把图片显示出来。一个大的网站，或者发展久了，服务器就会储存非常多的图片，也是一笔不小的经费，加上每张图片都有访问的请求，都会被占用服务器的流量或cdn流量。所以就诞生了图床。</p>
+<span id="more"></span>
+
+<h2 id="2-我为什么要用PicGo-GitHub搭建图床"><a href="#2-我为什么要用PicGo-GitHub搭建图床" class="headerlink" title="2 我为什么要用PicGo+GitHub搭建图床"></a>2 我为什么要用PicGo+GitHub搭建图床</h2><ul>
+<li><p>博客需要用图床，其实我对图床的依赖并不大，其次博客并不一定要用到图床。</p>
+</li>
+<li><p>GitHub免费，而且配置简单，使用优雅。最重要的是稳定。</p>
+</li>
+<li><p>支持Windows, macOS, Linux多平台，在不同平台都能使用</p>
+</li>
+</ul>
+<p><strong>注意：</strong><em><strong>隐私性很差</strong></em>。搭建图床时，使用的是public仓库。也就是说，每一个人都能访问你的图床，查看你的上传的图片。但是对我而言，我上传的都是一些博客图片，本来就是给大家看的。所以，这一点对我来说不成问题。</p>
+<h1 id="搭建图床"><a href="#搭建图床" class="headerlink" title="搭建图床"></a>搭建图床</h1><h2 id="1-配置Github"><a href="#1-配置Github" class="headerlink" title="1 配置Github"></a>1 配置Github</h2><h3 id="1-1新建仓库"><a href="#1-1新建仓库" class="headerlink" title="1.1新建仓库"></a>1.1新建仓库</h3><p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/PicGo+Gitub%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/1.png"></p>
+<p><strong>注意：</strong>一定要将仓库设置为public。因为后面使用图片时，算是外部访问，因此无法使用private仓库。</p>
+<h3 id="1-2-获取token"><a href="#1-2-获取token" class="headerlink" title="1.2 获取token"></a>1.2 获取token</h3><p>通过Setting -&gt; Developer settings -&gt; Personal access tokens到下图，然后点击Generate new token创建token</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/PicGo+Gitub%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/2.png"></p>
+<p>Note就是此token的名称，可随便命名。</p>
+<p>Expansion官方建议30天，到期再次申请。我怕麻烦，所以选的永久。</p>
+<p>复选框的话，repo 一定要全选，其他的无所谓，我是都勾选了。</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/PicGo+Gitub%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/3.png"></p>
+<p>生成后复制保存好token，一会在PicGo上还得用。</p>
+<h2 id="2-配置PicGo"><a href="#2-配置PicGo" class="headerlink" title="2 配置PicGo"></a>2 配置PicGo</h2><p>2.1 <a href="https://github.com/Molunerfinn/PicGo">PicGo下载链接</a>下载安装打开。</p>
+<p>2.2 找到图床设置中的Github图床。</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/PicGo+Gitub%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/4.png"></p>
+<p>2.3 填入信息。</p>
+<ul>
+<li>设定仓库名：上文在 GitHub 创建的仓库。</li>
+<li>设定分支名：main。</li>
+<li>设定 Token：上文生成的 token。</li>
+<li>指定存储路径：为空的话会上传到根目录，也可以指定路径。</li>
+<li>设定自定义域名：可以为空，这里为了使用 CDN 加快图片的访问速度，按这样格式填写：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://cdn.jsdelivr.net/gh/用户名/仓库名</span><br></pre></td></tr></table></figure>
+
+<p>2.4 至此，图床便搭建完成。</p>
+<h1 id="使用图床"><a href="#使用图床" class="headerlink" title="使用图床"></a>使用图床</h1><h2 id="1-上传图片"><a href="#1-上传图片" class="headerlink" title="1 上传图片"></a>1 上传图片</h2><p>只需将要上传的图片拖拽到上传区，或者在上传区点击上传。</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/PicGo+Gitub%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/5.png"></p>
+<h2 id="2-使用图片"><a href="#2-使用图片" class="headerlink" title="2 使用图片"></a>2 使用图片</h2><p>在相册中复制url即可，还可以选择自己要复制的格式。</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/PicGo+Gitub%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/6.png"></p>
+<hr>
+<center><b>如果有什么，可以通过下面的邮箱和我联系！！！</b></center>
+
+<p><a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=VCM9NTo1OhQlJXo3Ozk"><img data-src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png" alt="img"></a></p>
+]]></content>
+      <categories>
+        <category>博客</category>
+        <category>工具</category>
+        <category>图床</category>
+        <category>图床</category>
+      </categories>
+      <tags>
+        <tag>闲玩</tag>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo+Github搭建个人静态博客</title>
+    <url>/2022/04/26/Hexo+Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><h2 id="1-环境准备"><a href="#1-环境准备" class="headerlink" title="1 环境准备"></a>1 环境准备</h2><h3 id="1-1-安装Node-js"><a href="#1-1-安装Node-js" class="headerlink" title="1.1 安装Node.js"></a>1.1 安装Node.js</h3><ul>
+<li><a href="https://nodejs.org/zh-cn/">Node.js</a>	Hexo是基于Node.js写的，所以需要安装Node.js。一路next即可</li>
+</ul>
+<h3 id="1-2-安装Git"><a href="#1-2-安装Git" class="headerlink" title="1.2 安装Git"></a>1.2 安装Git</h3><ul>
+<li><a href="https://git-scm.com/">Git</a>	部署时要用到Git。不使用Git部署可以不用安装。安装时也是一路next即可。</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="2-Github准备"><a href="#2-Github准备" class="headerlink" title="2 Github准备"></a>2 Github准备</h2><h3 id="2-1创建仓库"><a href="#2-1创建仓库" class="headerlink" title="2.1创建仓库"></a>2.1创建仓库</h3><p><em><strong>注意：</strong></em>仓库名为 <u>用户名.github.io</u></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/Hexo+Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/1.png"></p>
+<h3 id="2-2-获取Token"><a href="#2-2-获取Token" class="headerlink" title="2.2 获取Token"></a>2.2 获取Token</h3><p>通过Setting -&gt; Developer settings -&gt; Personal access tokens到下图，然后点击Generate new token创建token</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/PicGo+Gitub%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/2.png"></p>
+<ul>
+<li><p>Note就是此token的名称，可随便命名。</p>
+</li>
+<li><p>Expansion官方建议30天，到期再次申请。我怕麻烦，所以选的永久。</p>
+</li>
+<li><p>复选框的话，全选。避免以后出现什么问题，重复申请Token。</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/PicGo+Gitub%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/3.png"></p>
+</li>
+</ul>
+<p>生成后复制保存好token，一会在站点配置时要用到。</p>
+<h3 id="2-3-配置SSH"><a href="#2-3-配置SSH" class="headerlink" title="2.3 配置SSH"></a>2.3 配置SSH</h3><ol>
+<li><p>桌面右键，点击git bash。</p>
+<p> <img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/Hexo+Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/2.png"></p>
+</li>
+<li><p>依次输出以下命令</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global  user.name &quot;这里换上你的用户名&quot;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这个用户名可以随便定义，建议为你GitHub的用户名</li>
+</ul>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.email &quot;这里换上你的邮箱&quot;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这里的邮箱是注册GitHub的邮箱账户</li>
+</ul>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;这里换上你的邮箱&quot;</span><br></pre></td></tr></table></figure>
+<p> 到这边时，连续按三次回车。
+ </p>
+</li>
+<li><p>打开系统盘下的用户目录下的.ssh文件夹下的id_rsa.pub文件，复制里面的内容</p>
+</li>
+</ol>
+<p>  <img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/Hexo+Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/3%EF%BC%81.png"></p>
+<ol start="4">
+<li>在Github中通过Setting-&gt;SSH and GPG keys路径，然后点击New SSH key，将复制的内容粘贴到Key中。</li>
+</ol>
+<p>  <img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/Hexo+Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/4.png"></p>
+<ul>
+<li>Title是随便命名的。</li>
+</ul>
+<p>  点击Add SSH key即配置成功。  </p>
+<h1 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h1><h2 id="1-安装Hexo"><a href="#1-安装Hexo" class="headerlink" title="1 安装Hexo"></a>1 安装Hexo</h2><ol>
+<li>右键git bash，输入以下命令，即可下载Hexo</li>
+</ol>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>通过下面的命令查看版本号，检验是否安装成功</p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建博客项目</p>
+</li>
+</ol>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo init 博客项目的名称(自定义)</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>初始化项目</li>
+</ol>
+<ul>
+<li><p>先切换项目的根路径下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd 博客项目的名称(自定义)</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>下载相关组件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="5">
+<li>本地启动博客</li>
+</ol>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>浏览器访问 <a href="http://localhost:4000，出现下图见面，则成功">http://localhost:4000，出现下图见面，则成功</a></li>
+</ol>
+<p>  <img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/Hexo+Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/5.png"></p>
+<h2 id="2-更换主题"><a href="#2-更换主题" class="headerlink" title="2 更换主题"></a>2 更换主题</h2><p>上图是默认主题，很丑对吧。在Hexo中有很多的主题供我们选择。我们可以访问<a href="https://hexo.io/themes/">Hexo</a>官网去选择自己喜欢的主题。</p>
+<ol>
+<li>下载复制到博客项目的themes路径下。在这我选择的是<a href="https://theme-next.js.org/">NexT</a>主题。</li>
+</ol>
+<p>  <img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/Hexo+Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/6.png"><br>2. 将根目录下的config.yml中theme后面的内容改为自己下载的主题的名称。<br>    <img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/Hexo+Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/7.png"></p>
+<p><em><strong>注意：</strong></em>每个主题的配置，都有对应的文档，请自行百度查找。</p>
+<h1 id="部署博客"><a href="#部署博客" class="headerlink" title="部署博客"></a>部署博客</h1><h2 id="方法一：Git部署"><a href="#方法一：Git部署" class="headerlink" title="方法一：Git部署"></a>方法一：Git部署</h2><ol>
+<li>安装hexo-deployer-git</li>
+</ol>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>修改项目根目录下的config.yml。在最后找到deploy，填写相关信息</li>
+</ol>
+<p>  <img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/Hexo+Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/8.png"></p>
+<ul>
+<li>type: 方式就是git</li>
+<li>reop: git@github@.com:用户名&#x2F;仓库名.git</li>
+<li>branch: main</li>
+<li>token: 前面创建的token，复制到这即可。</li>
+</ul>
+<ol start="3">
+<li>执行下面命令，即可部署成功。</li>
+</ol>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
+
+<h2 id="方式二：直接上传-十分麻烦，不推荐"><a href="#方式二：直接上传-十分麻烦，不推荐" class="headerlink" title="方式二：直接上传(十分麻烦，不推荐)"></a>方式二：直接上传(十分麻烦，不推荐)</h2><ol>
+<li>执行下面命令</li>
+</ol>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>将根目录下的public里的所有文件上传到仓库中。</li>
+</ol>
+<p>  <img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/Hexo+Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/9.png"></p>
+<h1 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h1><p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/Hexo+Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/0000.png"></p>
+<hr>
+<center><b>如果有什么，可以通过下面的邮箱和我联系！！！</b></center>
+
+<p><a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=VCM9NTo1OhQlJXo3Ozk"><img data-src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png" alt="img"></a></p>
+]]></content>
+      <categories>
+        <category>博客</category>
+        <category>创建</category>
+      </categories>
+      <tags>
+        <tag>闲玩</tag>
+        <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Markdown语法</title>
+    <url>/2022/05/01/Markdown/</url>
+    <content><![CDATA[<h1 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h1><h2 id="1-标记语法："><a href="#1-标记语法：" class="headerlink" title="1. 标记语法："></a>1. 标记语法：</h2><p>Markdown共有六级标题。用 # 数量可快速标记。一个 # 是一级标题，两个 # 是二级标题，以此类推。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">#### 四级标题</span><br><span class="line">##### 五级标题</span><br><span class="line">###### 六级标题</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="2-快捷键："><a href="#2-快捷键：" class="headerlink" title="2. 快捷键："></a>2. 快捷键：</h2><p>Ctrl+标题等级。如设置为一级标题，则为Ctrl+1。</p>
+<p>标题等级提升降低：Ctrl+&#x3D; 和 Ctrl-&#x3D;</p>
+<blockquote>
+<p>若设置为普通段落，则为Ctrl+0  </p>
+</blockquote>
+<h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h1><h2 id="1-无序列表"><a href="#1-无序列表" class="headerlink" title="1 无序列表"></a>1 无序列表</h2><h3 id="1-1-效果："><a href="#1-1-效果：" class="headerlink" title="1.1 效果："></a>1.1 效果：</h3><ul>
+<li>第二排</li>
+<li>第二排</li>
+<li>第三排</li>
+</ul>
+<h3 id="1-2-标记语法"><a href="#1-2-标记语法" class="headerlink" title="1.2 标记语法"></a>1.2 标记语法</h3><p>一共有三种字符可以标记，* ，+  ，- 。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">第一种</span><br><span class="line">* 第二排</span><br><span class="line">* 第二排</span><br><span class="line">* 第三排</span><br><span class="line"></span><br><span class="line">第二种</span><br><span class="line">- 第一排</span><br><span class="line">- 第二排</span><br><span class="line">- 第三排</span><br><span class="line"></span><br><span class="line">第三种</span><br><span class="line">+ 第一排</span><br><span class="line">+ 第二排</span><br><span class="line">+ 第三排</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-快捷键"><a href="#1-3-快捷键" class="headerlink" title="1.3 快捷键"></a>1.3 快捷键</h3><p>Ctrl + Shift + ]</p>
+<h2 id="2-有序列表"><a href="#2-有序列表" class="headerlink" title="2 有序列表"></a>2 有序列表</h2><h3 id="2-1-效果"><a href="#2-1-效果" class="headerlink" title="2.1 效果"></a>2.1 效果</h3><ol>
+<li>第一行 </li>
+<li>第二行</li>
+</ol>
+<h3 id="2-2-标记语法"><a href="#2-2-标记语法" class="headerlink" title="2.2 标记语法"></a>2.2 标记语法</h3><p>相比于无序列表来说。有序的字符标记语法较少，只有一种。数字+. 然后空格。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 第一行 </span><br><span class="line">2. 第二行</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-快捷键"><a href="#2-3-快捷键" class="headerlink" title="2.3 快捷键"></a>2.3 快捷键</h3><p>Ctrl + Shift + [</p>
+<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><h2 id="1-效果"><a href="#1-效果" class="headerlink" title="1 效果"></a>1 效果</h2><ol>
+<li><p>非嵌套：</p>
+<blockquote>
+<p>子曰：上午不睡，下午崩溃！</p>
+</blockquote>
+</li>
+<li><p>嵌套：</p>
+<blockquote>
+<p>孔子曰：上午不睡，下午崩溃！</p>
+<blockquote>
+<p>子曰：上午不睡，下午崩溃！</p>
+<blockquote>
+<p>曰：上午不睡，下午崩溃！</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+</ol>
+<h2 id="2-标记语法"><a href="#2-标记语法" class="headerlink" title="2 标记语法"></a>2 标记语法</h2><ol>
+<li><p>非嵌套</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; 子曰：上午不睡，下午崩溃！</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>嵌套：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; 孔子曰：上午不睡，下午崩溃！</span><br><span class="line">&gt; &gt; 子曰：上午不睡，下午崩溃！</span><br><span class="line">&gt; &gt; &gt; 曰：上午不睡，下午崩溃！</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="3-快捷键"><a href="#3-快捷键" class="headerlink" title="3 快捷键"></a>3 快捷键</h2><p>Ctrl  + Shift + Q</p>
+<h1 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h1><h2 id="1-效果-1"><a href="#1-效果-1" class="headerlink" title="1 效果"></a>1 效果</h2><ol>
+<li><p>代码片</p>
+<p><code>System.out.print(&quot;hello world&quot;);</code></p>
+</li>
+<li><p>代码块</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.print(<span class="string">&quot;hello world&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="2-标记语法-1"><a href="#2-标记语法-1" class="headerlink" title="2 标记语法"></a>2 标记语法</h2><ol>
+<li><p>代码片</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">`System.out.print(&quot;hello world&quot;)`</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>代码块</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">``` 然后回车，再输入System.out.print(&quot;hello world&quot;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在(&#96;&#96;&#96;)后可以接上语言类型，让代码块的关键字高亮</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="3-快捷键-1"><a href="#3-快捷键-1" class="headerlink" title="3 快捷键"></a>3 快捷键</h2><ol>
+<li>代码片：Ctrl + Shift + &#96;</li>
+<li>代码块：无</li>
+</ol>
+<h1 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h1><h2 id="1-效果-2"><a href="#1-效果-2" class="headerlink" title="1 效果"></a>1 效果</h2><p><a href="http://wian.tk/">本站地址</a></p>
+<h2 id="2-标记语法-2"><a href="#2-标记语法-2" class="headerlink" title="2 标记语法"></a>2 标记语法</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[本站地址](http://wian.tk)</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-快捷键-2"><a href="#3-快捷键-2" class="headerlink" title="3 快捷键"></a>3 快捷键</h2><p>Ctrl + K</p>
+<h1 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h1><h2 id="1-效果-3"><a href="#1-效果-3" class="headerlink" title="1 效果"></a>1 效果</h2><p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/Avatar/avatar.jpg" alt="这是一张图片"></p>
+<h2 id="2-标记语法-3"><a href="#2-标记语法-3" class="headerlink" title="2 标记语法"></a>2 标记语法</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">![这是一张图片](https://cdn.jsdelivr.net/gh/WianAn/imageBed/Avatar/avatar.jpg)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>[]中输入图片的标记</li>
+<li>()中输入图片地址，可以是url，也可以使本地地址。</li>
+</ul>
+<h2 id="3-快捷键-3"><a href="#3-快捷键-3" class="headerlink" title="3 快捷键"></a>3 快捷键</h2><p>Ctrl + Shift + I</p>
+<h1 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h1><h2 id="1-效果-4"><a href="#1-效果-4" class="headerlink" title="1 效果"></a>1 效果</h2><p><em>斜体文本</em>	<em>斜体文本</em></p>
+<p><strong>粗体文本</strong>	<strong>粗体文本</strong></p>
+<p><em><strong>粗斜体文本</strong></em>	<em><strong>粗斜体文本</strong></em></p>
+<h2 id="2-标记语法-4"><a href="#2-标记语法-4" class="headerlink" title="2 标记语法"></a>2 标记语法</h2><p>有两种标记字符 * 和 _	</p>
+<p>用法如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*斜体文本*</span><br><span class="line">_斜体文本_</span><br><span class="line">**粗体文本**</span><br><span class="line">__粗体文本__</span><br><span class="line">***粗斜体文本***</span><br><span class="line">___粗斜体文本___</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-快捷键-4"><a href="#3-快捷键-4" class="headerlink" title="3 快捷键"></a>3 快捷键</h2><ul>
+<li>斜体：Ctrl + I</li>
+<li>加粗：Ctrl + B</li>
+</ul>
+<h1 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h1><h2 id="1-效果-5"><a href="#1-效果-5" class="headerlink" title="1 效果"></a>1 效果</h2><table>
+<thead>
+<tr>
+<th>标题1</th>
+<th>标题1</th>
+<th>标题1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>单元格1</td>
+<td>单元格2</td>
+<td>单元格3</td>
+</tr>
+</tbody></table>
+<h2 id="2-标记语法-5"><a href="#2-标记语法-5" class="headerlink" title="2 标记语法"></a>2 标记语法</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">| 标题1 | 标题2 | 标题3 |</span><br><span class="line">| ---- | ---- | ---- |</span><br><span class="line">| 单元格1 | 单元格2 | 单元格3|</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-快捷键-5"><a href="#3-快捷键-5" class="headerlink" title="3 快捷键"></a>3 快捷键</h2><p>Ctrl + T</p>
+<h2 id="4-注意"><a href="#4-注意" class="headerlink" title="4 注意"></a>4 注意</h2><ul>
+<li>增加行：Ctrl + enter</li>
+<li>删除行：Ctrl + Shift + backspace(删除键)</li>
+</ul>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="1-删除线"><a href="#1-删除线" class="headerlink" title="1 删除线"></a>1 删除线</h2><h3 id="1-1-效果"><a href="#1-1-效果" class="headerlink" title="1.1 效果"></a>1.1 效果</h3><p><del>删除线</del></p>
+<h3 id="1-2-标记语法-1"><a href="#1-2-标记语法-1" class="headerlink" title="1.2 标记语法"></a>1.2 标记语法</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">~~被删除内容~~</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-快捷键-1"><a href="#1-3-快捷键-1" class="headerlink" title="1.3 快捷键"></a>1.3 快捷键</h3><p>Alt + Shift + 5</p>
+<h2 id="2-下划线"><a href="#2-下划线" class="headerlink" title="2 下划线"></a>2 下划线</h2><h3 id="2-1-效果-1"><a href="#2-1-效果-1" class="headerlink" title="2.1 效果"></a>2.1 效果</h3><p><u>下划线</u></p>
+<h3 id="2-2-标记语法-1"><a href="#2-2-标记语法-1" class="headerlink" title="2.2 标记语法"></a>2.2 标记语法</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;u&gt;下划线&lt;/u&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-快捷键-1"><a href="#2-3-快捷键-1" class="headerlink" title="2.3 快捷键"></a>2.3 快捷键</h3><p>Ctrl + U</p>
+<h2 id="3-分割线"><a href="#3-分割线" class="headerlink" title="3 分割线"></a>3 分割线</h2><h3 id="3-1-效果"><a href="#3-1-效果" class="headerlink" title="3.1 效果"></a>3.1 效果</h3><p>下面是下划线</p>
+<hr>
+<hr>
+<h3 id="3-2-标记语法"><a href="#3-2-标记语法" class="headerlink" title="3.2 标记语法"></a>3.2 标记语法</h3><p>你可以在一行中用三个以上的星号、减号、底线来建立一个分隔线，行内不能有其他东西。你也可以在星号或是减号中间插入空格。下面每种写法都可以建立分隔线：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">***</span><br><span class="line"></span><br><span class="line">* * *</span><br><span class="line"></span><br><span class="line">*****</span><br><span class="line"></span><br><span class="line">- - -</span><br><span class="line"></span><br><span class="line">----------</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3快捷键"><a href="#3-3快捷键" class="headerlink" title="3.3快捷键"></a>3.3快捷键</h3><p>无</p>
+<hr>
+<center><b>如果有什么，可以通过下面的邮箱和我联系！！！</b></center>
+
+<p><a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=VCM9NTo1OhQlJXo3Ozk"><img data-src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png" alt="img"></a></p>
+]]></content>
+      <categories>
+        <category>工具</category>
+        <category>Typora</category>
+      </categories>
+      <tags>
+        <tag>闲玩</tag>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git应用</title>
+    <url>/2022/05/02/Git/</url>
+    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ol>
+<li><p>Git 是一个免费和开源的分布式版本控制系统，旨在以速度和效率处理从小型到大型项目的所有内容。可以有效、高速地处理从很小到非常大的项目版本管理。 也是Linus Torvalds为了帮助管理Linux内核开发而开发的一个开放源码的版本控制软件。Torvalds 开始着手开发 Git 是为了作为一种过渡方案来替代 BitKeeper</p>
+<span id="more"></span>
+</li>
+<li><p>Git易于学习， 占用空间小，性能快如闪电。它优于 SCM 工具，如 Subversion、CVS、Perforce 和 ClearCase，具有、方便和等功能。</p>
+</li>
+<li><p>分布式版本控制系统没有“中央服务器”，每个人的电脑上都是一个完整的版本库，这样工作的时候，无需要联网了，因为版本库就在你自己的电脑上。多人协作只需要各自的修改推送给对方，就能互相看到对方的 修改了。</p>
+</li>
+</ol>
+<h1 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h1><p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/Git/1.png"></p>
+<p>上图所展示的便是Git的核心，只有充分理解上图，才能很哈的使用Git这一工具。</p>
+<p>主要分为四部分：</p>
+<ul>
+<li>远程仓库(GitHub, Gitee等托管平台)。</li>
+<li>本地仓库：在自己的项目根目录，通过在Git bash中使用git init命令创建仓库。</li>
+<li>暂存区：当我们的代码完成了一个阶段，我们想当前的这个版本在本地仓库进行保存一个版本，也就是commit操作，但是假如我们每次文件修改后都需要进行一次commit，会比较麻烦，所以Git给我们提供了一种方式，就是将修改的文件进行一次add操作，添加到暂存区中，在进行了一些add之后，统一进行commit操作。当然也可以直接每次add之后就进行commit。</li>
+<li>工作区：我们在资源管理器里可以看到的文件就是我们的工作区</li>
+</ul>
+<p>上图中所展示的命令如下(下文也会说到)：</p>
+<ol>
+<li>clone（克隆）: 从远程仓库中克隆代码到本地仓库</li>
+<li>checkout （检出）:从本地仓库中检出一个仓库分支然后进行修订</li>
+<li>add（添加）: 在提交前先将代码提交到暂存区</li>
+<li>commit（提交）: 提交到本地仓库。本地仓库中保存修改的各个历史版本 </li>
+<li>fetch (抓取) ： 从远程库，抓取到本地仓库，不进行任何的合并动作，一般操作比较少。</li>
+<li>pull (拉取) ： 从远程库拉到本地库，自动进行合并(merge)，然后放到到工作区，相当于 fetch+merge </li>
+<li>push（推送） : 修改完成后，需要和团队成员共享代码时，将代码推送到远程仓库</li>
+</ol>
+<h1 id="基础配置"><a href="#基础配置" class="headerlink" title="基础配置"></a>基础配置</h1><h2 id="1-配置用户信息"><a href="#1-配置用户信息" class="headerlink" title="1 配置用户信息"></a>1 配置用户信息</h2><p>在Git bash中输入以下命令即可</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;用户名&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.email <span class="string">&quot;邮箱地址&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-查看用户信息"><a href="#2-查看用户信息" class="headerlink" title="2 查看用户信息"></a>2 查看用户信息</h2><p>在Git bash中输入以下命令即可</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.email</span><br></pre></td></tr></table></figure>
+
+<p>也可以通过下面的命令直接查出</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global  --list</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-为命令起别名"><a href="#3-为命令起别名" class="headerlink" title="3 为命令起别名"></a>3 为命令起别名</h2><ol>
+<li><p>在用户目录创建.bashrc文件。</p>
+</li>
+<li><p>在此文件中添加别名</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">alias</span> 别名=<span class="string">&#x27;原始命令&#x27;</span>				<span class="comment">#基本格式</span></span><br><span class="line"><span class="comment">#举例</span></span><br><span class="line"><span class="built_in">alias</span> gitlog=<span class="string">&#x27;git log --pretty=oneline --all --graph --abbrev-commit&#x27;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开Git bash，执行以下命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="4-处理中文乱码"><a href="#4-处理中文乱码" class="headerlink" title="4 处理中文乱码"></a>4 处理中文乱码</h2><ol>
+<li><p>在Git bash中输入以下命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global core.quotepath <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开Git安装命令，找到etc&#x2F;bash.bashrc 文件末尾添加以下信息</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> LANG=<span class="string">&quot;zh_CN.UTF-8&quot;</span></span><br><span class="line"><span class="built_in">export</span> LC_ALL=<span class="string">&quot;zh_CN.UTF-8&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h1><h2 id="1-将文件添加至暂存区"><a href="#1-将文件添加至暂存区" class="headerlink" title="1 将文件添加至暂存区"></a>1 将文件添加至暂存区</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add 文件名			<span class="comment">#将指定文件上传至暂存区</span></span><br><span class="line">git add .			  <span class="comment">#将工作区的所有文件上传至暂存区</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-将文件提交到本地仓库"><a href="#2-将文件提交到本地仓库" class="headerlink" title="2 将文件提交到本地仓库"></a>2 将文件提交到本地仓库</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;XXXX&quot;</span>   </span><br><span class="line"><span class="comment">#将暂存区的所有文件提交到本地仓库其中 XXX 表示提交时，对此次操作的标记</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-查看文件状态"><a href="#3-查看文件状态" class="headerlink" title="3 查看文件状态"></a>3 查看文件状态</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git status             <span class="comment">#查看文件现在所处的状态</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-查看日志"><a href="#4-查看日志" class="headerlink" title="4 查看日志"></a>4 查看日志</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">log</span> -参数</span><br></pre></td></tr></table></figure>
+
+<p>参数：</p>
+<ul>
+<li>–all 显示所有分支 </li>
+<li>–pretty&#x3D;oneline 将提交信息显示为一行 </li>
+<li>–abbrev-commit 使得输出的commitId更简短 </li>
+<li>–graph 以图的形式显示</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">log</span>				<span class="comment">#所展示的内容很少，基本很少使用</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>一般采用命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git-log=<span class="string">&#x27;git log --pretty=oneline --all --graph --abbrev-commit</span></span><br></pre></td></tr></table></figure>
+
+<p>但使用时较为复杂，我们可以为命令起别名。在基础配置中可以看到。</p>
+<h2 id="5-版本回退"><a href="#5-版本回退" class="headerlink" title="5 版本回退"></a>5 版本回退</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset --hard commit_id			<span class="comment">#commit_id通过查日志得等</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果提交记录被删除，不能获得commit_id。可以通过git reflog查询。</p>
+</blockquote>
+<h1 id="忽略文件"><a href="#忽略文件" class="headerlink" title="忽略文件"></a>忽略文件</h1><h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1 简介"></a>1 简介</h2><p>在我们的项目中，有许许多多的文件。但不是所有的文件(比如：java项目下的字节码文件，日志文件等等)我们都不需要上传至代码托管平台。对于这种文件，我们可以在工作目录中创建一个名为 .gitignore 的文件。列出要忽略的文件模式。</p>
+<h2 id="2-语法"><a href="#2-语法" class="headerlink" title="2 语法"></a>2 语法</h2><p>下面是几种常见的忽略格式：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">*.文件后缀名		   <span class="comment">#如: *.txt		  忽略所有以.txt为后缀的文件</span></span><br><span class="line">/目录名			 <span class="comment">#如: /temp		   忽略根目录下的temp目录</span></span><br><span class="line">目录名/			 <span class="comment">#如: temp/		   忽略temp目录下的所有文件</span></span><br><span class="line">目录名/*.文件后缀名	  <span class="comment">#如: temp/*.txt	忽略temp目录下的所有以txt后缀结尾的文件</span></span><br><span class="line"><span class="comment"># 注意：</span></span><br><span class="line">!文件名.文件后缀表	  <span class="comment">#常嵌套上的的格式使用。表示此文件除外。 如: *.txt  !test.txt   </span></span><br><span class="line">				   <span class="comment">#忽略所有以txt后缀结尾的文件，但test.txt除外</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="分支命令"><a href="#分支命令" class="headerlink" title="分支命令"></a>分支命令</h1><h2 id="1-查看分支"><a href="#1-查看分支" class="headerlink" title="1 查看分支"></a>1 查看分支</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-创建分支"><a href="#2-创建分支" class="headerlink" title="2 创建分支"></a>2 创建分支</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch 分支名</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-切换分支"><a href="#3-切换分支" class="headerlink" title="3 切换分支"></a>3 切换分支</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout 分支名</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-创建并切换分支"><a href="#4-创建并切换分支" class="headerlink" title="4 创建并切换分支"></a>4 创建并切换分支</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -b 分支名</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-合并分支"><a href="#4-合并分支" class="headerlink" title="4 合并分支"></a>4 合并分支</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git merge 分支名</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-删除分支"><a href="#5-删除分支" class="headerlink" title="5 删除分支"></a>5 删除分支</h2><blockquote>
+<p>只能删除其他分支，不能删除当前分支 </p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -d 分支名	<span class="comment">#删除分支时，需要检查</span></span><br><span class="line">git branch -D 分支名	<span class="comment">#删除分支时，不做检查，强制删除。</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="6-解决冲突"><a href="#6-解决冲突" class="headerlink" title="6 解决冲突"></a>6 解决冲突</h2><p>当多个分支同时对同一个文件的同一个位置修改时，在合并分支时便会产生冲突。</p>
+<p>解决方法：</p>
+<ol>
+<li>处理冲突产生的文件(分支的开发者讨论使用一个分支的内容)</li>
+<li>重新上传。</li>
+</ol>
+<h1 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h1><h2 id="1-添加远程仓库"><a href="#1-添加远程仓库" class="headerlink" title="1 添加远程仓库"></a>1 添加远程仓库</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote add 远端名称 仓库路径</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>远端名称：默认是origin，可以自定义</li>
+<li>仓库路径：从码云仓库主页获取</li>
+</ul>
+<h2 id="2-查看远程仓库"><a href="#2-查看远程仓库" class="headerlink" title="2 查看远程仓库"></a>2 查看远程仓库</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-推送到远程仓库"><a href="#3-推送到远程仓库" class="headerlink" title="3 推送到远程仓库"></a>3 推送到远程仓库</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push [-f] [--set-upstream] [[远端名称 [本地分支名][远端分支名]]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果远端分支名和本地分支名一样，则可以省略远端分支名</li>
+<li>-f ：强制覆盖</li>
+<li>–set-upstream ： 推送到远端的同时并且建立起和远端分支的关联关系。</li>
+<li>如果当前分支已经和远端分支关联，则可以省略分支名和远端名。</li>
+</ul>
+<h2 id="4-查看本地远程关系"><a href="#4-查看本地远程关系" class="headerlink" title="4 查看本地远程关系"></a>4 查看本地远程关系</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -vv</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-从远程仓库克隆"><a href="#5-从远程仓库克隆" class="headerlink" title="5 从远程仓库克隆"></a>5 从远程仓库克隆</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> 仓库路径 [本地目录]	<span class="comment">#本地目录可以省略，会自动生成本地目录</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="6-从远程仓库中抓取和拉取"><a href="#6-从远程仓库中抓取和拉取" class="headerlink" title="6 从远程仓库中抓取和拉取"></a>6 从远程仓库中抓取和拉取</h2><h3 id="1-抓取"><a href="#1-抓取" class="headerlink" title="1 抓取"></a>1 抓取</h3><p>抓取指令就是将仓库里的更新都抓取到本地，不会进行合并</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git fetch [remote name] [branch name]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果不指定远端名称和分支名，则抓取所有分支。</li>
+</ul>
+<h3 id="2-拉取"><a href="#2-拉取" class="headerlink" title="2 拉取"></a>2 拉取</h3><p>拉取指令就是将远端仓库的修改拉到本地并自动进行合并，等同于fetch+merge</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git pull [remote name] [branch name]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果不指定远端名称和分支名，则抓取所有并更新当前分支。</li>
+</ul>
+<h2 id="7-解决合并冲突"><a href="#7-解决合并冲突" class="headerlink" title="7 解决合并冲突"></a>7 解决合并冲突</h2><p><strong>概述</strong>：在某一段时间内，有甲、乙两个人相继修改了同一个文件中的代码。此时就会出现合并冲突</p>
+<p><strong>解决方法</strong>：甲先推送到远程仓库后，乙拉取到本地修改后再推送到远程仓库。</p>
+<hr>
+<center><b>如果有什么，可以通过下面的邮箱和我联系！！！</b></center>
+
+<p><a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=VCM9NTo1OhQlJXo3Ozk"><img data-src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png" alt="img"></a></p>
+]]></content>
+      <categories>
+        <category>工具</category>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>闲玩</tag>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL基础知识</title>
+    <url>/2022/04/28/MySQL/</url>
+    <content><![CDATA[<h1 id="通用语法"><a href="#通用语法" class="headerlink" title="通用语法"></a>通用语法</h1><ul>
+<li>Sql语句可以单行或者多行书写，但是必须以分号结束。只有以分号结束才是一个完整的Sql语句。</li>
+<li>Mysql数据库的语句不区分大小写，关键字建议大写，便于区分。</li>
+<li>注释：<ul>
+<li>单行注释：- - 或者#</li>
+<li>多行注释：&#x2F;* 被注释内容*&#x2F;</li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+
+
+
+<h1 id="DDL"><a href="#DDL" class="headerlink" title="DDL"></a>DDL</h1><p>DDL(Data Definition Language) ： 数据定义语言，用来定义数据库对象：数据库，表，列等</p>
+<p>DDL简单理解就是用来操作数据库，表等</p>
+<h2 id="1-操作数据库"><a href="#1-操作数据库" class="headerlink" title="1 操作数据库"></a>1 操作数据库</h2><h3 id="1-1-查询所有的数据库"><a href="#1-1-查询所有的数据库" class="headerlink" title="1.1 查询所有的数据库"></a>1.1 查询所有的数据库</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> DATABASES;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-创建数据库"><a href="#1-2-创建数据库" class="headerlink" title="1.2 创建数据库"></a>1.2 创建数据库</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> DATABASE 数据库名称;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-删除数据库"><a href="#1-3-删除数据库" class="headerlink" title="1.3 删除数据库"></a>1.3 删除数据库</h3><ul>
+<li><p>知道存在，直接删除</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> DATABASE 数据库名称;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不知道是否存在，添加判断语句。若存在，则删除</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> DATABASE IF <span class="keyword">EXISTS</span> 数据库名称;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="1-4-使用数据库"><a href="#1-4-使用数据库" class="headerlink" title="1.4 使用数据库"></a>1.4 使用数据库</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">USE 数据库名称;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-5-查看当前数据库"><a href="#1-5-查看当前数据库" class="headerlink" title="1.5 查看当前数据库"></a>1.5 查看当前数据库</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> DATABASE();</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-操作表"><a href="#2-操作表" class="headerlink" title="2 操作表"></a>2 操作表</h2><h3 id="2-1-查询当前数据库下所有的表"><a href="#2-1-查询当前数据库下所有的表" class="headerlink" title="2.1 查询当前数据库下所有的表"></a>2.1 查询当前数据库下所有的表</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> TABLES;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-查询表结构"><a href="#2-2-查询表结构" class="headerlink" title="2.2 查询表结构"></a>2.2 查询表结构</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DESC</span> 表名称;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-创建表"><a href="#2-3-创建表" class="headerlink" title="2.3 创建表"></a>2.3 创建表</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> 表名 (</span><br><span class="line">	字段名<span class="number">1</span>	数据类型<span class="number">1</span>,</span><br><span class="line">	字段名<span class="number">1</span>	数据类型<span class="number">1</span>,</span><br><span class="line">	...</span><br><span class="line">	字段名n	数据类型n</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-删除表："><a href="#2-4-删除表：" class="headerlink" title="2.4 删除表："></a>2.4 删除表：</h3><ul>
+<li><p>知道存在，直接删除</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> 表名;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不知道是否存在，添加判断语句。若存在，则删除</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> 表名;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="2-5-修改表："><a href="#2-5-修改表：" class="headerlink" title="2.5 修改表："></a>2.5 修改表：</h3><h4 id="2-5-1-修改表名"><a href="#2-5-1-修改表名" class="headerlink" title="2.5.1 修改表名"></a>2.5.1 修改表名</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> 表名 RENAME <span class="keyword">TO</span> 新表名;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-5-2-添加列："><a href="#2-5-2-添加列：" class="headerlink" title="2.5.2 添加列："></a>2.5.2 添加列：</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> 表名 <span class="keyword">ADD</span> 添加的列名 添加的列的数据类型;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-5-3-修改列的数据类型"><a href="#2-5-3-修改列的数据类型" class="headerlink" title="2.5.3 修改列的数据类型"></a>2.5.3 修改列的数据类型</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span>　表名　MODIFY　列名　新的数据类型;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-5-4-同时修改列名和数据类型"><a href="#2-5-4-同时修改列名和数据类型" class="headerlink" title="2.5.4 同时修改列名和数据类型"></a>2.5.4 同时修改列名和数据类型</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span>　表名　列名　新的数据类型;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-5-5-删除列"><a href="#2-5-5-删除列" class="headerlink" title="2.5.5 删除列"></a>2.5.5 删除列</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span>　表名　<span class="keyword">DROP</span>　列名;</span><br></pre></td></tr></table></figure>
+
+<p>​			</p>
+<h1 id="DML"><a href="#DML" class="headerlink" title="DML"></a>DML</h1><p>DML(Data Manipulation Language) 数据操作语言，用来对数据库中表的数据进行增删改</p>
+<p>DML简单理解就对表中数据进行增删改</p>
+<h2 id="1-添加数据"><a href="#1-添加数据" class="headerlink" title="1 添加数据"></a>1 添加数据</h2><h3 id="1-1-给指定列添加数据"><a href="#1-1-给指定列添加数据" class="headerlink" title="1.1 给指定列添加数据"></a>1.1 给指定列添加数据</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> 表名(列名<span class="number">1</span>,列名<span class="number">2.</span>..) <span class="keyword">VALUES</span>(值<span class="number">1</span>,值<span class="number">2.</span>..);</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-给全部列添加数据"><a href="#1-2-给全部列添加数据" class="headerlink" title="1.2 给全部列添加数据"></a>1.2 给全部列添加数据</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> 表名 <span class="keyword">VALUES</span>(值<span class="number">1</span>,值<span class="number">2.</span>..);</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-批量添加数据"><a href="#1-3-批量添加数据" class="headerlink" title="1.3 批量添加数据"></a>1.3 批量添加数据</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> 表名(列名<span class="number">1</span>,列名<span class="number">2.</span>..) </span><br><span class="line"><span class="keyword">VALUES</span></span><br><span class="line">		(值<span class="number">1</span>,值<span class="number">2.</span>..),</span><br><span class="line">		(值<span class="number">1</span>,值<span class="number">2.</span>..),</span><br><span class="line">		(值<span class="number">1</span>,值<span class="number">2.</span>..),</span><br><span class="line">		...</span><br><span class="line">		(值<span class="number">1</span>,值<span class="number">2.</span>..);</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-修改数据"><a href="#2-修改数据" class="headerlink" title="2 修改数据"></a>2 修改数据</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> 表名 <span class="keyword">SET</span> 列名<span class="number">1</span><span class="operator">=</span>值<span class="number">1</span>, 列名<span class="number">2</span><span class="operator">=</span>值<span class="number">2</span>, ... [<span class="keyword">WHERE</span> 条件]</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-删除数据："><a href="#3-删除数据：" class="headerlink" title="3 删除数据："></a>3 删除数据：</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> 表名 [<span class="keyword">WHERE</span> 条件]</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="DQL"><a href="#DQL" class="headerlink" title="DQL"></a>DQL</h1><p>DQL(Data Query Language) 数据查询语言，用来查询数据库中表的记录(数据)</p>
+<p>DQL简单理解就是对数据进行查询操作。从数据库表中查询到我们想要的数据。</p>
+<h2 id="1-基础查询"><a href="#1-基础查询" class="headerlink" title="1 基础查询"></a>1 基础查询</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 字段列表 <span class="keyword">FROM</span> 表名;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> 表名; <span class="comment">--查询所有数据(*为所有字段)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-条件查询"><a href="#2-条件查询" class="headerlink" title="2 条件查询"></a>2 条件查询</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 字段列表 <span class="keyword">FROM</span> 表名 <span class="keyword">WHERE</span> 条件列表;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>下面为条件查询能够使用的运算符。</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&gt;</td>
+<td>大于</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>小于</td>
+</tr>
+<tr>
+<td>&gt;&#x3D;</td>
+<td>大于等于</td>
+</tr>
+<tr>
+<td>&lt;&#x3D;</td>
+<td>小于等于</td>
+</tr>
+<tr>
+<td>&#x3D;</td>
+<td>等于</td>
+</tr>
+<tr>
+<td>&lt;&gt;或者!&#x3D;</td>
+<td>不等于</td>
+</tr>
+<tr>
+<td>BETWEEN…AND…</td>
+<td>在某个范围之间(前后都包含)</td>
+</tr>
+<tr>
+<td>IN(…)</td>
+<td>多选一 满足其中一个即可</td>
+</tr>
+<tr>
+<td>LIKE占位符</td>
+<td>模糊查询 _单个任意字符 %多个任意字符</td>
+</tr>
+<tr>
+<td>IS NULL</td>
+<td>是NULL</td>
+</tr>
+<tr>
+<td>IS NOT NULL</td>
+<td>不是NULL</td>
+</tr>
+<tr>
+<td>AND或&amp;&amp;</td>
+<td>并且</td>
+</tr>
+<tr>
+<td>OR或||</td>
+<td>或者</td>
+</tr>
+<tr>
+<td>NOT或！</td>
+<td>非，不是</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>模糊查询：就是查询只知道部分信息来查数据</p>
+</li>
+</ul>
+<h2 id="3-排序查询"><a href="#3-排序查询" class="headerlink" title="3 排序查询"></a>3 排序查询</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 字段列表 <span class="keyword">FROM</span> 表名 <span class="keyword">ORDER</span> <span class="keyword">BY</span> 排序字段名<span class="number">1</span> [排序方式],排序字段名<span class="number">2</span> [排序方式]...;</span><br></pre></td></tr></table></figure>
+
+<p>排序方式有两种：</p>
+<ul>
+<li>ASC：升序排列 (默认值)</li>
+<li>DESC：降序排列</li>
+</ul>
+<p>注意：如果有多个排序条件，当前面的条件值一样时，才会根据第二条件进行排序。</p>
+<h2 id="4-聚合函数"><a href="#4-聚合函数" class="headerlink" title="4 聚合函数"></a>4 聚合函数</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 聚合函数名(列名) <span class="keyword">FROM</span> 表;</span><br></pre></td></tr></table></figure>
+
+<p>函数分类：</p>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>count(列名)</td>
+<td>统计数量（一般选用不为null的列）</td>
+</tr>
+<tr>
+<td>max(列名)</td>
+<td>最大值</td>
+</tr>
+<tr>
+<td>min(列名)</td>
+<td>最小值</td>
+</tr>
+<tr>
+<td>sum(列名)</td>
+<td>求和</td>
+</tr>
+<tr>
+<td>avg(列名)</td>
+<td>平均值</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>注意：NULL值不参与所有聚合函数运算！！！</p>
+</blockquote>
+<h2 id="5-分组查询"><a href="#5-分组查询" class="headerlink" title="5 分组查询"></a>5 分组查询</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 字段列表 <span class="keyword">FROM</span> 表名 [<span class="keyword">WHERE</span> 分组前的限定条件] <span class="keyword">GROUP</span> <span class="keyword">BY</span> 分组字段名 [<span class="keyword">HAVING</span> 分组后过滤条件]</span><br></pre></td></tr></table></figure>
+
+<p><strong>WHERE和HAVING的区别：</strong></p>
+<ul>
+<li>执行时机不一样：where 是分组之前进行限定，不满足where条件，则不参与分组，而having是分组之后对结果进行过滤。</li>
+<li>可判断的条件不一样：where 不能对聚合函数进行判断，having 可以。</li>
+</ul>
+<blockquote>
+<p>注意：分组之后，查询的字段为聚合函数和分组字段，查询其他字段无任何意义</p>
+</blockquote>
+<h2 id="6-分页查询"><a href="#6-分页查询" class="headerlink" title="6 分页查询"></a>6 分页查询</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 字段列表 <span class="keyword">FROM</span> 表名 LIMIT 其实索引, 查询台条目数;</span><br></pre></td></tr></table></figure>
+
+<p>索引计算公式：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">起始索引 <span class="operator">=</span> (当前页码 <span class="operator">-</span> <span class="number">1</span>) <span class="operator">*</span> 每页显示的条数</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h1><h2 id="1-非外键约束"><a href="#1-非外键约束" class="headerlink" title="1 非外键约束"></a>1 非外键约束</h2><table>
+<thead>
+<tr>
+<th>约束名称</th>
+<th align="left">描述</th>
+<th>关键字</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>主键约束</td>
+<td align="left">主键是一行数据的唯一标识，要求非空且唯一</td>
+<td>PRIMARY KEY</td>
+</tr>
+<tr>
+<td>唯一约束</td>
+<td align="left">保证列中的所有数据各不相同</td>
+<td>UNIQUE</td>
+</tr>
+<tr>
+<td>非空约束</td>
+<td align="left">保证列中所有数据不能有NULL值</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td>默认约束</td>
+<td align="left">保存数据时，未指定值则采用默认值</td>
+<td>DEFAULT</td>
+</tr>
+</tbody></table>
+<h2 id="2-外键约束"><a href="#2-外键约束" class="headerlink" title="2 外键约束"></a>2 外键约束</h2><ul>
+<li><p>外键用来让两个表的数据之间建立链接，保证数据的一致性和完整性。</p>
+<table>
+<thead>
+<tr>
+<th>外键约束</th>
+<th>外键是用来让两个表之间建立连接，保证数据的一致性和完整性</th>
+<th align="center">FOREIGN KEY</th>
+</tr>
+</thead>
+</table>
+</li>
+<li><p>添加约束</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 创建表时添加外键约束</span></span><br><span class="line"><span class="keyword">CREATE</span>　<span class="keyword">TABLE</span> 表名(</span><br><span class="line">	列名 数据类型,</span><br><span class="line">    ...</span><br><span class="line">    [<span class="keyword">CONSTRAINT</span>] [外键名] <span class="keyword">FOREIGN</span> KEY(外键列名) <span class="keyword">REFERENCES</span> 主表(主表列名)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--- 创建表后添加外键约束</span></span><br><span class="line"><span class="keyword">ALTER</span>　<span class="keyword">TABLE</span>　表名 <span class="keyword">DROP</span> <span class="keyword">FOREIGN</span>(外键列名) <span class="keyword">REFERENCES</span> 主表(主表名称);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除约束</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> 表名 <span class="keyword">DROP</span> <span class="keyword">FOREIGN</span> KEY 外键名称;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h1><h2 id="1-一对一"><a href="#1-一对一" class="headerlink" title="1 一对一"></a>1 一对一</h2><ul>
+<li><p>一对一关系多用于表拆分，将一个实体中经常出现的字段放一张表，不经常出现的字段放一张表。用于调高查询性能。</p>
+</li>
+<li><p>实现方法：在任意一方加入外键，关联另一方主键，并且设置外键为唯一约束(UNIQUE)。</p>
+</li>
+<li><p>例子：下图就是一对一的例子，我在tb_user_desc表中添加了一个外键。</p>
+<center>tb_user用户表 (1)</center>
+
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>age</th>
+<th>sex</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>张三</td>
+<td>33</td>
+<td>男</td>
+</tr>
+<tr>
+<td>2</td>
+<td>李四</td>
+<td>56</td>
+<td>女</td>
+</tr>
+<tr>
+<td>3</td>
+<td>王五</td>
+<td>34</td>
+<td>男</td>
+</tr>
+</tbody></table>
+<center>tb_user_desc (1)</center>
+
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>adder</th>
+<th>status</th>
+<th>user_id(添加的外键)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>四川</td>
+<td>单身</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>上海</td>
+<td>离婚</td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>广东</td>
+<td>已婚</td>
+<td>3</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="2-多对一"><a href="#2-多对一" class="headerlink" title="2 多对一"></a>2 多对一</h2><ul>
+<li><p>一个表的某一行数据对应这另一张表的多行数据。</p>
+</li>
+<li><p>实现方法：在多的一方建立外键，指向一的一方。</p>
+</li>
+<li><p>例子：一个部门对应多个员工，一个员工对应一个部门。我在tb_emp表中建立外键，指向tb_dept表。</p>
+<center>tb_emp (m)</center>
+
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>age</th>
+<th>dept_id(添加的外键)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>张三</td>
+<td>23</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>李四</td>
+<td>54</td>
+<td>1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>王五</td>
+<td>34</td>
+<td>2</td>
+</tr>
+</tbody></table>
+<center>tb_dept (1)</center>
+
+<table>
+<thead>
+<tr>
+<th>dept_id</th>
+<th>dept_name</th>
+<th>adder</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>研发部</td>
+<td>北京</td>
+</tr>
+<tr>
+<td>2</td>
+<td>销售部</td>
+<td>成都</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="3-多对多"><a href="#3-多对多" class="headerlink" title="3 多对多"></a>3 多对多</h2><ul>
+<li><p>两张表互相有多行数据有关联。</p>
+</li>
+<li><p>实现方法：建立第三只张<strong>中间表</strong>，中间至少包含<strong>两个外键</strong>，分别是关<strong>联的是两张表的主键</strong>。</p>
+</li>
+<li><p>例子：书包和书的种类便是多对多，一个书包可以装不同种类的书。一种书可以装进不同的书包。我创建了第三张表，包含两个外键，分别指向tb_bag和tb_book的主键。</p>
+<center>tb_bag (m)</center>
+
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>甲</td>
+</tr>
+<tr>
+<td>2</td>
+<td>乙</td>
+</tr>
+</tbody></table>
+<center>tb_book (n)</center>
+
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>语文</td>
+</tr>
+<tr>
+<td>2</td>
+<td>数学</td>
+</tr>
+<tr>
+<td>3</td>
+<td>英语</td>
+</tr>
+</tbody></table>
+<center>tb_book_bag (创建的第三张中间表)</center>
+
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>tb_bag</th>
+<th>tb_book</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+<td>3</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h1 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h1><h2 id="1-连接查询"><a href="#1-连接查询" class="headerlink" title="1 连接查询"></a>1 连接查询</h2><h3 id="1-1-内连接"><a href="#1-1-内连接" class="headerlink" title="1.1 内连接"></a>1.1 内连接</h3><p>查两张表的交集部分。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 隐式内连接</span></span><br><span class="line"><span class="keyword">SELECT</span> 字段列表 <span class="keyword">FROM</span> 表名<span class="number">1</span>,表名<span class="number">2</span>,... <span class="keyword">WHERE</span> 条件; </span><br><span class="line"><span class="comment">-- 显示类链接</span></span><br><span class="line"><span class="keyword">SELECT</span> 字段列表 <span class="keyword">FROM</span> 表名<span class="number">1</span> <span class="keyword">FROM</span> [<span class="keyword">INNER</span>] <span class="keyword">JOIN</span> 表名<span class="number">2</span> <span class="keyword">ON</span> 条件;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-外连接"><a href="#1-2-外连接" class="headerlink" title="1.2 外连接"></a>1.2 外连接</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 左外连接</span></span><br><span class="line"><span class="keyword">SELECT</span> 字段列表 <span class="keyword">FROM</span> 表<span class="number">1</span> <span class="keyword">LEFT</span> [<span class="keyword">OUTER</span>] <span class="keyword">JOIN</span> 表<span class="number">2</span> <span class="keyword">ON</span> 条件;</span><br><span class="line"><span class="comment">-- 右外连接</span></span><br><span class="line"><span class="keyword">SELECT</span> 字段列表 <span class="keyword">FROM</span> 表<span class="number">1</span> <span class="keyword">RIGHT</span> [<span class="keyword">OUTER</span>] <span class="keyword">JOIN</span> 表<span class="number">2</span> <span class="keyword">ON</span> 条件;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>左外连接：相当于查询表1所有数据和交集部分数据。</li>
+<li>右外连接：相当于查询表2所有数据和交集部分数据。</li>
+</ul>
+<h2 id="2-子查询"><a href="#2-子查询" class="headerlink" title="2 子查询"></a>2 子查询</h2><p>子查询就是查询中嵌套查询。</p>
+<h3 id="2-1-单行单列"><a href="#2-1-单行单列" class="headerlink" title="2.1 单行单列"></a>2.1 单行单列</h3><ul>
+<li>作为条件值，使用 &#x3D; , !&#x3D; , &gt; ,  &lt;等进行判断。</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 字段列表 <span class="keyword">FROM</span> 表名 <span class="keyword">WHERE</span> 字段名 <span class="operator">=</span> (子查询);</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-多行单列"><a href="#2-2-多行单列" class="headerlink" title="2.2 多行单列"></a>2.2 多行单列</h3><ul>
+<li>作为条件值，使用in等关键字进行条件判断。</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 字段列表 <span class="keyword">FROM</span> 表名 <span class="keyword">WHERE</span> 字段名 <span class="keyword">IN</span> (子查询);</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-多行多列"><a href="#2-3-多行多列" class="headerlink" title="2.3 多行多列"></a>2.3 多行多列</h3><ul>
+<li>作为虚拟表。</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 字段列表 <span class="keyword">FROM</span> (子查询) <span class="keyword">WHERE</span> 条件;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><h2 id="1-四大特性"><a href="#1-四大特性" class="headerlink" title="1 四大特性"></a>1 四大特性</h2><ul>
+<li>原子性：事务是不可分割的最小操作单元，要么同时成功，要么同时失败。</li>
+<li>一致性：事务完成时，必须使所以的数据都保持一致状态。</li>
+<li>隔离性：多个事务之间，操作的可见性。</li>
+<li>持久行：事务一旦提交或回滚，它对数据的改变是永久的。</li>
+</ul>
+<h2 id="2-使用-常用"><a href="#2-使用-常用" class="headerlink" title="2 使用(常用)"></a>2 使用(常用)</h2><h3 id="2-1-开启事务"><a href="#2-1-开启事务" class="headerlink" title="2.1 开启事务"></a>2.1 开启事务</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">START</span> TRANSACTION; 或 <span class="keyword">BEGIN</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-提交事务"><a href="#2-2-提交事务" class="headerlink" title="2.2 提交事务"></a>2.2 提交事务</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">COMMIT</span></span><br></pre></td></tr></table></figure>
+
+<p>COMMIT 会提交事务，并使已对数据库进行的所有修改成为永久性的.</p>
+<h3 id="2-3-回滚事务"><a href="#2-3-回滚事务" class="headerlink" title="2.3 回滚事务"></a>2.3 回滚事务</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ROLLBACK</span>;</span><br></pre></td></tr></table></figure>
+
+<p>回滚会结束用户的事务，并撤销正在进行的所有未提交的修改。</p>
+<hr>
+<center><b>如果有什么，可以通过下面的邮箱和我联系！！！</b></center>
+
+<p><a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=VCM9NTo1OhQlJXo3Ozk"><img data-src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png" alt="img"></a></p>
+]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Maven基础应用</title>
+    <url>/2022/05/04/Maven%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1 简介"></a>1 简介</h2><p>背景：我们在做项目时。一个项目中常常有许多的不同种类的文件，难以管理。在多人开发一个项目时，每个人的项目结构也不一样，对于后期的整合也是一个大问题。在我们开发时，会用到许多的jar包，那么对于jar包的导入和管理也是一个棘手的问题。在这样的背景下，出现了许多的项目管理工具。现在常用的便是Maven。</p>
+<p>Maven：由背景我们就能知道Maven是一个项目管理工具。</p>
+<span id="more"></span>
+
+<h2 id="2-作用"><a href="#2-作用" class="headerlink" title="2 作用"></a>2 作用</h2><ul>
+<li>项目构建：提供骨架，便于开发者统一项目结构，便于开发。</li>
+<li>依赖管理：Maven能够方便快捷的管理jar包。</li>
+<li>提供标准：开发者都Maven，久而言之。Maven便提供了标准的项目结构。</li>
+</ul>
+<h1 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h1><h2 id="1-仓库"><a href="#1-仓库" class="headerlink" title="1 仓库"></a>1 仓库</h2><p>仓库就是装东西的。在Maven中，我们要仓库有什么用？仓库在哪里？</p>
+<p>在背景中已经提到，Maven可以管理jar包。所以能够猜测出仓库就是用来存放jar包。</p>
+<p>仓库的分类：</p>
+<ol>
+<li><p>远程仓库：非本机上存储jar包的仓库。连接本地仓库，为本地仓库提供jar包。</p>
+<p>分类：</p>
+<ol>
+<li>中央仓库：由Maven开发人员管理和维护，里面拥有绝大部分的开源jar包</li>
+<li>私服：由企业或个人创建的远程仓库。从中央仓库获取jar包，或者自己上传jar包。</li>
+</ol>
+</li>
+<li><p>本地仓库：本机上用于存储jar包的仓库。</p>
+</li>
+</ol>
+<blockquote>
+<ol>
+<li>私服用来存储自己研发的jar包，保护自己的版权。</li>
+<li>用于团队直接互相传递自己研发的jar包。</li>
+</ol>
+</blockquote>
+<p>下图为jar包的工作流程图。</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/Maven/0000.png"></p>
+<p>本地仓库获取jar包由三种方法：</p>
+<ol>
+<li>从私服中获取，私服的服务器一般在国内，获取jar的速度快。</li>
+<li>直接从中央仓库中获取。但是中央仓库的服务器在国外，获取速度很慢，不推荐使用此方法。</li>
+<li>自己导入，下载对于的jar包后，手动添加到对于的文件目录下。</li>
+</ol>
+<h2 id="2-坐标"><a href="#2-坐标" class="headerlink" title="2 坐标"></a>2 坐标</h2><p>坐标就要用来确定位置的。那么在Maven中哪里要用到坐标呢？坐标的出现是为了精确地找到对应的物品。在仓库中，存在着众多的jar包。找起来是十分麻烦。所有就用坐标来定位我们需要的jar包。</p>
+<p>Maven坐标的组成部分：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>XXX<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>XXX<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>XXX<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中各参数为：</p>
+<ul>
+<li>groupId：定义当前Maven隶属组织名称(通常情况下为域名 反写，如：com.mybatis)</li>
+<li>artifactId：定义当前Maven项目的名称(通常是模块名称，如CRM，SMS)</li>
+<li>version：定义当前版本的版本号</li>
+<li>packaging：定义当前项目的打包方式(如：jar，war)</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">mvn compile			#编译</span><br><span class="line">mvn clean			#清理</span><br><span class="line">mvn test			#测试</span><br><span class="line">mvn package			#打包</span><br><span class="line">mvn install			#安装到本地仓库</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="依赖管理"><a href="#依赖管理" class="headerlink" title="依赖管理"></a>依赖管理</h1><h2 id="1-依赖传递"><a href="#1-依赖传递" class="headerlink" title="1 依赖传递"></a>1 依赖传递</h2><p>分类：</p>
+<ul>
+<li>直接依赖：当前依赖中通过依赖配置建立的依赖关系</li>
+<li>间接依赖：被依赖的依赖包如果依赖其他的依赖包，那么当前项目就间接依赖其他依赖包。</li>
+</ul>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/Maven/1.png"></p>
+<p>如图：</p>
+<ul>
+<li>test2.jar对于test1.jar就是直接依赖</li>
+<li>test3.jar对于test1.jar就是间接依赖</li>
+</ul>
+<h2 id="2-可选依赖"><a href="#2-可选依赖" class="headerlink" title="2 可选依赖"></a>2 可选依赖</h2><p>可选依赖：对外隐藏自己所依赖的依赖包</p>
+<ul>
+<li>只需在添加依赖时，添加<code>&lt;optional&gt;true&lt;/optional&gt;</code></li>
+<li>optional的默认值为false，即不隐藏自己所依赖的jar包</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>XXX<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>XXX<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>XXX<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-排除依赖"><a href="#3-排除依赖" class="headerlink" title="3 排除依赖"></a>3 排除依赖</h2><p>排除依赖：主动断开依赖的资源，被排除的资源无需指定版本</p>
+<ul>
+<li>在直接依赖下面添加<code>exclusions</code>标签</li>
+<li>如下：在test1中导图test2依赖，但是要断开test3依赖</li>
+</ul>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/Maven/1.png"></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"># 此为test1项目的pom.xml文件</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>tk.wian<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>test2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">versoio</span>&gt;</span>1.2.2<span class="tag">&lt;/<span class="name">versoio</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>tk.wian<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>test3<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-依赖范围"><a href="#4-依赖范围" class="headerlink" title="4 依赖范围"></a>4 依赖范围</h2><ul>
+<li><p>依赖的jar默认情况下是compile，即任何地方都能使用。但是在实际开发中并不是所有的依赖在所有的地方都有使用。</p>
+</li>
+<li><p>通过scope标签设定依赖的作用范围</p>
+</li>
+<li><p>作用范围</p>
+<ul>
+<li><p>全部范围有效</p>
+</li>
+<li><p>主程序范围有效(main文件范围内)</p>
+</li>
+<li><p>测试程序范围有效(test文件范围内)</p>
+</li>
+<li><p>是否参与打包(package指令范围内)</p>
+</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>scope</th>
+<th>主代码</th>
+<th>测试代码</th>
+<th>打包</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>compile</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>test</td>
+<td></td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>provided</td>
+<td>Y</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>runtime</td>
+<td></td>
+<td></td>
+<td>Y</td>
+</tr>
+</tbody></table>
+<ul>
+<li>依赖范围的传递性：只有能够参与打包的依赖才能传递</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>compile</th>
+<th>test</th>
+<th>provided</th>
+<th>runtime</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>compile</td>
+<td>compile</td>
+<td>test</td>
+<td>provided</td>
+<td>runtime</td>
+</tr>
+<tr>
+<td>test</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>provided</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>runtime</td>
+<td>runtime</td>
+<td>test</td>
+<td>provided</td>
+<td>runtime</td>
+</tr>
+</tbody></table>
+<h1 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h1><p>生命周期注意分为三类：</p>
+<ul>
+<li>clean</li>
+<li>default</li>
+<li>site</li>
+</ul>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/Maven/2.png"></p>
+<ol>
+<li><p><strong>default周期(重点)：</strong></p>
+<ul>
+<li>compile			  编译项目的源代码</li>
+<li>test                      使用合适的单元测试框架运行测试(junit便是其一)</li>
+<li>package              将编译后的代码打包。格式为jar，war等</li>
+<li>install                  安装项目包到本地仓库，可以作为本地项目的依赖</li>
+</ul>
+<blockquote>
+<p>该周期有很多，只说明了其中的常用几个。</p>
+</blockquote>
+</li>
+<li><p>clean周期：</p>
+<ul>
+<li><p>pre-clean			执行一些需要在clean之前完成的工作</p>
+</li>
+<li><p>clean                   移除所有上一次构建生成的文件</p>
+</li>
+<li><p>post-clean          执行一些需要在clean之后立刻完成的工作</p>
+</li>
+</ul>
+</li>
+<li><p>site周期：</p>
+<ul>
+<li><p>pre-site			   执行一些需要在站点生成文档之前的工作</p>
+</li>
+<li><p>site                      生成项目所需要的站点文档</p>
+</li>
+<li><p>post-site             执行一些需要在生成站点文档之后完成的工作，并为部署做准备</p>
+</li>
+<li><p>site-deploy         将生成的站点文档部署到特定的服务器上</p>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h1><ul>
+<li>插件与生命周期内的阶段绑定，在执行到对应的生命周期时执行对应的插件</li>
+<li>默认Maven在各个生命周期上绑定有预设的功能</li>
+<li>通过插件可以自定义其他功能</li>
+</ul>
+<p>导入插件格式如下：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bulid</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span><span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span><span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span><span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">excution</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">goal</span>&gt;</span><span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">phase</span>&gt;</span><span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">excution</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bulid</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<center><b>如果有什么，可以通过下面的邮箱和我联系！！！</b></center>
+
+<p><a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=VCM9NTo1OhQlJXo3Ozk"><img data-src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png" alt="img"></a></p>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>工具</category>
+        <category>Maven</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Maven</tag>
+      </tags>
+  </entry>
+</search>
