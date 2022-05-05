@@ -1028,44 +1028,44 @@
   <entry>
     <title>Maven基础应用</title>
     <url>/2022/05/04/Maven%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1 简介"></a>1 简介</h2><p>背景：我们在做项目时。一个项目中常常有许多的不同种类的文件，难以管理。在多人开发一个项目时，每个人的项目结构也不一样，对于后期的整合也是一个大问题。在我们开发时，会用到许多的jar包，那么对于jar包的导入和管理也是一个棘手的问题。在这样的背景下，出现了许多的项目管理工具。现在常用的便是Maven。</p>
+    <content><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1 简介"></a>1 简介</h2><p>背景：我们在做项目时。一个项目中常常有许多的不同种类的文件，难以管理。在多人开发一个项目时，每个人的项目结构也不一样，对于后期的整合也是一个大问题。在我们开发时，会用到许多的依赖，那么对于依赖的导入和管理也是一个棘手的问题。在这样的背景下，出现了许多的项目管理工具。现在常用的便是Maven。</p>
 <p>Maven：由背景我们就能知道Maven是一个项目管理工具。</p>
 <span id="more"></span>
 
 <h2 id="2-作用"><a href="#2-作用" class="headerlink" title="2 作用"></a>2 作用</h2><ul>
 <li>项目构建：提供骨架，便于开发者统一项目结构，便于开发。</li>
-<li>依赖管理：Maven能够方便快捷的管理jar包。</li>
+<li>依赖管理：Maven能够方便快捷的管理依赖。</li>
 <li>提供标准：开发者都Maven，久而言之。Maven便提供了标准的项目结构。</li>
 </ul>
 <h1 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h1><h2 id="1-仓库"><a href="#1-仓库" class="headerlink" title="1 仓库"></a>1 仓库</h2><p>仓库就是装东西的。在Maven中，我们要仓库有什么用？仓库在哪里？</p>
-<p>在背景中已经提到，Maven可以管理jar包。所以能够猜测出仓库就是用来存放jar包。</p>
+<p>在背景中已经提到，Maven可以管理依赖。所以能够猜测出仓库就是用来存放依赖。</p>
 <p>仓库的分类：</p>
 <ol>
-<li><p>远程仓库：非本机上存储jar包的仓库。连接本地仓库，为本地仓库提供jar包。</p>
+<li><p>远程仓库：非本机上存储依赖的仓库。连接本地仓库，为本地仓库提供依赖。</p>
 <p>分类：</p>
 <ol>
-<li>中央仓库：由Maven开发人员管理和维护，里面拥有绝大部分的开源jar包</li>
-<li>私服：由企业或个人创建的远程仓库。从中央仓库获取jar包，或者自己上传jar包。</li>
+<li>中央仓库：由Maven开发人员管理和维护，里面拥有绝大部分的开源依赖</li>
+<li>私服：由企业或个人创建的远程仓库。从中央仓库获取依赖，或者自己上传依赖。</li>
 </ol>
 </li>
-<li><p>本地仓库：本机上用于存储jar包的仓库。</p>
+<li><p>本地仓库：本机上用于存储依赖的仓库。</p>
 </li>
 </ol>
 <blockquote>
 <ol>
-<li>私服用来存储自己研发的jar包，保护自己的版权。</li>
-<li>用于团队直接互相传递自己研发的jar包。</li>
+<li>私服用来存储自己研发的依赖，保护自己的版权。</li>
+<li>用于团队直接互相传递自己研发的依赖。</li>
 </ol>
 </blockquote>
-<p>下图为jar包的工作流程图。</p>
+<p>下图为仓库的工作流程图。</p>
 <p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/Maven/0000.png"></p>
-<p>本地仓库获取jar包由三种方法：</p>
+<p>本地仓库获取依赖由三种方法：</p>
 <ol>
-<li>从私服中获取，私服的服务器一般在国内，获取jar的速度快。</li>
+<li>从私服中获取，私服的服务器一般在国内，获取依赖的速度快。</li>
 <li>直接从中央仓库中获取。但是中央仓库的服务器在国外，获取速度很慢，不推荐使用此方法。</li>
-<li>自己导入，下载对于的jar包后，手动添加到对于的文件目录下。</li>
+<li>自己导入，下载对于的依赖后，手动添加到对于的文件目录下。</li>
 </ol>
-<h2 id="2-坐标"><a href="#2-坐标" class="headerlink" title="2 坐标"></a>2 坐标</h2><p>坐标就要用来确定位置的。那么在Maven中哪里要用到坐标呢？坐标的出现是为了精确地找到对应的物品。在仓库中，存在着众多的jar包。找起来是十分麻烦。所有就用坐标来定位我们需要的jar包。</p>
+<h2 id="2-坐标"><a href="#2-坐标" class="headerlink" title="2 坐标"></a>2 坐标</h2><p>坐标就要用来确定位置的。那么在Maven中哪里要用到坐标呢？坐标的出现是为了精确地找到对应的物品。在仓库中，存在着众多的依赖。找起来是十分麻烦。所有就用坐标来定位我们需要的依赖。</p>
 <p>Maven坐标的组成部分：</p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>XXX<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>XXX<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>XXX<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
