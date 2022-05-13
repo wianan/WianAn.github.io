@@ -1574,4 +1574,200 @@
         <tag>Java</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Request和Response</title>
+    <url>/2022/05/02/Request%E5%92%8CResponse/</url>
+    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ul>
+<li><p>Request是请求对象，Response是响应对象。</p>
+</li>
+<li><p>request:获取请求数据</p>
+<ul>
+<li>浏览器会发送HTTP请求到后台服务器[Tomcat]</li>
+<li>HTTP的请求中会包含很多请求数据[请求行+请求头+请求体]</li>
+<li>后台服务器[Tomcat]会对HTTP请求中的数据进行解析并把解析结果存入到一个对象中</li>
+<li>所存入的对象即为request对象，所以我们可以从request对象中获取请求的相关参数</li>
+</ul>
+<span id="more"></span>
+
+<ul>
+<li>获取到数据后就可以继续后续的业务，比如获取用户名和密码就可以实现登录操作的相关业务</li>
+</ul>
+</li>
+<li><p>response:设置响应数据</p>
+<ul>
+<li>业务处理完后，后台就需要给前端返回业务处理的结果即响应数据</li>
+</ul>
+<ul>
+<li>把响应数据封装到response对象中</li>
+<li>后台服务器[Tomcat]会解析response对象,按照[响应行+响应头+响应体]格式拼接结果</li>
+<li>浏览器最终解析结果，把内容展示在浏览器给用户浏览</li>
+</ul>
+</li>
+</ul>
+<h1 id="Request"><a href="#Request" class="headerlink" title="Request"></a>Request</h1><h2 id="1-获取请求数据"><a href="#1-获取请求数据" class="headerlink" title="1 获取请求数据"></a>1 获取请求数据</h2><h3 id="1-1-获取请求行数据"><a href="#1-1-获取请求行数据" class="headerlink" title="1.1 获取请求行数据"></a>1.1 获取请求行数据</h3><p>请求行的数据包含三部分，分别为<strong>请求方法</strong>，<strong>请求资源路径</strong>和H<strong>TTP协议及版本</strong></p>
+<ul>
+<li><p>获取请求方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String <span class="title function_">getMethod</span><span class="params">()</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取访问路径</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String <span class="title function_">getContextPath</span><span class="params">()</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取URL(统一资源定位符)</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">StringBuffer <span class="title function_">getRequestURL</span><span class="params">()</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取URI(统一资源标识符)</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String <span class="title function_">getRequestURI</span><span class="params">()</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取请求参数(直射用于Get请求)</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String <span class="title function_">getQueryString</span><span class="params">()</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="1-2-获取请求体数据"><a href="#1-2-获取请求体数据" class="headerlink" title="1.2 获取请求体数据"></a>1.2 获取请求体数据</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String <span class="title function_">getHeader</span><span class="params">(String name)</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-3-获取请求体数据-Post"><a href="#1-3-获取请求体数据-Post" class="headerlink" title="1.3 获取请求体数据(Post)"></a>1.3 获取请求体数据(Post)</h3><p>因为Get请求方式中没有请求体，所以此方式只适用于Post请求方式</p>
+<ul>
+<li><p>方法一：字节输入流</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ServletInputStream <span class="title function_">getInputStream</span><span class="params">()</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方法二：字符输入流</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">BufferedReader <span class="title function_">getReader</span><span class="params">()</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="1-4-获取请求数据通用方法"><a href="#1-4-获取请求数据通用方法" class="headerlink" title="1.4 获取请求数据通用方法"></a>1.4 获取请求数据通用方法</h3><ul>
+<li>获取所有参数Map集合</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Map&lt;String,String[]&gt; getParameterMap()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>根据名称获取参数值（数组）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">String[] getParameterValues(String name)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>根据名称获取参数值(单个值)</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">String getParameter(String name)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Map集合中的范形为String和Sting数组</p>
+</blockquote>
+<h2 id="2-中文乱码问题"><a href="#2-中文乱码问题" class="headerlink" title="2 中文乱码问题"></a>2 中文乱码问题</h2><h3 id="2-1-Post方式"><a href="#2-1-Post方式" class="headerlink" title="2.1 Post方式"></a>2.1 Post方式</h3><ul>
+<li>出现中文乱码的原因：<ul>
+<li>POST的请求参数是通过request的getReader()来获取流中的数据</li>
+<li>TOMCAT在获取流的时候采用的编码是ISO-8859-1</li>
+<li>ISO-8859-1编码是不支持中文的，所以会出现乱码</li>
+</ul>
+</li>
+<li>解决方案：<ul>
+<li>页面设置的编码格式为UTF-8</li>
+<li>把TOMCAT在获取流数据之前的编码设置为UTF-8</li>
+<li>通过<code>request.setCharacterEncoding(&quot;UTF-8&quot;)</code>设置编码,UTF-8也可以写成小写.</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-Get方式-通用方法"><a href="#2-2-Get方式-通用方法" class="headerlink" title="2.2 Get方式(通用方法)"></a>2.2 Get方式(通用方法)</h3><ul>
+<li><p>出现中文乱码的原因：</p>
+<ul>
+<li>浏览器把中文参数按照<code>UTF-8</code>进行URL编码</li>
+<li>Tomcat对获取到的内容进行了<code>ISO-8859-1</code>的URL解码</li>
+</ul>
+</li>
+<li><p>解决方案：</p>
+<ul>
+<li><p>按照ISO-8859-1编码获取乱码<code>å¼ ä¸</code>对应的字节数组</p>
+</li>
+<li><p>按照UTF-8编码获取字节数组对应的字符串</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">byte</span>[] bytes = 数据.getBytes(StandardCharsets.ISO_8859_1);</span><br><span class="line"><span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(bytes, StandardCharsets.UTF_8);</span><br><span class="line"><span class="comment">//合并为</span></span><br><span class="line"><span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(数据.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h2 id="3-请求转发"><a href="#3-请求转发" class="headerlink" title="3 请求转发"></a>3 请求转发</h2><ul>
+<li><p>请求转发(forward):一种在服务器内部的资源跳转方式。</p>
+<ol>
+<li>浏览器发送请求给服务器，服务器中对应的资源A接收到请求</li>
+<li>资源A处理完请求后将请求发给资源B</li>
+<li>资源B处理完后将结果响应给浏览器</li>
+<li>请求从资源A到资源B的过程就叫请求转发</li>
+</ol>
+</li>
+<li><p>实现方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">req.getRequestDispatcher(<span class="string">&quot;资源B路径&quot;</span>).forward(req,resp);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="Response"><a href="#Response" class="headerlink" title="Response"></a>Response</h1><h2 id="1-设置相应数据"><a href="#1-设置相应数据" class="headerlink" title="1 设置相应数据"></a>1 设置相应数据</h2><p>HTTP响应数据总共分为三部分内容，分别是<strong>响应行</strong>、<strong>响应头</strong>、<strong>响应体</strong>。</p>
+<ol>
+<li><p>响应行</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br></pre></td></tr></table></figure>
+
+<p>HTTP&#x2F;1.1：HTTP协议及版本号</p>
+<p>200：响应状态码</p>
+<p>OK：状态码的描述</p>
+<ul>
+<li>常用的方法就是设置状态码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">setStatus</span><span class="params">(<span class="type">int</span> sc)</span>;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>响应头</p>
+<ul>
+<li><p>设置响应头键值对</p>
+</li>
+<li><p>&#96;&#96;&#96;java<br>void setHeader(String name,String value);</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">3. 响应体</span><br><span class="line"></span><br><span class="line">   - 通过字符、字节输出流的方式往浏览器写，</span><br><span class="line">   - 方法：</span><br><span class="line"></span><br><span class="line">   ```java</span><br><span class="line">   //字符流</span><br><span class="line">   PrintWriter getWriter();</span><br><span class="line">   //字节流</span><br><span class="line">   ServletOutputStream getOutputStream();</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h2 id="2-请求重定向"><a href="#2-请求重定向" class="headerlink" title="2 请求重定向"></a>2 请求重定向</h2><ul>
+<li><p>简介：</p>
+<ol>
+<li><p>浏览器发送请求给服务器，服务器中对应的资源A接收到请求</p>
+</li>
+<li><p>资源A现在无法处理该请求，就会给浏览器响应一个302的状态码+location的一个访问资源B的路径</p>
+</li>
+<li><p>浏览器接收到响应状态码为302就会重新发送请求到location对应的访问地址去访问资源B</p>
+</li>
+<li><p>资源B接收到请求后进行处理并最终给浏览器响应结果，这整个过程就叫重定向</p>
+</li>
+</ol>
+</li>
+<li><p>实现方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//第一步：设置状态码</span></span><br><span class="line">resp.setStatus(<span class="number">302</span>);</span><br><span class="line"><span class="comment">//第二部：提供重定向地址</span></span><br><span class="line">resp.setHeader(<span class="string">&quot;location&quot;</span>,<span class="string">&quot;资源B的访问路径&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//简化方法，无需设置状态码</span></span><br><span class="line">resposne.sendRedirect(<span class="string">&quot;资源B访问路径&quot;</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>特点：</p>
+<ol>
+<li><p>浏览器地址栏路径发送变化</p>
+<p>当进行重定向访问的时候，由于是由浏览器发送的两次请求，所以地址会发生变化</p>
+</li>
+<li><p>可以重定向到任何位置的资源(服务内容、外部均可)</p>
+<p>因为第一次响应结果中包含了浏览器下次要跳转的路径，所以这个路径是可以任意位置资源。</p>
+</li>
+<li><p>两次请求，不能在多个资源使用request共享数据</p>
+<p>因为浏览器发送了两次请求，是两个不同的request对象，就无法通过request对象进行共享数据</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="3-相应数据"><a href="#3-相应数据" class="headerlink" title="3 相应数据"></a>3 相应数据</h2><h3 id="3-1-字符数据"><a href="#3-1-字符数据" class="headerlink" title="3.1 字符数据"></a>3.1 字符数据</h3><p>通过Response对象获取字符输出流：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">PrintWriter</span> <span class="variable">writer</span> <span class="operator">=</span> resp.getWriter();</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-字节数据"><a href="#3-2-字节数据" class="headerlink" title="3.2 字节数据"></a>3.2 字节数据</h3><p>通过Response对象获取字节输出流：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">ServletOutputStream</span> <span class="variable">outputStream</span> <span class="operator">=</span> resp.getOutputStream();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>对于html标签，得告诉六浏览器返回的数据类型为html。浏览器才能解析html标签。</p>
+<p>response.setHeader(“content-type”,”text&#x2F;html”);</p>
+</blockquote>
+<hr>
+<center><b>如果有什么，可以通过下面的邮箱和我联系！！</b></center>
+
+<p><a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=VCM9NTo1OhQlJXo3Ozk"><img data-src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png" alt="img"></a></p>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>Servlet</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
 </search>
