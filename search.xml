@@ -1330,7 +1330,7 @@
 <td>王五</td>
 <td>789</td>
 <td>33</td>
-<td>22</td>
+<td>2</td>
 </tr>
 <tr>
 <td>4</td>
@@ -1458,6 +1458,120 @@
       <tags>
         <tag>Java</tag>
         <tag>Mybatisyi</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git应用</title>
+    <url>/2022/05/13/Servlet/</url>
+    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Java Servlet 是运行在 Web 服务器或应用服务器上的程序，它是作为来自 Web 浏览器或其他 HTTP 客户端的请求和 HTTP 服务器上的数据库或应用程序之间的中间层。</p>
+<p>使用 Servlet，您可以收集来自网页表单的用户输入，呈现来自数据库或者其他源的记录，还可以动态创建网页。</p>
+<p>Java Servlet 通常情况下与使用 CGI（Common Gateway Interface，公共网关接口）实现的程序可以达到异曲同工的效果。但是相比于 CGI，Servlet 有以下几点优势：</p>
+<span id="more"></span>
+
+<ul>
+<li>性能明显更好。</li>
+<li>Servlet 在 Web 服务器的地址空间内执行。这样它就没有必要再创建一个单独的进程来处理每个客户端请求。</li>
+<li>Servlet 是独立于平台的，因为它们是用 Java 编写的。</li>
+<li>服务器上的 Java 安全管理器执行了一系列限制，以保护服务器计算机上的资源。因此，Servlet 是可信的。</li>
+<li>Java 类库的全部功能对 Servlet 来说都是可用的。它可以通过 sockets 和 RMI 机制与 applets、数据库或其他软件进行交互。</li>
+</ul>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="1-导入依赖"><a href="#1-导入依赖" class="headerlink" title="1 导入依赖"></a>1 导入依赖</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javax.servlet-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>一定要加上<scope>标签，并且设置为provided。因为在tomcat中，已经内置了该依赖包。如果在生成war包中添加jar，会和tomcat中的jar包发生冲突。</p>
+</blockquote>
+<h2 id="2-实现Servlet接口"><a href="#2-实现Servlet接口" class="headerlink" title="2 实现Servlet接口"></a>2 实现Servlet接口</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> tk.wian;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.*;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ServletDemo1</span> <span class="keyword">implements</span> <span class="title class_">Servlet</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">service</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse)</span> <span class="keyword">throws</span> ServletException, IOException &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello world&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">(ServletConfig servletConfig)</span> <span class="keyword">throws</span> ServletException &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> ServletConfig <span class="title function_">getServletConfig</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getServletInfo</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">destroy</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-配置访问路径"><a href="#3-配置访问路径" class="headerlink" title="3 配置访问路径"></a>3 配置访问路径</h2><p>只需在类的上面使用@WebServlet注解即可，格式如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/demo&quot;)</span>     <span class="comment">//访问路径必须在前面加上斜杠</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-访问"><a href="#4-访问" class="headerlink" title="4 访问"></a>4 访问</h2><p>打开浏览器输入对应的url。如上面的url为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://localhost:8080/select-demo/demo1</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>localhost:8080：本地8080端口。tomcat默认端口</li>
+<li>select-demo：模块名</li>
+<li>demo1：@WebServlet指定的路径</li>
+</ul>
+<h1 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h1><p>对象的生命周期指一个对象从被创建到被销毁的整个过程。而Servlet的生命周期主要是下面四步：</p>
+<ol>
+<li><p>加载和实例化</p>
+<p>默认情况下，当Servlet第一次被访问时，由容器创建Servlet对象</p>
+<blockquote>
+<p><strong>但是我们可以使用设置WebServlet中的loadOnStarcancan参数，让服务器启动时，便加载和实例化：</strong></p>
+<p>@WebServlet(urlPatterns &#x3D; “&#x2F;demo1”,loadOnStartup &#x3D; 1)<br>loadOnstartup的取值有两类情况<br>（1）负整数:第一次访问时创建Servlet对象<br>（2）0或正整数:服务器启动时创建Servlet对象，数字越小优先级越高</p>
+</blockquote>
+</li>
+<li><p>初始化</p>
+<p>在Servlet实例化之后，容器将调用Servlet的init()方法初始化这个对象，完成一些如加载配置文件、创建连接等初始化的工作。该方法只调用<strong>一次</strong>。</p>
+</li>
+<li><p>请求处理</p>
+<p>每次请求Servlet时，Servlet容器都会调用Servlet的ervice()方法对请求进行处理</p>
+</li>
+<li><p>服务终止</p>
+<p>当需要释放内存或者容器关闭时，容器就会调用Servlet实例的destroy()方法完成资源的释放。在destroy()方法调用之后，容器会释放这个Servlet实例，该实例随后会被Java的垃圾收集器所回收。此方法也只调用<strong>一次</strong>。</p>
+</li>
+</ol>
+<h1 id="体系结构"><a href="#体系结构" class="headerlink" title="体系结构"></a>体系结构</h1><p>我们都是针对Http协议开发项目的。所以有一个类HttpServlet间接实现了Servlet接口，让我们的开发效率进一步提升。</p>
+<p>HttpServlet是实现了GenericServlet接口，而GenericServlet接口继承了Serclet接口，所以说HttpServlet间接实现了Servlet接口。</p>
+<p>在HttpServlet中提供了很多方法，但是我们主要使用**doPost()<strong>和</strong>doGet()**方法分别处理post请求和get请求。</p>
+<h1 id="urlPattern配置"><a href="#urlPattern配置" class="headerlink" title="urlPattern配置"></a>urlPattern配置</h1><h2 id="1-多配置"><a href="#1-多配置" class="headerlink" title="1 多配置"></a>1 多配置</h2><p>一个类可以配置多个访问路径。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@WebServlet(urlpattern=&#123;&quot;/demo1&quot;,&quot;/dem01&quot;&#125;)</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-精准匹配"><a href="#2-精准匹配" class="headerlink" title="2 精准匹配"></a>2 精准匹配</h2><p>给出准确的访问路径，只能通过此路径访问。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/aaa/bbb&quot;)</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-目录匹配"><a href="#3-目录匹配" class="headerlink" title="3 目录匹配"></a>3 目录匹配</h2><p>在该目录下输入任意字符，均可访问。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@WebServlet(&quot;/demo/*&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>如下所示的url，均能访问</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://localhost:8080/select-demo/demo/aaa</span><br><span class="line">http://localhost:8080/select-demo/demo/bbb</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-拓展名匹配"><a href="#4-拓展名匹配" class="headerlink" title="4 拓展名匹配"></a>4 拓展名匹配</h2><p>只要拓展名符合要求就能够访问</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;*.ai&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<p>如下所示的url，均能访问</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">http:<span class="comment">//localhost:8080/select-demo/aaa.ai</span></span><br><span class="line">http:<span class="comment">//localhost:8080/select-demo/bbb.ai</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>拓展名配置时。WebServlet中不能加上斜杠，否则会报错</p>
+</blockquote>
+<h2 id="5-任意匹配"><a href="#5-任意匹配" class="headerlink" title="5 任意匹配"></a>5 任意匹配</h2><p>输入任何url均能访问</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/&quot;)</span></span><br><span class="line"><span class="meta">@WebServlet(&quot;/*&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<p>如下所示的url，均能访问</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://localhost:8080/select-demo/aaa</span><br><span class="line">http://localhost:8080/select-demo/bbb</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>&#x2F;和&#x2F;*的区别：</p>
+<ol>
+<li>DefaultServlet是用来处理静态资源，如果配置了”&#x2F;“会把默认的覆盖	掉，就会引发请求静态资源的时候没有走默认的而是走了自定义的Servlet类，最终导致静态资源不能被访问</li>
+<li>当我们的项目中的Servlet配置了 “&#x2F;“,会覆盖掉tomcat中的DefaultServlet,当其他的url-pattern都匹配不上时都会走这个Servlet</li>
+</ol>
+</blockquote>
+<h2 id="访问优先级"><a href="#访问优先级" class="headerlink" title="访问优先级"></a>访问优先级</h2><p>遵循小范围优先。即：</p>
+<p><em><em>精确匹配 &gt; 目录匹配&gt; 扩展名匹配 &gt; &#x2F;</em> &gt; &#x2F;</em>*</p>
+<hr>
+<center><b>如果有什么，可以通过下面的邮箱和我联系！！！</b></center>
+
+<p><a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=VCM9NTo1OhQlJXo3Ozk"><img data-src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png" alt="img"></a></p>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>Servlet</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
       </tags>
   </entry>
 </search>
