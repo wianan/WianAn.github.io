@@ -1576,7 +1576,7 @@
   </entry>
   <entry>
     <title>Request和Response</title>
-    <url>/2022/05/02/Request%E5%92%8CResponse/</url>
+    <url>/2022/05/13/Request%E5%92%8CResponse/</url>
     <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ul>
 <li><p>Request是请求对象，Response是响应对象。</p>
 </li>
