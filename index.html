@@ -282,26 +282,6 @@
 <li><p>会话跟踪:一种维护浏览器状态的方法，服务器需要识别多次请求是否来自于同一浏览器，以便在同一次会话的多次请求间共享数据。</p>
 </li>
 </ul>
-<h1 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h1><h2 id="1-概念"><a href="#1-概念" class="headerlink" title="1 概念"></a>1 概念</h2><p>客户端会话技术，将数据保存到客户端，以后每次请求都携带Cookie数据进行访问。</p>
-<h2 id="2-基本使用"><a href="#2-基本使用" class="headerlink" title="2 基本使用"></a>2 基本使用</h2><h3 id="2-1-发送Cookie"><a href="#2-1-发送Cookie" class="headerlink" title="2.1 发送Cookie"></a>2.1 发送Cookie</h3><ul>
-<li><p>创建Cookie对象，并设置数据</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Cookie</span> <span class="variable">cookie</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Cookie</span>(<span class="string">&quot;key&quot;</span>,<span class="string">&quot;value&quot;</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>发送Cookie对象到客户端，使用<strong>response</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response.addCookie(cookie);</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="2-2-获取Cookie"><a href="#2-2-获取Cookie" class="headerlink" title="2.2 获取Cookie"></a>2.2 获取Cookie</h3><ul>
-<li><p>获取客户端所有的Cookie，使用<strong>request</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie[] cookies = request.getCookie(); </span><br></pre></td></tr></table></figure>
-</li>
-<li><p>遍历数组，获取每一个Cookie对象。并且使用Cookie对象的方法，获取数据</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (Cookie cookie : cookies)&#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> cookie.getname();</span><br><span class="line">    <span class="type">String</span> <span class="variable">value</span> <span class="operator">=</span> cookie.getvalue();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>如果需要指定Cookie数据，可以添加一个if条件进行判断</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (Cookie cookie : cookies)&#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> cookie.getname();</span><br><span class="line">    <span class="keyword">if</span> (name.equles(<span class="string">&quot;指定Cookie数据的名字&quot;</span>))&#123;</span><br><span class="line">        System.out.println(name+<span class="string">&quot;:&quot;</span>+value);</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/15/%E4%BC%9A%E8%AF%9D%E8%BF%BD%E8%B8%AA%E6%8A%80%E6%9C%AF/#more" rel="contents">
