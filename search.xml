@@ -1871,4 +1871,62 @@
         <tag>Java</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Filter—过滤器</title>
+    <url>/2022/05/15/Filter/</url>
+    <content><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Filter 表示过滤器，是 JavaWeb 三大组件(Servlet、Filter、Listener)之一。过滤器可以把对资源的请求拦截下来，从而实现一些特殊的功能。</p>
+<p>过滤器可以把对资源的请求拦截下来，从而实现一些特殊的功能。</p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="1-实现Filter接口"><a href="#1-实现Filter接口" class="headerlink" title="1 实现Filter接口"></a>1 实现Filter接口</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">test</span> <span class="keyword">implements</span> <span class="title class_">Filter</span> </span><br></pre></td></tr></table></figure>
+
+<h2 id="2-重写接口中的方法"><a href="#2-重写接口中的方法" class="headerlink" title="2 重写接口中的方法"></a>2 重写接口中的方法</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.servlet.*;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">test</span> <span class="keyword">implements</span> <span class="title class_">Filter</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">destroy</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-配置拦截路径"><a href="#3-配置拦截路径" class="headerlink" title="3 配置拦截路径"></a>3 配置拦截路径</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.servlet.*;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.annotation.WebFilter;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="meta">@WebFilter(&quot;/*&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">test</span> <span class="keyword">implements</span> <span class="title class_">Filter</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">destroy</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Filter拦截路径配置"><a href="#Filter拦截路径配置" class="headerlink" title="Filter拦截路径配置"></a>Filter拦截路径配置</h1><p>和Servlet基本一致。</p>
+<h2 id="1拦截具体的资源"><a href="#1拦截具体的资源" class="headerlink" title="1拦截具体的资源"></a>1拦截具体的资源</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@WebFilter(&quot;/idnex.jsp&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<p>只有访问index.jsp时就会被拦截</p>
+<h2 id="2-目录拦截"><a href="#2-目录拦截" class="headerlink" title="2 目录拦截"></a>2 目录拦截</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@WebFilter(&quot;/user/*&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<p>访问&#x2F;user下的所有资源，都会被拦截</p>
+<h2 id="3-后缀名拦截"><a href="#3-后缀名拦截" class="headerlink" title="3 后缀名拦截"></a>3 后缀名拦截</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@WebFilter(&quot;*jsp&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<p>访问后缀名为jsp的资源，都会被拦截</p>
+<blockquote>
+<p>和Servlet一样也不能加上斜杠</p>
+</blockquote>
+<h2 id="4-拦截所有"><a href="#4-拦截所有" class="headerlink" title="4 拦截所有"></a>4 拦截所有</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@WebFilter(&quot;/&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<p>访问所有资源，都会被拦截</p>
+<h1 id="过滤链"><a href="#过滤链" class="headerlink" title="过滤链"></a>过滤链</h1><h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1 概述"></a>1 概述</h2><p>过滤器链是指在一个Web应用，可以配置多个过滤器，这多个过滤器称为过滤器链。</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/Filter/Filter.png"></p>
+<p>上图中的过滤器链执行是按照以下流程执行：</p>
+<ol>
+<li>执行 <code>Filter1</code> 的放行前逻辑代码</li>
+<li>执行 <code>Filter1</code> 的放行代码</li>
+<li>执行 <code>Filter2</code> 的放行前逻辑代码</li>
+<li>执行 <code>Filter2</code> 的放行代码</li>
+<li>访问到资源</li>
+<li>执行 <code>Filter2</code> 的放行后逻辑代码</li>
+<li>执行 <code>Filter1</code> 的放行后逻辑代码</li>
+</ol>
+<p>以上流程串起来就像一条链子，故称之为过滤器链。</p>
+<h2 id="2-执行顺序"><a href="#2-执行顺序" class="headerlink" title="2 执行顺序"></a>2 执行顺序</h2><p>我们现在使用的是注解配置Filter，而这种配置方式的优先级是按照过滤器类名(字符串)的自然排序。</p>
+<p>比如有如下两个名称的过滤器 ： <code>BFilterDemo</code> 和 <code>AFilterDemo</code> 。那一定是 <code>AFilterDemo</code> 过滤器先执行。</p>
+<hr>
+<center><b>如果有什么，可以通过下面的邮箱和我联系！！！</b></center>
+
+<p><a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=VCM9NTo1OhQlJXo3Ozk"><img data-src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png" alt="img"></a></p>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>Filter</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Filter</tag>
+      </tags>
+  </entry>
 </search>
