@@ -1771,7 +1771,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Git应用</title>
+    <title>会话跟踪技术</title>
     <url>/2022/05/15/%E4%BC%9A%E8%AF%9D%E8%BF%BD%E8%B8%AA%E6%8A%80%E6%9C%AF/</url>
     <content><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><ul>
 <li><p>会话：用户打开浏览器，访问web服务器的资源，会话建立，直到有一方断开连接，会话结束。在一次会话中可以包含多次请求和响应。</p>
