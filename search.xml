@@ -167,13 +167,12 @@
     <title>Hexo+Github搭建个人静态博客</title>
     <url>/2022/04/26/Hexo+Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><h2 id="1-环境准备"><a href="#1-环境准备" class="headerlink" title="1 环境准备"></a>1 环境准备</h2><h3 id="1-1-安装Node-js"><a href="#1-1-安装Node-js" class="headerlink" title="1.1 安装Node.js"></a>1.1 安装Node.js</h3><ul>
-<li><a href="https://nodejs.org/zh-cn/">Node.js</a>	Hexo是基于Node.js写的，所以需要安装Node.js。一路next即可</li>
+<li><p><a href="https://nodejs.org/zh-cn/">Node.js</a>	Hexo是基于Node.js写的，所以需要安装Node.js。一路next即可</p>
+<span id="more"></span></li>
 </ul>
 <h3 id="1-2-安装Git"><a href="#1-2-安装Git" class="headerlink" title="1.2 安装Git"></a>1.2 安装Git</h3><ul>
 <li><a href="https://git-scm.com/">Git</a>	部署时要用到Git。不使用Git部署可以不用安装。安装时也是一路next即可。</li>
 </ul>
-<span id="more"></span>
-
 <h2 id="2-Github准备"><a href="#2-Github准备" class="headerlink" title="2 Github准备"></a>2 Github准备</h2><h3 id="2-1创建仓库"><a href="#2-1创建仓库" class="headerlink" title="2.1创建仓库"></a>2.1创建仓库</h3><p><em><strong>注意：</strong></em>仓库名为 <u>用户名.github.io</u></p>
 <p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/Hexo+Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/1.png"></p>
 <h3 id="2-2-获取Token"><a href="#2-2-获取Token" class="headerlink" title="2.2 获取Token"></a>2.2 获取Token</h3><p>通过Setting -&gt; Developer settings -&gt; Personal access tokens到下图，然后点击Generate new token创建token</p>
@@ -308,9 +307,9 @@
     <title>PicGo+Github搭建图床</title>
     <url>/2022/04/25/ImageBed/</url>
     <content><![CDATA[<h1 id="我为什么要搭建图床"><a href="#我为什么要搭建图床" class="headerlink" title="我为什么要搭建图床"></a>我为什么要搭建图床</h1><h2 id="1-认识图床"><a href="#1-认识图床" class="headerlink" title="1 认识图床"></a>1 认识图床</h2><p>图床简而言之就是用于储存图片的。</p>
-<p>网站、APP的所有图片都是储存在服务器，然后获得图片地址，就能把图片显示出来。一个大的网站，或者发展久了，服务器就会储存非常多的图片，也是一笔不小的经费，加上每张图片都有访问的请求，都会被占用服务器的流量或cdn流量。所以就诞生了图床。</p>
 <span id="more"></span>
 
+<p>网站、APP的所有图片都是储存在服务器，然后获得图片地址，就能把图片显示出来。一个大的网站，或者发展久了，服务器就会储存非常多的图片，也是一笔不小的经费，加上每张图片都有访问的请求，都会被占用服务器的流量或cdn流量。所以就诞生了图床。</p>
 <h2 id="2-我为什么要用PicGo-GitHub搭建图床"><a href="#2-我为什么要用PicGo-GitHub搭建图床" class="headerlink" title="2 我为什么要用PicGo+GitHub搭建图床"></a>2 我为什么要用PicGo+GitHub搭建图床</h2><ul>
 <li><p>博客需要用图床，其实我对图床的依赖并不大，其次博客并不一定要用到图床。</p>
 </li>
@@ -519,9 +518,9 @@
     <title>Maven基础应用</title>
     <url>/2022/05/04/Maven%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1 简介"></a>1 简介</h2><p>背景：我们在做项目时。一个项目中常常有许多的不同种类的文件，难以管理。在多人开发一个项目时，每个人的项目结构也不一样，对于后期的整合也是一个大问题。在我们开发时，会用到许多的依赖，那么对于依赖的导入和管理也是一个棘手的问题。在这样的背景下，出现了许多的项目管理工具。现在常用的便是Maven。</p>
-<p>Maven：由背景我们就能知道Maven是一个项目管理工具。</p>
 <span id="more"></span>
 
+<p>Maven：由背景我们就能知道Maven是一个项目管理工具。</p>
 <h2 id="2-作用"><a href="#2-作用" class="headerlink" title="2 作用"></a>2 作用</h2><ul>
 <li>项目构建：提供骨架，便于开发者统一项目结构，便于开发。</li>
 <li>依赖管理：Maven能够方便快捷的管理依赖。</li>
@@ -1465,9 +1464,9 @@
     <url>/2022/05/13/Servlet/</url>
     <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Java Servlet 是运行在 Web 服务器或应用服务器上的程序，它是作为来自 Web 浏览器或其他 HTTP 客户端的请求和 HTTP 服务器上的数据库或应用程序之间的中间层。</p>
 <p>使用 Servlet，您可以收集来自网页表单的用户输入，呈现来自数据库或者其他源的记录，还可以动态创建网页。</p>
-<p>Java Servlet 通常情况下与使用 CGI（Common Gateway Interface，公共网关接口）实现的程序可以达到异曲同工的效果。但是相比于 CGI，Servlet 有以下几点优势：</p>
 <span id="more"></span>
 
+<p>Java Servlet 通常情况下与使用 CGI（Common Gateway Interface，公共网关接口）实现的程序可以达到异曲同工的效果。但是相比于 CGI，Servlet 有以下几点优势：</p>
 <ul>
 <li>性能明显更好。</li>
 <li>Servlet 在 Web 服务器的地址空间内执行。这样它就没有必要再创建一个单独的进程来处理每个客户端请求。</li>
@@ -1582,15 +1581,17 @@
 </li>
 <li><p>request:获取请求数据</p>
 <ul>
-<li>浏览器会发送HTTP请求到后台服务器[Tomcat]</li>
-<li>HTTP的请求中会包含很多请求数据[请求行+请求头+请求体]</li>
-<li>后台服务器[Tomcat]会对HTTP请求中的数据进行解析并把解析结果存入到一个对象中</li>
-<li>所存入的对象即为request对象，所以我们可以从request对象中获取请求的相关参数</li>
-</ul>
+<li><p>浏览器会发送HTTP请求到后台服务器[Tomcat]</p>
+</li>
+<li><p>HTTP的请求中会包含很多请求数据[请求行+请求头+请求体]</p>
 <span id="more"></span>
-
-<ul>
-<li>获取到数据后就可以继续后续的业务，比如获取用户名和密码就可以实现登录操作的相关业务</li>
+</li>
+<li><p>后台服务器[Tomcat]会对HTTP请求中的数据进行解析并把解析结果存入到一个对象中</p>
+</li>
+<li><p>所存入的对象即为request对象，所以我们可以从request对象中获取请求的相关参数</p>
+</li>
+<li><p>获取到数据后就可以继续后续的业务，比如获取用户名和密码就可以实现登录操作的相关业务</p>
+</li>
 </ul>
 </li>
 <li><p>response:设置响应数据</p>
@@ -1710,12 +1711,16 @@
 </li>
 <li><p>响应头</p>
 <ul>
-<li><p>设置响应头键值对</p>
-</li>
-<li><p>&#96;&#96;&#96;java<br>void setHeader(String name,String value);</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">3. 响应体</span><br><span class="line"></span><br><span class="line">   - 通过字符、字节输出流的方式往浏览器写，</span><br><span class="line">   - 方法：</span><br><span class="line"></span><br><span class="line">   ```java</span><br><span class="line">   //字符流</span><br><span class="line">   PrintWriter getWriter();</span><br><span class="line">   //字节流</span><br><span class="line">   ServletOutputStream getOutputStream();</span><br></pre></td></tr></table></figure></li>
+<li>设置响应头键值对</li>
 </ul>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">setHeader</span><span class="params">(String name,String value)</span>;</span><br></pre></td></tr></table></figure>
 </li>
+<li><p>响应体</p>
+<ul>
+<li>通过字符、字节输出流的方式往浏览器写，</li>
+<li>方法：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//字符流</span></span><br><span class="line">PrintWriter <span class="title function_">getWriter</span><span class="params">()</span>;</span><br><span class="line"><span class="comment">//字节流</span></span><br><span class="line">ServletOutputStream <span class="title function_">getOutputStream</span><span class="params">()</span>;</span><br></pre></td></tr></table></figure></li>
 </ol>
 <h2 id="2-请求重定向"><a href="#2-请求重定向" class="headerlink" title="2 请求重定向"></a>2 请求重定向</h2><ul>
 <li><p>简介：</p>
@@ -1747,7 +1752,7 @@
 </ol>
 </li>
 </ul>
-<h2 id="3-相应数据"><a href="#3-相应数据" class="headerlink" title="3 相应数据"></a>3 相应数据</h2><h3 id="3-1-字符数据"><a href="#3-1-字符数据" class="headerlink" title="3.1 字符数据"></a>3.1 字符数据</h3><p>通过Response对象获取字符输出流：</p>
+<h2 id="3-发送相应数据"><a href="#3-发送相应数据" class="headerlink" title="3 发送相应数据"></a>3 发送相应数据</h2><h3 id="3-1-字符数据"><a href="#3-1-字符数据" class="headerlink" title="3.1 字符数据"></a>3.1 字符数据</h3><p>通过Response对象获取字符输出流：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">PrintWriter</span> <span class="variable">writer</span> <span class="operator">=</span> resp.getWriter();</span><br></pre></td></tr></table></figure>
 
 <h3 id="3-2-字节数据"><a href="#3-2-字节数据" class="headerlink" title="3.2 字节数据"></a>3.2 字节数据</h3><p>通过Response对象获取字节输出流：</p>
@@ -1876,7 +1881,9 @@
     <url>/2022/05/15/Filter/</url>
     <content><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Filter 表示过滤器，是 JavaWeb 三大组件(Servlet、Filter、Listener)之一。过滤器可以把对资源的请求拦截下来，从而实现一些特殊的功能。</p>
 <p>过滤器可以把对资源的请求拦截下来，从而实现一些特殊的功能。</p>
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="1-实现Filter接口"><a href="#1-实现Filter接口" class="headerlink" title="1 实现Filter接口"></a>1 实现Filter接口</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">test</span> <span class="keyword">implements</span> <span class="title class_">Filter</span> </span><br></pre></td></tr></table></figure>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="1-实现Filter接口"><a href="#1-实现Filter接口" class="headerlink" title="1 实现Filter接口"></a>1 实现Filter接口</h2><span id="more"></span>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">test</span> <span class="keyword">implements</span> <span class="title class_">Filter</span> </span><br></pre></td></tr></table></figure>
 
 <h2 id="2-重写接口中的方法"><a href="#2-重写接口中的方法" class="headerlink" title="2 重写接口中的方法"></a>2 重写接口中的方法</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.servlet.*;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">test</span> <span class="keyword">implements</span> <span class="title class_">Filter</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">destroy</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 

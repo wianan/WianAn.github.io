@@ -276,11 +276,7 @@
     <div class="post-body" itemprop="articleBody">
           <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Filter 表示过滤器，是 JavaWeb 三大组件(Servlet、Filter、Listener)之一。过滤器可以把对资源的请求拦截下来，从而实现一些特殊的功能。</p>
 <p>过滤器可以把对资源的请求拦截下来，从而实现一些特殊的功能。</p>
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="1-实现Filter接口"><a href="#1-实现Filter接口" class="headerlink" title="1 实现Filter接口"></a>1 实现Filter接口</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">test</span> <span class="keyword">implements</span> <span class="title class_">Filter</span> </span><br></pre></td></tr></table></figure>
-
-<h2 id="2-重写接口中的方法"><a href="#2-重写接口中的方法" class="headerlink" title="2 重写接口中的方法"></a>2 重写接口中的方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.servlet.*;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">test</span> <span class="keyword">implements</span> <span class="title class_">Filter</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">destroy</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-配置拦截路径"><a href="#3-配置拦截路径" class="headerlink" title="3 配置拦截路径"></a>3 配置拦截路径</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.servlet.*;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.annotation.WebFilter;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="meta">@WebFilter(&quot;/*&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">test</span> <span class="keyword">implements</span> <span class="title class_">Filter</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">destroy</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="1-实现Filter接口"><a href="#1-实现Filter接口" class="headerlink" title="1 实现Filter接口"></a>1 实现Filter接口</h2>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/15/Filter/#more" rel="contents">
@@ -470,11 +466,9 @@
 </li>
 <li><p>request:获取请求数据</p>
 <ul>
-<li>浏览器会发送HTTP请求到后台服务器[Tomcat]</li>
-<li>HTTP的请求中会包含很多请求数据[请求行+请求头+请求体]</li>
-<li>后台服务器[Tomcat]会对HTTP请求中的数据进行解析并把解析结果存入到一个对象中</li>
-<li>所存入的对象即为request对象，所以我们可以从request对象中获取请求的相关参数</li>
-</ul>
+<li><p>浏览器会发送HTTP请求到后台服务器[Tomcat]</p>
+</li>
+<li><p>HTTP的请求中会包含很多请求数据[请求行+请求头+请求体]</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/13/Request%E5%92%8CResponse/#more" rel="contents">
@@ -565,7 +559,6 @@
     <div class="post-body" itemprop="articleBody">
           <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Java Servlet 是运行在 Web 服务器或应用服务器上的程序，它是作为来自 Web 浏览器或其他 HTTP 客户端的请求和 HTTP 服务器上的数据库或应用程序之间的中间层。</p>
 <p>使用 Servlet，您可以收集来自网页表单的用户输入，呈现来自数据库或者其他源的记录，还可以动态创建网页。</p>
-<p>Java Servlet 通常情况下与使用 CGI（Common Gateway Interface，公共网关接口）实现的程序可以达到异曲同工的效果。但是相比于 CGI，Servlet 有以下几点优势：</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/13/Servlet/#more" rel="contents">
@@ -774,7 +767,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1 简介"></a>1 简介</h2><p>背景：我们在做项目时。一个项目中常常有许多的不同种类的文件，难以管理。在多人开发一个项目时，每个人的项目结构也不一样，对于后期的整合也是一个大问题。在我们开发时，会用到许多的依赖，那么对于依赖的导入和管理也是一个棘手的问题。在这样的背景下，出现了许多的项目管理工具。现在常用的便是Maven。</p>
-<p>Maven：由背景我们就能知道Maven是一个项目管理工具。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/04/Maven%E5%9F%BA%E7%A1%80/#more" rel="contents">
@@ -1141,11 +1133,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><h2 id="1-环境准备"><a href="#1-环境准备" class="headerlink" title="1 环境准备"></a>1 环境准备</h2><h3 id="1-1-安装Node-js"><a href="#1-1-安装Node-js" class="headerlink" title="1.1 安装Node.js"></a>1.1 安装Node.js</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/">Node.js</a>	Hexo是基于Node.js写的，所以需要安装Node.js。一路next即可</li>
-</ul>
-<h3 id="1-2-安装Git"><a href="#1-2-安装Git" class="headerlink" title="1.2 安装Git"></a>1.2 安装Git</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://git-scm.com/">Git</a>	部署时要用到Git。不使用Git部署可以不用安装。安装时也是一路next即可。</li>
-</ul>
+<li><p><a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/">Node.js</a>	Hexo是基于Node.js写的，所以需要安装Node.js。一路next即可</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/04/26/Hexo+Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/#more" rel="contents">
