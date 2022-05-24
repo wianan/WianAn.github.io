@@ -1936,4 +1936,686 @@
         <tag>Filter</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Spring基础</title>
+    <url>/2022/05/24/Spring%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h1 id="xml配置开发"><a href="#xml配置开发" class="headerlink" title="xml配置开发"></a>xml配置开发</h1><h2 id="1-bean的基本配置"><a href="#1-bean的基本配置" class="headerlink" title="1 bean的基本配置"></a>1 bean的基本配置</h2><h3 id="1-1-id与class"><a href="#1-1-id与class" class="headerlink" title="1.1 id与class"></a>1.1 id与class</h3><p>id与class时基本配置中的基本</p>
+<ul>
+<li>格式</li>
+</ul>
+<span id="more"></span>
+
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span> <span class="attr">class</span>=<span class="string">&quot;&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>属性</p>
+<ul>
+<li>id：使用容器时可以通过id值获取到对应的bean，一个容器中id值唯一</li>
+<li>class：配置的bean的全路径类名</li>
+</ul>
+</li>
+<li><p>示例</p>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">&quot;selectbao&quot;</span> <span class="attr">class</span> = <span class="string">&quot;dao.imp.selectDaoImpl&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-名字name"><a href="#1-2-名字name" class="headerlink" title="1.2 名字name"></a>1.2 名字name</h3><p>就是为bean定义别名，可以定义多个。使用空格、逗号或分号隔开</p>
+<ul>
+<li>格式</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span> <span class="attr">naem</span>=<span class="string">&quot;&quot;</span> <span class="attr">class</span>=<span class="string">&quot;&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>示例</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">&quot;selectbao&quot;</span> <span class="attr">name</span>=<span class="string">&quot;one two three&quot;</span> <span class="attr">class</span> = <span class="string">&quot;dao.imp.selectDaoImpl&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-3-作用范围scope"><a href="#1-3-作用范围scope" class="headerlink" title="1.3 作用范围scope"></a>1.3 作用范围scope</h3><ul>
+<li>格式</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span> <span class="attr">naem</span>=<span class="string">&quot;&quot;</span> <span class="attr">class</span>=<span class="string">&quot;&quot;</span>/ <span class="attr">scope</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>可选项<ul>
+<li>singleton：单例(默认值)</li>
+<li>prototype：非单例</li>
+</ul>
+</li>
+<li>实例</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span> <span class="attr">naem</span>=<span class="string">&quot;&quot;</span> <span class="attr">class</span>=<span class="string">&quot;&quot;</span>/ <span class="attr">scope</span>=<span class="string">&quot;prototype&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>单例</p>
+<p>单例的意思是在Spring的IOC容器中只会有该类的一个对象，避免了对象的频繁创建与销毁，达到了bean对象的复用，性能高</p>
+</li>
+</ul>
+<h2 id="2-bean实例化"><a href="#2-bean实例化" class="headerlink" title="2 bean实例化"></a>2 bean实例化</h2><h3 id="2-1-构造方法实例化"><a href="#2-1-构造方法实例化" class="headerlink" title="2.1 构造方法实例化"></a>2.1 构造方法实例化</h3><p>通过无参构造方法实例化。也是最为简单和现在最为常用的方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">dao1</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">save</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">dao1Impl</span> <span class="keyword">implements</span> <span class="title class_">dao1</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>配置文件</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dao1&quot;</span> <span class="attr">class</span>=<span class="string">&quot;dao.Impl.dao1Impl&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-2-静态工厂实例化"><a href="#2-2-静态工厂实例化" class="headerlink" title="2.2 静态工厂实例化"></a>2.2 静态工厂实例化</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">dao1</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">save</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">dao1Impl</span> <span class="keyword">implements</span> <span class="title class_">dao1</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>工厂java，用一个工厂java，用一个静态方法返回一个dao1Impl对象。这是早些时间常用的方法。方法返回一个dao1Impl对象。这是早些时间常用的方法。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">dao1Factory</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> dao1Impl <span class="title function_">getDao1Impl</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">dao1Impl</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>配置文件</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dao1&quot;</span> <span class="attr">class</span>=<span class="string">&quot;dao1Factory&quot;</span> <span class="attr">factory-method</span>=<span class="string">&quot;getDao1Impl&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>class:工厂类的类全名</p>
+</li>
+<li><p>factory-mehod:具体工厂类中创建对象的方法名</p>
+</li>
+</ul>
+<h3 id="2-3-非静态工厂实例化"><a href="#2-3-非静态工厂实例化" class="headerlink" title="2.3 非静态工厂实例化"></a>2.3 非静态工厂实例化</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">dao1</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">save</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">dao1Impl</span> <span class="keyword">implements</span> <span class="title class_">dao1</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>工厂java，用一个<strong>非静态</strong>方法返回一个dao1Impl对象。这是早些时间常用的方法。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">dao1Factory</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> dao1Impl <span class="title function_">getDao1Impl</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">dao1Impl</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>配置文件</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dao1Factory&quot;</span> <span class="attr">class</span>=<span class="string">&quot;dao1Factory&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dao1&quot;</span> <span class="attr">factory-bean</span>=<span class="string">&quot;dao1Factory&quot;</span> <span class="attr">factory-method</span>=<span class="string">&quot;getDao1Impl&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-4-FactoryBean"><a href="#2-4-FactoryBean" class="headerlink" title="2.4 FactoryBean"></a>2.4 FactoryBean</h3><p>实例工厂实例化的方式就已经介绍完了，配置的过程还是比较复杂，所以Spring为了简化这种配置方式就提供了一种叫<code>FactoryBean</code>的方式来简化开发。</p>
+<p>下面这一部分还是不变</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">dao1</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">save</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">dao1Impl</span> <span class="keyword">implements</span> <span class="title class_">dao1</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在工厂文件中就有所变化了，要实现实现FactoryBean接口，重写接口的方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">dao1Factory</span> <span class="keyword">implements</span> <span class="title class_">FactoryBean</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> dao1Impl <span class="title function_">getObject</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">dao1Impl</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Class&lt;?&gt; getObjectType() &#123;</span><br><span class="line">        <span class="keyword">return</span> dao1Impl.class;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>配置文件</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dao1&quot;</span> <span class="attr">class</span>=<span class="string">&quot;dao1Factory&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>接口FactoryBean中有三个方法。分别是:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">T <span class="title function_">getObject</span><span class="params">()</span> <span class="keyword">throws</span> Exception;</span><br><span class="line"></span><br><span class="line">Class&lt;?&gt; getObjectType();</span><br><span class="line"></span><br><span class="line"><span class="keyword">default</span> <span class="type">boolean</span> <span class="title function_">isSingleton</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>方法一:getObject()，被重写后，在方法中进行对象的创建并返回</p>
+</li>
+<li><p>方法二:getObjectType(),被重写后，主要返回的是被创建类的Class对象</p>
+</li>
+<li><p>方法三:没有被重写，因为它已经给了默认值，从方法名中可以看出其作用是设置对象是否为单例，默认true。</p>
+</li>
+</ul>
+<h2 id="3-bean的生命周期"><a href="#3-bean的生命周期" class="headerlink" title="3 bean的生命周期"></a>3 bean的生命周期</h2><p>bean对象从创建到销毁的整体过程</p>
+<p>我们在bean对象对应的类中分别添加两个方法，<strong>方法名任意</strong></p>
+<p>在配置文件中添加对应的属性参数名为对应的方法名，标签如下：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">init-method			#初始化方法</span><br><span class="line">destroy-method		#销毁方法</span><br></pre></td></tr></table></figure>
+
+
+
+<p>例子如下</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dao1&quot;</span> <span class="attr">class</span>=<span class="string">&quot;dao.impl.dao1Impl&quot;</span> <span class="attr">init-method</span>=<span class="string">&quot;init&quot;</span> <span class="attr">destroy-method</span>=<span class="string">&quot;destory&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>创建实例化工厂对象,对应的是第一行配置</p>
+</li>
+<li><p>调用对象中的方法来创建bean，对应的是第二行配置</p>
+<ul>
+<li>factory-bean:工厂的实例对象</li>
+</ul>
+</li>
+<li><p>factory-method:工厂对象中的具体创建对象的方法名</p>
+</li>
+</ul>
+<h2 id="4-依赖注入"><a href="#4-依赖注入" class="headerlink" title="4 依赖注入"></a>4 依赖注入</h2><h3 id="4-1-setter注入"><a href="#4-1-setter注入" class="headerlink" title="4.1 setter注入"></a>4.1 setter注入</h3><p>通过set方法作为接口，向bean中注入数据。所以在bean对应的类中就一定要有对应的set方法</p>
+<h4 id="4-1-1-引用数据"><a href="#4-1-1-引用数据" class="headerlink" title="4.1.1 引用数据"></a>4.1.1 引用数据</h4><p>引用数据就是在Spring中也配置了的对象。</p>
+<p>如下，就是注入配置文件中的其他bean。配置配置文件中的bean得用<strong>ref</strong>标签。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">dao1Impl</span> <span class="keyword">implements</span> <span class="title class_">dao1</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">dao2Impl</span> <span class="keyword">implements</span> <span class="title class_">dao2</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> dao1Impl dao1;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setDao1</span><span class="params">(dao1Impl dao1)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.dao1 = dao1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">()</span> &#123;</span><br><span class="line">        dao1.save();</span><br><span class="line">        System.out.println(<span class="string">&quot;Spring&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dao1&quot;</span> <span class="attr">class</span>=<span class="string">&quot;dao.Impl.dao1Impl&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dao2&quot;</span> <span class="attr">class</span>=<span class="string">&quot;dao.Impl.dao2Impl&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;dao1&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;dao1&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-1-2-数组"><a href="#4-1-2-数组" class="headerlink" title="4.1.2 数组"></a>4.1.2 数组</h4><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;array&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>值1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>值2<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>值3<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-1-3-LIst"><a href="#4-1-3-LIst" class="headerlink" title="4.1.3 LIst"></a>4.1.3 LIst</h4><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;list&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>值1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>值2<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>值3<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-1-4-Set"><a href="#4-1-4-Set" class="headerlink" title="4.1.4 Set"></a>4.1.4 Set</h4><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;set&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>值1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>值2<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>值3<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-1-5-Map"><a href="#4-1-5-Map" class="headerlink" title="4.1.5 Map"></a>4.1.5 Map</h4><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;map&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">map</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">&quot;键1&quot;</span> <span class="attr">value</span>=<span class="string">&quot;值1&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">&quot;键3&quot;</span> <span class="attr">value</span>=<span class="string">&quot;值2&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">&quot;键3&quot;</span> <span class="attr">value</span>=<span class="string">&quot;值3&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">map</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-1-6-Properties"><a href="#4-1-6-Properties" class="headerlink" title="4.1.6 Properties"></a>4.1.6 Properties</h4><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;properties&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">props</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">&quot;键1&quot;</span>&gt;</span>值1<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">&quot;键2&quot;</span>&gt;</span>值3<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">&quot;键3&quot;</span>&gt;</span>值3<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">props</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-2-构造器注入"><a href="#4-2-构造器注入" class="headerlink" title="4.2 构造器注入"></a>4.2 构造器注入</h3><p>与setter注入类似，不过接口换为带参构造函数。参数就是被注入的数据。</p>
+<h4 id="4-2-1-引用数据"><a href="#4-2-1-引用数据" class="headerlink" title="4.2.1 引用数据"></a>4.2.1 引用数据</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">dao1Impl</span> <span class="keyword">implements</span> <span class="title class_">dao1</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">dao2Impl</span> <span class="keyword">implements</span> <span class="title class_">dao2</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> dao1Impl dao1;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">dao2Impl</span><span class="params">(dao1Impl dao1)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.dao1 = dao1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">()</span> &#123;</span><br><span class="line">        dao1.save();</span><br><span class="line">        System.out.println(<span class="string">&quot;Spring&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dao1&quot;</span> <span class="attr">class</span>=<span class="string">&quot;dao.Impl.dao1Impl&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dao2&quot;</span> <span class="attr">class</span>=<span class="string">&quot;dao.Impl.dao2Impl&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">&quot;dao1&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;dao1&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-1-2-数组-1"><a href="#4-1-2-数组-1" class="headerlink" title="4.1.2 数组"></a>4.1.2 数组</h4><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">&quot;array&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>值1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>值2<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>值3<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">arary</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-3-List"><a href="#4-2-3-List" class="headerlink" title="4.2.3 List"></a>4.2.3 List</h4><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">&quot;list&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>值1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>值2<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>值3<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-2-4-Set"><a href="#4-2-4-Set" class="headerlink" title="4.2.4 Set"></a>4.2.4 Set</h4><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">&quot;set&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>值1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>值2<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>值3<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-2-5-Map"><a href="#4-2-5-Map" class="headerlink" title="4.2.5 Map"></a>4.2.5 Map</h4><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">&quot;map&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">map</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">&quot;键1&quot;</span> <span class="attr">value</span>=<span class="string">&quot;值1&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">&quot;键3&quot;</span> <span class="attr">value</span>=<span class="string">&quot;值2&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">&quot;键3&quot;</span> <span class="attr">value</span>=<span class="string">&quot;值3&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">map</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-2-6-Properties"><a href="#4-2-6-Properties" class="headerlink" title="4.2.6 Properties"></a>4.2.6 Properties</h4><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">&quot;properties&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">props</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">&quot;键1&quot;</span>&gt;</span>值1<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">&quot;键2&quot;</span>&gt;</span>值3<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">&quot;键3&quot;</span>&gt;</span>值3<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">props</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-自动装配"><a href="#5-自动装配" class="headerlink" title="5 自动装配"></a>5 自动装配</h2><p>自动装配就是IoC容器根据bean所依赖的资源在容器中自动查找并注入到bean。</p>
+<p><strong>常用方式：</strong></p>
+<ul>
+<li>按类型(bytype)（<strong>常用</strong>）</li>
+<li>按名称(byname)</li>
+<li>按构造方法</li>
+<li>不启用自动装配</li>
+</ul>
+<p><strong>使用方法：</strong></p>
+<p>相当于替换了property，用智能的方式自动填入</p>
+<p>使用autowire属性</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">bean id=<span class="string">&quot;dao1&quot;</span> class=<span class="string">&quot;dao.Impl.dao1Impl&quot;</span> autowire=<span class="string">&quot;byName&quot;</span>/&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>注意事项:</strong></p>
+<ul>
+<li>需要注入属性的类中对应属性的setter方法不能省略</li>
+<li>被注入的对象必须要被Spring的IOC容器管理</li>
+<li>按照类型在Spring的IOC容器中如果找到多个对象，会报<code>NoUniqueBeanDefinitionException</code></li>
+</ul>
+<ul>
+<li>自动装配用于引用类型依赖注入，不能对简单类型进行操作</li>
+<li>使用按类型装配时（byType）必须保障容器中相同类型的bean唯一，推荐使用</li>
+<li>使用按名称装配时（byName）必须保障容器中具有指定名称的bean，因变量名与配置耦合，不推荐使用</li>
+<li>自动装配优先级低于setter注入与构造器注入，同时出现时自动装配配置失效</li>
+</ul>
+<h2 id="6-配置管理第三方bean"><a href="#6-配置管理第三方bean" class="headerlink" title="6 配置管理第三方bean"></a>6 配置管理第三方bean</h2><p><strong>例子：</strong>实现Druid管理</p>
+<h3 id="6-1-导入druid依赖"><a href="#6-1-导入druid依赖" class="headerlink" title="6.1 导入druid依赖"></a>6.1 导入druid依赖</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.16<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="6-2-配置第三方bean"><a href="#6-2-配置第三方bean" class="headerlink" title="6.2 配置第三方bean"></a>6.2 配置第三方bean</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;druid&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.alibaba.druid.pool.DruidDataSource&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driverClassName&quot;</span> <span class="attr">value</span>=<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;jdbc:mysql://localhost:3306/spring_db&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;root&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;root&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>driverClassName:数据库驱动</li>
+<li>url:数据库连接地址</li>
+<li>username:数据库连接用户名</li>
+<li>password:数据库连接密码</li>
+<li>数据库连接的四要素要和自己使用的数据库信息一致。</li>
+</ul>
+<blockquote>
+<p>不同第三方bean，在配置bean时。属性名可能不一样，但在idea中均有提示。</p>
+</blockquote>
+<blockquote>
+<p>是通过setter注入的相关属性，所以在bean配置中使用了property</p>
+</blockquote>
+<h2 id="7-加载Properties文件"><a href="#7-加载Properties文件" class="headerlink" title="7 加载Properties文件"></a>7 加载Properties文件</h2><h3 id="7-1-开启context命名空间"><a href="#7-1-开启context命名空间" class="headerlink" title="7.1 开启context命名空间"></a>7.1 开启context命名空间</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">&quot;http://www.springframework.org/schema/context&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;</span></span></span><br><span class="line"><span class="string"><span class="tag">            http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag">            http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag">            http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="string"><span class="tag">            http://www.springframework.org/schema/context/spring-context.xsd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="7-2-加载properties文件"><a href="#7-2-加载properties文件" class="headerlink" title="7.2 加载properties文件"></a>7.2 加载properties文件</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">location</span>=<span class="string">&quot;文件名&quot;</span> <span class="attr">system-properties-mode</span>=<span class="string">&quot;NEVER&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li>syetem-properties-mode&#x3D;”NEVER”是为了解决<code>&lt;context:property-placeholder/&gt;</code>标签会加载系统的环境变量，而且环境变量的值会被优先加载的问题。</li>
+</ol>
+</blockquote>
+<h3 id="7-3-获取数据"><a href="#7-3-获取数据" class="headerlink" title="7.3 获取数据"></a>7.3 获取数据</h3><p>使用EL表达式获取properties文件中的数据</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">$&#123;key&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="注意：location配置"><a href="#注意：location配置" class="headerlink" title="注意：location配置"></a>注意：location配置</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--方式一 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">location</span>=<span class="string">&quot;jdbc.properties,jdbc2.properties&quot;</span> <span class="attr">system-properties-mode</span>=<span class="string">&quot;NEVER&quot;</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--方式二--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">location</span>=<span class="string">&quot;*.properties&quot;</span> <span class="attr">system-properties-mode</span>=<span class="string">&quot;NEVER&quot;</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--方式三 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">location</span>=<span class="string">&quot;classpath:*.properties&quot;</span> <span class="attr">system-properties-mode</span>=<span class="string">&quot;NEVER&quot;</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--方式四--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">location</span>=<span class="string">&quot;classpath*:*.properties&quot;</span> <span class="attr">system-properties-mode</span>=<span class="string">&quot;NEVER&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>说明:</strong></p>
+<ul>
+<li>方式一:可以实现，如果配置文件多的话，每个都需要配置</li>
+<li>方式二:<code>*.properties</code>代表所有以properties结尾的文件都会被加载，可以解决方式一的问题，但是不标准</li>
+<li>方式三:标准的写法，<code>classpath:</code>代表的是从根路径下开始查找，但是只能查询当前项目的根路径</li>
+<li>方式四:不仅可以加载当前项目还可以加载当前项目所依赖的所有项目的根路径下的properties配置文件</li>
+</ul>
+<h2 id="8-核心容器"><a href="#8-核心容器" class="headerlink" title="8 核心容器"></a>8 核心容器</h2><h3 id="8-1-容器的创建方法"><a href="#8-1-容器的创建方法" class="headerlink" title="8.1 容器的创建方法"></a>8.1 容器的创建方法</h3><ol>
+<li><p>方式一：ApplicationContext创建。通过配置文件名称创建</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">ApplicationContext</span> <span class="variable">ctx</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;applicationContext.xml&quot;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方式二：通过FileSystemXmlApplicationContext创建。通过文件的绝对路径进行创建。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">ApplicationContext</span> <span class="variable">ctx</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileSystemXmlApplicationContext</span>(<span class="string">&quot;D:\\code\\spring\\src\\main\\resources\\applicationContext.xml&quot;</span>); </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这种方式虽能实现，但是当项目的位置发生变化后,代码也需要跟着改,耦合度较高,不推荐使用。</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="8-2-Bean的三种获取方法"><a href="#8-2-Bean的三种获取方法" class="headerlink" title="8.2 Bean的三种获取方法"></a>8.2 Bean的三种获取方法</h3><ol>
+<li><p>通过bean的id获取</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">dao1Impl</span> <span class="variable">dao1</span> <span class="operator">=</span> (dao1Impl) app.getBean(<span class="string">&quot;dao1&quot;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过类型获取</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">dao1Impl</span> <span class="variable">dao1</span> <span class="operator">=</span> (dao1Impl) app.getBean(dao1Impl.class);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="8-2-BeanFactory"><a href="#8-2-BeanFactory" class="headerlink" title="8.2 BeanFactory"></a>8.2 BeanFactory</h3><p>使用BeanFactory来创建IOC容器的具体实现方式为:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AppForBeanFactory</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Resource</span> <span class="variable">resources</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathResource</span>(<span class="string">&quot;applicationContext.xml&quot;</span>);</span><br><span class="line">        <span class="type">BeanFactory</span> <span class="variable">bf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">XmlBeanFactory</span>(resources);</span><br><span class="line">        <span class="type">dao1Impl</span> <span class="variable">dao1</span> <span class="operator">=</span> bf.getBean(<span class="string">&quot;dao1&quot;</span>);</span><br><span class="line">        dao1.save();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>BeanFactory与ApplicationContext的区别</p>
+<ul>
+<li><p>BeanFactory是延迟加载，只有在获取bean对象的时候才会去创建</p>
+</li>
+<li><p>ApplicationContext是立即加载，容器加载的时候就会创建bean对象</p>
+</li>
+<li><p>ApplicationContext要想成为延迟加载，只需要按照如下方式进行配置</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dao1&quot;</span> <span class="attr">class</span>=<span class="string">&quot;.dao.impl.dao1Impl&quot;</span>  <span class="attr">lazy-init</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="注解开发"><a href="#注解开发" class="headerlink" title="注解开发"></a>注解开发</h1><h2 id="1-获取容器"><a href="#1-获取容器" class="headerlink" title="1 获取容器"></a>1 获取容器</h2><h3 id="1-1-创建配置类"><a href="#1-1-创建配置类" class="headerlink" title="1.1 创建配置类"></a>1.1 创建配置类</h3><p>在配置类上添加<code>@Configuration</code>注解，将其标识为一个配置类,替换<code>applicationContext.xml</code></p>
+<p>在配置类上添加包扫描注解<code>@ComponentScan</code>，用于扫描对应的java包。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan(&quot;dao&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SpringConfig</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>@ComponentScan注解用于设定扫描路径，此注解只能添加一次，多个数据请用数组格式</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ComponentScan(&#123;&quot;service&quot;,&quot;dao&quot;,&quot;web&quot;&#125;)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>小结</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>@Configuration</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类型</td>
+<td>类注解</td>
+</tr>
+<tr>
+<td>位置</td>
+<td>类定义上方</td>
+</tr>
+<tr>
+<td>作用</td>
+<td>设置该类为spring配置类</td>
+</tr>
+<tr>
+<td>属性</td>
+<td>value（默认）：定义bean的id</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>@ComponentScan</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类型</td>
+<td>类注解</td>
+</tr>
+<tr>
+<td>位置</td>
+<td>类定义上方</td>
+</tr>
+<tr>
+<td>作用</td>
+<td>设置spring配置类扫描路径，用于加载使用注解格式定义的bean</td>
+</tr>
+<tr>
+<td>属性</td>
+<td>value（默认）：扫描路径，此路径可以逐层向下扫描</td>
+</tr>
+</tbody></table>
+<h3 id="1-2-加载容器"><a href="#1-2-加载容器" class="headerlink" title="1.2 加载容器"></a>1.2 加载容器</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">ApplicationContext</span> <span class="variable">app</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AnnotationConfigApplicationContext</span>(SpringConfig.class);`</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-Bean配置"><a href="#2-Bean配置" class="headerlink" title="2 Bean配置"></a>2 Bean配置</h2><h3 id="2-1-Bean注明"><a href="#2-1-Bean注明" class="headerlink" title="2.1 Bean注明"></a>2.1 Bean注明</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>@Component&#x2F;@Controller&#x2F;@Service&#x2F;@Repository</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类型</td>
+<td>类注解</td>
+</tr>
+<tr>
+<td>位置</td>
+<td>类定义上方</td>
+</tr>
+<tr>
+<td>作用</td>
+<td>设置该类为spring管理的bean</td>
+</tr>
+<tr>
+<td>属性</td>
+<td>value（默认）：定义bean的id</td>
+</tr>
+</tbody></table>
+<ul>
+<li>@Component：任何地方都能使用</li>
+<li>@Controller：用于web层</li>
+<li>@Service：用于服务层</li>
+<li>@Repository：用于dao层</li>
+</ul>
+<h3 id="2-2-Bean作用范围"><a href="#2-2-Bean作用范围" class="headerlink" title="2.2 Bean作用范围"></a>2.2 Bean作用范围</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>@Scope</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类型</td>
+<td>类注解</td>
+</tr>
+<tr>
+<td>位置</td>
+<td>类定义上方</td>
+</tr>
+<tr>
+<td>作用</td>
+<td>设置该类创建对象的作用范围<br/>可用于设置创建出的bean是否为单例对象</td>
+</tr>
+<tr>
+<td>属性</td>
+<td>value（默认）：定义bean作用范围，<br/>&#x3D;&#x3D;默认值singleton（单例），可选值prototype（非单例）&#x3D;&#x3D;</td>
+</tr>
+</tbody></table>
+<h3 id="2-3-Bean生命周期"><a href="#2-3-Bean生命周期" class="headerlink" title="2.3 Bean生命周期"></a>2.3 Bean生命周期</h3><p><strong>@PostConstruct</strong></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>@PostConstruct</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类型</td>
+<td>方法注解</td>
+</tr>
+<tr>
+<td>位置</td>
+<td>方法上</td>
+</tr>
+<tr>
+<td>作用</td>
+<td>设置该方法为初始化方法</td>
+</tr>
+<tr>
+<td>属性</td>
+<td>无</td>
+</tr>
+</tbody></table>
+<p><strong>@PreDestroy</strong></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>@PreDestroy</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类型</td>
+<td>方法注解</td>
+</tr>
+<tr>
+<td>位置</td>
+<td>方法上</td>
+</tr>
+<tr>
+<td>作用</td>
+<td>设置该方法为销毁方法</td>
+</tr>
+<tr>
+<td>属性</td>
+<td>无</td>
+</tr>
+</tbody></table>
+<h2 id="3-依赖注入"><a href="#3-依赖注入" class="headerlink" title="3 依赖注入"></a>3 依赖注入</h2><p>无论什么数据注入都<strong>可以不用写setter方法</strong></p>
+<h3 id="3-1-引用类型注入"><a href="#3-1-引用类型注入" class="headerlink" title="3.1 引用类型注入"></a>3.1 引用类型注入</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>@Autowired</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类型</td>
+<td>属性注解  或  方法注解（了解）  或  方法形参注解（了解）</td>
+</tr>
+<tr>
+<td>位置</td>
+<td>属性定义上方  或  标准set方法上方  或  类set方法上方  或  方法形参前面</td>
+</tr>
+<tr>
+<td>作用</td>
+<td>为引用类型属性设置值</td>
+</tr>
+<tr>
+<td>属性</td>
+<td>required：true&#x2F;false，定义该属性是否允许为null</td>
+</tr>
+</tbody></table>
+<p>@Autowired是按照类型注入，那么对应到dao1接口如果有多个实现类，就会报错。这时我们就只能加上@Qualifier按名称注入</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>@Qualifier</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类型</td>
+<td>属性注解  或  方法注解（了解）</td>
+</tr>
+<tr>
+<td>位置</td>
+<td>属性定义上方  或  标准set方法上方  或  类set方法上方</td>
+</tr>
+<tr>
+<td>作用</td>
+<td>为引用类型属性指定注入的beanId</td>
+</tr>
+<tr>
+<td>属性</td>
+<td>value（默认）：设置注入的beanId</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>@Qualifier不能独立使用，必须和@Autowired一起使用</p>
+</blockquote>
+<h3 id="3-2-普通数据注入"><a href="#3-2-普通数据注入" class="headerlink" title="3.2 普通数据注入"></a>3.2 普通数据注入</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>@Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类型</td>
+<td>属性注解  或  方法注解（了解）</td>
+</tr>
+<tr>
+<td>位置</td>
+<td>属性定义上方  或  标准set方法上方  或  类set方法上方</td>
+</tr>
+<tr>
+<td>作用</td>
+<td>为  基本数据类型  或  字符串类型  属性设置值</td>
+</tr>
+<tr>
+<td>属性</td>
+<td>value（默认）：要注入的属性值</td>
+</tr>
+</tbody></table>
+<h3 id="3-3-Properties注入"><a href="#3-3-Properties注入" class="headerlink" title="3.3 Properties注入"></a>3.3 Properties注入</h3><ol>
+<li><p>注解加载properties配置文件</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan(&quot;dao&quot;)</span></span><br><span class="line"><span class="meta">@PropertySource(&quot;jdbc.properties&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SpringConfig</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>@PropertySource</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类型</td>
+<td>类注解</td>
+</tr>
+<tr>
+<td>位置</td>
+<td><strong>类定义上方</strong></td>
+</tr>
+<tr>
+<td>作用</td>
+<td>加载properties文件中的属性值</td>
+</tr>
+<tr>
+<td>属性</td>
+<td>value（默认）：设置加载的properties文件对应的文件名或文件名组成的数组</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>使用@Value和EL表达式读取配置文件中的内容</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">@Value(&quot;$&#123;name&#125;&quot;)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="4-管理第三方bean"><a href="#4-管理第三方bean" class="headerlink" title="4 管理第三方bean"></a>4 管理第三方bean</h2><h3 id="4-1-配置类中添加"><a href="#4-1-配置类中添加" class="headerlink" title="4.1 配置类中添加"></a>4.1 配置类中添加</h3><p>在配置类中添加一个方法，该方法的返回值就是要创建的Bean对象类型。并用@Bean注明</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SpringConfig</span> &#123;</span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> DataSource <span class="title function_">dataSource</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">DruidDataSource</span> <span class="variable">ds</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DruidDataSource</span>();</span><br><span class="line">        ds.setDriverClassName(<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>);</span><br><span class="line">        ds.setUrl(<span class="string">&quot;jdbc:mysql://localhost:3306/spring_db&quot;</span>);</span><br><span class="line">        ds.setUsername(<span class="string">&quot;root&quot;</span>);</span><br><span class="line">        ds.setPassword(<span class="string">&quot;root&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> ds;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>@Bean</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类型</td>
+<td>方法注解</td>
+</tr>
+<tr>
+<td>位置</td>
+<td>方法定义上方</td>
+</tr>
+<tr>
+<td>作用</td>
+<td>设置该方法的返回值作为spring管理的bean</td>
+</tr>
+<tr>
+<td>属性</td>
+<td>value（默认）：定义bean的id</td>
+</tr>
+</tbody></table>
+<h3 id="4-2-引入外部外部配置类"><a href="#4-2-引入外部外部配置类" class="headerlink" title="4.2 引入外部外部配置类"></a>4.2 引入外部外部配置类</h3><h4 id="4-2-1-使用包扫描"><a href="#4-2-1-使用包扫描" class="headerlink" title="4.2.1 使用包扫描"></a>4.2.1 使用包扫描</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan(&quot;config&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SpringConfig</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>将jdbConfig类要放入config包中</p>
+</blockquote>
+<h4 id="4-2-2-Import引入"><a href="#4-2-2-Import引入" class="headerlink" title="4.2.2 @Import引入"></a>4.2.2 <code>@Import</code>引入</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="comment">//@ComponentScan(&quot;com.itheima.config&quot;)</span></span><br><span class="line"><span class="meta">@Import(&#123;JdbcConfig.class&#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SpringConfig</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>@Import参数需要的是一个数组，可以引入多个配置类。</li>
+<li>@Import注解在配置类中只能写一次</li>
+<li>@Import注解引入的是类的类型</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>@Import</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类型</td>
+<td>类注解</td>
+</tr>
+<tr>
+<td>位置</td>
+<td>类定义上方</td>
+</tr>
+<tr>
+<td>作用</td>
+<td>导入配置类</td>
+</tr>
+<tr>
+<td>属性</td>
+<td>value（默认）：定义导入的配置类类名，<br/>当配置类有多个时使用数组格式一次性导入多个配置类</td>
+</tr>
+</tbody></table>
+<h1 id="总结对比"><a href="#总结对比" class="headerlink" title="总结对比"></a>总结对比</h1><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>xml配置</th>
+<th>注解</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>定义bean</td>
+<td>bean标签<br/>     id属性<br />     class属性</td>
+<td>@Component<br />     @Controller<br />     @Service<br />     @Repository<br />@ComponentScan</td>
+</tr>
+<tr>
+<td>设置依赖注入</td>
+<td>setter输入(set方法)<br />构造器注入(构造方法)<br />自动装配</td>
+<td>@Autowired<br />      @Qualifier<br />@Value</td>
+</tr>
+<tr>
+<td>配置第三方bean</td>
+<td>bean标签<br />     静态工厂<br />     实例工厂<br />     FactoryBean</td>
+<td>@Bean</td>
+</tr>
+<tr>
+<td>作用范围</td>
+<td>scope属性</td>
+<td>@Scope</td>
+</tr>
+<tr>
+<td>生命周期</td>
+<td>标准接口 <br />     init-method<br />     destroy-method</td>
+<td>@PostConstructor<br />@PreDestroy</td>
+</tr>
+</tbody></table>
+<hr>
+<center><b>如果有什么，可以通过下面的邮箱和我联系！！！</b></center>
+
+<p><a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=VCM9NTo1OhQlJXo3Ozk"><img data-src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png" alt="img"></a></p>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>SSM</category>
+        <category>Spring</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Spring</tag>
+      </tags>
+  </entry>
 </search>
