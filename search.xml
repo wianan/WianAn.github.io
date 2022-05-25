@@ -2618,4 +2618,152 @@
         <tag>Spring</tag>
       </tags>
   </entry>
+  <entry>
+    <title>JDBC</title>
+    <url>/2022/05/25/JDBC/</url>
+    <content><![CDATA[<h1 id="JDBC本质"><a href="#JDBC本质" class="headerlink" title="JDBC本质"></a>JDBC本质</h1><ul>
+<li>官方（sun公司）定义的一套操作所有关系型数据库的规则，即接口</li>
+<li>各个数据库厂商去实现这套接口，提供数据库驱动jar包</li>
+<li>我们可以使用这套接口（JDBC）编程，真正执行的代码是驱动jar包中的实现类</li>
+</ul>
+<span id="more"></span>
+
+
+
+<h1 id="JDBC使用"><a href="#JDBC使用" class="headerlink" title="JDBC使用"></a>JDBC使用</h1><h2 id="六个步骤"><a href="#六个步骤" class="headerlink" title="六个步骤"></a>六个步骤</h2><ul>
+<li>注册驱动(可省略)</li>
+<li>获取连接</li>
+<li>获取操作对象</li>
+<li>执行sql</li>
+<li>处理查询操作集</li>
+<li>关闭资源</li>
+</ul>
+<h2 id="详细例子"><a href="#详细例子" class="headerlink" title="详细例子"></a>详细例子</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.Statement;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JDBC</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line"><span class="comment">//        1.注册驱动</span></span><br><span class="line">        DriverManager.registerDriver(<span class="keyword">new</span> <span class="title class_">com</span>.mysql.jdbc.Driver());</span><br><span class="line"><span class="comment">//        2.获取连接</span></span><br><span class="line">        <span class="type">Connection</span> <span class="variable">conn</span> <span class="operator">=</span> DriverManager.getConnection(<span class="string">&quot;jdbc:mysql:///jdbc&quot;</span>, <span class="string">&quot;root&quot;</span>, <span class="string">&quot;88888888&quot;</span>);</span><br><span class="line"><span class="comment">//        3.获取操作对象</span></span><br><span class="line">        <span class="type">Statement</span> <span class="variable">stat</span> <span class="operator">=</span> conn.createStatement();</span><br><span class="line"><span class="comment">//        4.执行sql</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">sql</span> <span class="operator">=</span> <span class="string">&quot;select * from tb_user&quot;</span>;</span><br><span class="line">        <span class="type">ResultSet</span> <span class="variable">re</span> <span class="operator">=</span> stat.executeQuery(sql);</span><br><span class="line"><span class="comment">//        5.处理查询集</span></span><br><span class="line">        <span class="keyword">while</span>(re.next())&#123;</span><br><span class="line">            <span class="type">Integer</span> <span class="variable">id</span> <span class="operator">=</span> re.getInt(<span class="number">1</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> re.getString(<span class="number">2</span>);</span><br><span class="line">            System.out.println(id + <span class="string">&quot;:&quot;</span> + name);</span><br><span class="line">        &#125;</span><br><span class="line"><span class="comment">//        6.释放资源</span></span><br><span class="line">        re.close();</span><br><span class="line">        stat.close();</span><br><span class="line">        conn.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h1><h2 id="1-注册驱动"><a href="#1-注册驱动" class="headerlink" title="1 注册驱动"></a>1 注册驱动</h2><p>注册驱动主要有两种方式</p>
+<ul>
+<li>方法1</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">DriverManager.registerDriver(<span class="keyword">new</span> <span class="title class_">com</span>.mysql.jdbc.Driver());</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>方法2</li>
+</ul>
+<p>通过反射进行注册，这也是现在常用的方式</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Class.forName(<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-获取连接"><a href="#2-获取连接" class="headerlink" title="2 获取连接"></a>2 获取连接</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Connection</span> <span class="variable">conn</span> <span class="operator">=</span> DriverManager.getConnection(<span class="string">&quot;jdbc:mysql:///jdbc&quot;</span>, <span class="string">&quot;root&quot;</span>, <span class="string">&quot;88888888&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>调用DriverManager的getConnection方法，其参数为：</p>
+<ul>
+<li>url：数据库链接</li>
+<li>username：数据库用户名</li>
+<li>password：数据库密码</li>
+</ul>
+<h2 id="3-获取操作对象"><a href="#3-获取操作对象" class="headerlink" title="3 获取操作对象"></a>3 获取操作对象</h2><p>Statement不能防止sql注入，所以很少使用。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Statement</span> <span class="variable">stat</span> <span class="operator">=</span> conn.createStatement();</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-执行sql语句"><a href="#4-执行sql语句" class="headerlink" title="4 执行sql语句"></a>4 执行sql语句</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">sql</span> <span class="operator">=</span> <span class="string">&quot;select * from tb_user&quot;</span>;</span><br><span class="line"><span class="type">ResultSet</span> <span class="variable">re</span> <span class="operator">=</span> stat.executeQuery(sql);</span><br></pre></td></tr></table></figure>
+
+<p>Statement下有两个方法：</p>
+<ul>
+<li><p>int executeUpdate(String sql)：</p>
+<p>该方法用于执行DML语句，即增删改。返回的值为被影响的行数。</p>
+</li>
+<li><p>ResultSet executeQuery(String sql)：</p>
+<p>该方法用于执行DQL语句，即查询语句。返回了ResultSet。</p>
+</li>
+</ul>
+<h2 id="5-处理查询集"><a href="#5-处理查询集" class="headerlink" title="5 处理查询集"></a>5 处理查询集</h2><p>当我们执行的语句是DQL语句时，就会返回一个ResultSet。在这其中就包含了我们查询的数据。</p>
+<p>从ResultSet中获取数据</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">ResultSet</span> <span class="variable">re</span> <span class="operator">=</span> stat.executeQuery(sql);</span><br><span class="line"><span class="keyword">while</span>(re.next())&#123;</span><br><span class="line">	<span class="type">Integer</span> <span class="variable">id</span> <span class="operator">=</span> re.getInt(<span class="number">1</span>);</span><br><span class="line">	<span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> re.getString(<span class="number">2</span>);</span><br><span class="line">	System.out.println(id + <span class="string">&quot;:&quot;</span> + name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>boolean next()方法：</p>
+<p>返回下一存储位置是否有数据。有就返回true，没有就返回false。</p>
+</li>
+<li><p>int getInt(String str)，int getInt (int i):</p>
+<p>返回对应数据库中表对应列或字段的数据。str就是字段名。i就是字段顺序，从1开始。</p>
+<p>如果获取的是String数据类型。则为String getString(String str)，String getString(int i)。以此类推。</p>
+</li>
+</ul>
+<h2 id="6-释放资源"><a href="#6-释放资源" class="headerlink" title="6 释放资源"></a>6 释放资源</h2><p>如果执行了DQL语句，那么就要释放ResultSet。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">re.close;</span><br><span class="line">statm.close;</span><br><span class="line">conn.close;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="PreparedStatement"><a href="#PreparedStatement" class="headerlink" title="PreparedStatement"></a>PreparedStatement</h1><p>通过Statement对象执行sql语句时，可能会存在sql注入问题，会存在一定的安全隐患。所以后来产生了PreparedStatement对象，可以有效的解决sql注入问题。</p>
+<h2 id="1-获取方式"><a href="#1-获取方式" class="headerlink" title="1 获取方式"></a>1 获取方式</h2><p>与Statement一样，但是在获取时，就得写入sql语句。并且使用占位符” ? “。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">sql</span> <span class="operator">=</span> <span class="string">&quot;select * from tb_user where id = ? and name = ?&quot;</span>;</span><br><span class="line"><span class="type">PreparedStatement</span> <span class="variable">preparedStatement</span> <span class="operator">=</span> connection.prepareStatement(sql);</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-注入数据"><a href="#2-注入数据" class="headerlink" title="2 注入数据"></a>2 注入数据</h2><p>sql语句是不完整的，需要用数据去替换掉对应的” ? “。</p>
+<p>PreparedStatement提供了相应的方法：</p>
+<p>void setInt(int i，int x):</p>
+<ul>
+<li>i是第几个占位符。</li>
+<li>x是注入的数据。</li>
+</ul>
+<p>如果需注入String类型数据，则为void setString(int i，String str)。以此类推。</p>
+<h2 id="3-执行sql"><a href="#3-执行sql" class="headerlink" title="3 执行sql"></a>3 执行sql</h2><ul>
+<li><p>DML语句</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">executeUpdate</span><span class="params">()</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>DQL语句</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ResoultSet <span class="title function_">executeQuery</span><span class="params">()</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>以上两个方法都不需要任何参数。</p>
+</blockquote>
+<h2 id="4-与Statement对比"><a href="#4-与Statement对比" class="headerlink" title="4 与Statement对比"></a>4 与Statement对比</h2><ol>
+<li>Statement存在Sql注入问题，preparedStatement解决了Sql注入问题</li>
+<li>Statement是编译一次执行一次，preparedStatement是编译一次，可以执行多次。preparedStatement执行效率更高</li>
+<li>preparedStatement会在编译阶段做类型的安全检查</li>
+</ol>
+<h1 id="事务管理"><a href="#事务管理" class="headerlink" title="事务管理"></a>事务管理</h1><p>事务对应的方法全在Connection中。</p>
+<ol>
+<li><p>开启事务。</p>
+<p>在JDBC中，事务是默认开启的，但是是自动提交。我们可以通过</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">void setAutoCommit（Boolean b）</span><br></pre></td></tr></table></figure>
+
+<p>关闭其自动提交。</p>
+<ul>
+<li>ture：开启自动提交（默认）</li>
+<li>false：关闭自动提交</li>
+</ul>
+</li>
+<li><p>提交事务</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">void commit()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>回滚事务</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">viod rollbac()</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>下面是一个例子：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> com.mysql.jdbc.Driver;</span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.sql.Statement;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JDBC</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> SQLException &#123;</span><br><span class="line">        DriverManager.registerDriver(<span class="keyword">new</span> <span class="title class_">Driver</span>());</span><br><span class="line">        <span class="type">Connection</span> <span class="variable">conn</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="type">Statement</span> <span class="variable">state</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            conn = DriverManager.getConnection(<span class="string">&quot;jdbc:mysql:///jdbc&quot;</span>, <span class="string">&quot;root&quot;</span>, <span class="string">&quot;88888888&quot;</span>);</span><br><span class="line"><span class="comment">//        关闭自动提交</span></span><br><span class="line">            conn.setAutoCommit(<span class="literal">false</span>);</span><br><span class="line">            state = conn.createStatement();</span><br><span class="line">            <span class="type">String</span> <span class="variable">sql1</span> <span class="operator">=</span> <span class="string">&quot;update tb_user set money = 1000 where id = 1&quot;</span>;</span><br><span class="line">            <span class="type">String</span> <span class="variable">sql2</span> <span class="operator">=</span> <span class="string">&quot;update tb_user set money = 1000 where id = 2&quot;</span>;</span><br><span class="line">            state.executeUpdate(sql1);</span><br><span class="line">            state.executeUpdate(sql2);</span><br><span class="line"><span class="comment">//            一切正常，提交事务</span></span><br><span class="line">            conn.commit();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line"><span class="comment">//            出现异常，回滚事务</span></span><br><span class="line">            conn.rollback();</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line"><span class="comment">//            无论提交与否，最后都需要是释放资源</span></span><br><span class="line">            state.close();</span><br><span class="line">            conn.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<hr>
+<center><b>如果有什么，可以通过下面的邮箱和我联系！！！</b></center>
+
+<p><a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=VCM9NTo1OhQlJXo3Ozk"><img data-src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png" alt="img"></a></p>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>数据库</category>
+        <category>JDBC</category>
+        <category>JDBC</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>数据库</tag>
+      </tags>
+  </entry>
 </search>
