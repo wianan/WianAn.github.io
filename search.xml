@@ -2936,4 +2936,79 @@
         <tag>服务器</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Redhat搭建dhcp服务</title>
+    <url>/2022/06/03/Redhat%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1/</url>
+    <content><![CDATA[<h1 id="1-克隆虚拟机"><a href="#1-克隆虚拟机" class="headerlink" title="1 克隆虚拟机"></a>1 克隆虚拟机</h1><ul>
+<li><p>之前，我已经安装了web服务器的虚拟机。现在我们只需克隆即可。这样就不用再次安装一个虚拟机浪费时间了。</p>
+</li>
+<li><p>卸载软件（可选）</p>
+<p>之前安装了http，可以卸载它</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dnf remove http</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="2-设置静态ip"><a href="#2-设置静态ip" class="headerlink" title="2 设置静态ip"></a>2 设置静态ip</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nmtui</span><br></pre></td></tr></table></figure>
+
+<p>输入以上命令，进入以下界面。</p>
+<p>选择编辑一个链接</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A10001.png"></p>
+<p>选择ens160网卡</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A10002.png"></p>
+<p>先将自动连接勾选上，再展示出细节</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A10003.png"></p>
+<p>填入自定义的ip</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A10004.png"></p>
+<p>退出重启即可。</p>
+<h1 id="3-配置dhcp"><a href="#3-配置dhcp" class="headerlink" title="3 配置dhcp"></a>3 配置dhcp</h1><ul>
+<li><p>下载dhcp</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dnf install dhcp-server</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编辑配置文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/dhcp/dhcpd.conf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>我编辑了以下内容</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">subnet 192.2.16.0 netmask 255.255.255.0 &#123;	<span class="comment">#分配的ip地址所在网段和子网掩码</span></span><br><span class="line">  range 192.2.16.10 192.2.16.254;			<span class="comment">#分配的ip地址的范围</span></span><br><span class="line">  option domain-name-servers 192.2.16.110;	<span class="comment">#DNS服务器地址</span></span><br><span class="line">  option domain-name <span class="string">&quot;wq.com&quot;</span>;				<span class="comment">#域名服务器的名称，配置DNS后可以通过域名访问web服务器</span></span><br><span class="line">  option broadcast-address 192.2.16.255;	<span class="comment">#广播地址</span></span><br><span class="line">  default-lease-time 600;  					<span class="comment">#默认租约时间</span></span><br><span class="line">  max-lease-time 7200;						<span class="comment">#最大租约时间</span></span><br><span class="line">  host Web &#123;								<span class="comment">#为web服务器下发固定ip地址</span></span><br><span class="line">        hardware ethernet 00:0C:29:B1:8F:EC;<span class="comment">#web服务器的MAC地址</span></span><br><span class="line">        fixed-address 192.2.16.120;			<span class="comment">#下发的ip地址</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A10005.png"></p>
+</li>
+</ul>
+<h1 id="4-开启服务"><a href="#4-开启服务" class="headerlink" title="4 开启服务"></a>4 开启服务</h1><p>开启dhcp服务</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl start dhcpd</span><br></pre></td></tr></table></figure>
+
+<p>设置为开机自启</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> dhcpd</span><br></pre></td></tr></table></figure>
+
+<p>防火墙放行</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --permanent --add-service=dhcp</span><br></pre></td></tr></table></figure>
+
+<p>使其立即生效</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<p>在虚拟网络编辑器中关闭本地dhcp服务</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A10008.png"></p>
+<p>在win客户端，使对应网卡重新自动获取ip地址。</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A10009.png"></p>
+<p>如下图，当dhcp和网卡的ip处于同一网段，则为成功</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A10010.png"></p>
+<h1 id="5-访问页面"><a href="#5-访问页面" class="headerlink" title="5 访问页面"></a>5 访问页面</h1><ul>
+<li><p>获取ip地址</p>
+<p>打开web服务器，获取ip地址</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A10006.png"></p>
+</li>
+<li><p>浏览器访问<br><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A10007.png"></p>
+</li>
+</ul>
+<hr>
+<center><b>如果有什么，可以通过下面的邮箱和我联系！！！</b></center>
+
+<p><a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=VCM9NTo1OhQlJXo3Ozk"><img data-src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png" alt="img"></a></p>
+]]></content>
+      <categories>
+        <category>服务器与存储技术</category>
+        <category>dhcp服务</category>
+      </categories>
+      <tags>
+        <tag>dhcp</tag>
+        <tag>服务器与存储技术</tag>
+      </tags>
+  </entry>
 </search>
