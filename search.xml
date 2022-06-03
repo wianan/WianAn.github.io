@@ -2773,12 +2773,11 @@
 <p>最低硬件要求：</p>
 <ul>
 <li><p>一颗CPU</p>
-<span id="more"></span>
 </li>
 <li><p>2G内存容量</p>
 </li>
 <li><p>500G硬盘容量。</p>
-</li>
+<span id="more"></span></li>
 </ul>
 <p>安装后修改主机名(可选)。</p>
 <ul>
@@ -2831,7 +2830,7 @@
 <ul>
 <li>输入以下内容</li>
 </ul>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8001.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1/001.png"></p>
 <ul>
 <li>挂载上，重启也可以</li>
 </ul>
@@ -2876,13 +2875,13 @@
 <ul>
 <li><p>资源路径</p>
 <p>修改以下地方，均修改为&#x2F;web，就是web资源的存放位置</p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8002.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1/002.png"></p>
 <p>修改默认访问页面，默认为index.html，因为我创建的文件就是index.heml，所以我不需要改动</p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8003.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1/003.png"></p>
 </li>
 <li><p>修改端口号(可选)</p>
 <p>默认端口为80。在此，我修改为8080端口</p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8004.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1/004.png"></p>
 </li>
 </ul>
 <h1 id="7-开启服务"><a href="#7-开启服务" class="headerlink" title="7 开启服务"></a>7 开启服务</h1><p>开启httpd服务</p>
@@ -2901,28 +2900,28 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --list-all</span><br></pre></td></tr></table></figure>
 
 <p>如果为以下内容，则放行成功</p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8005.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1/005.png"></p>
 <p>关闭linux第二道防火墙</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/selinux/config</span><br></pre></td></tr></table></figure>
 
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8006.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1/006.png"></p>
 <h1 id="8-访问页面"><a href="#8-访问页面" class="headerlink" title="8 访问页面"></a>8 访问页面</h1><ul>
 <li><p>获取ip</p>
 <p>查看网卡，获取网卡名字。如我的网卡名为ens160</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ip add</span><br></pre></td></tr></table></figure>
 
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8007.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1/007.png"></p>
 <p>为网卡配置ip</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nmcli con up ens160</span><br></pre></td></tr></table></figure>
 
 <p>查看ip</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ip add</span><br></pre></td></tr></table></figure>
 
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8009.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1/009.png"></p>
 </li>
 <li><p>浏览器访问</p>
 <p>在浏览器中输入ip和端口号</p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8010.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1/010.png"></p>
 <hr>
 <center><b>如果有什么，可以通过下面的邮箱和我联系！！！</b></center></li>
 </ul>
@@ -2952,13 +2951,13 @@
 
 <p>输入以上命令，进入以下界面。</p>
 <p>选择编辑一个链接</p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A10001.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1/001.png"></p>
 <p>选择ens160网卡</p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A10002.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1/002.png"></p>
 <p>先将自动连接勾选上，再展示出细节</p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A10003.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1/003.png"></p>
 <p>填入自定义的ip</p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A10004.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1/004.png"></p>
 <p>退出重启即可。</p>
 <h1 id="3-配置dhcp"><a href="#3-配置dhcp" class="headerlink" title="3 配置dhcp"></a>3 配置dhcp</h1><ul>
 <li><p>下载dhcp</p>
@@ -2968,9 +2967,9 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/dhcp/dhcpd.conf</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>我编辑了以下内容</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">subnet 192.2.16.0 netmask 255.255.255.0 &#123;	<span class="comment">#分配的ip地址所在网段和子网掩码</span></span><br><span class="line">  range 192.2.16.10 192.2.16.254;			<span class="comment">#分配的ip地址的范围</span></span><br><span class="line">  option domain-name-servers 192.2.16.110;	<span class="comment">#DNS服务器地址</span></span><br><span class="line">  option domain-name <span class="string">&quot;wq.com&quot;</span>;				<span class="comment">#域名服务器的名称，配置DNS后可以通过域名访问web服务器</span></span><br><span class="line">  option broadcast-address 192.2.16.255;	<span class="comment">#广播地址</span></span><br><span class="line">  default-lease-time 600;  					<span class="comment">#默认租约时间</span></span><br><span class="line">  max-lease-time 7200;						<span class="comment">#最大租约时间</span></span><br><span class="line">  host Web &#123;								<span class="comment">#为web服务器下发固定ip地址</span></span><br><span class="line">        hardware ethernet 00:0C:29:B1:8F:EC;<span class="comment">#web服务器的MAC地址</span></span><br><span class="line">        fixed-address 192.2.16.120;			<span class="comment">#下发的ip地址</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">subnet 88.88.88.0 netmask 255.255.255.0 &#123;	<span class="comment">#分配的ip地址所在网段和子网掩码</span></span><br><span class="line">  range 88.88.88.10 192.2.16.254;			<span class="comment">#分配的ip地址的范围</span></span><br><span class="line">  option domain-name-servers 88.88.88.110;	<span class="comment">#DNS服务器地址</span></span><br><span class="line">  option domain-name <span class="string">&quot;wq.com&quot;</span>;				<span class="comment">#域名服务器的名称，配置DNS后可以通过域名访问web服务器</span></span><br><span class="line">  option broadcast-address 88.88.88.255;	<span class="comment">#广播地址</span></span><br><span class="line">  default-lease-time 600;  					<span class="comment">#默认租约时间</span></span><br><span class="line">  max-lease-time 7200;						<span class="comment">#最大租约时间</span></span><br><span class="line">  host Web &#123;								<span class="comment">#为web服务器下发固定ip地址</span></span><br><span class="line">        hardware ethernet 00:0C:29:B1:8F:EC;<span class="comment">#web服务器的MAC地址</span></span><br><span class="line">        fixed-address 88.88.88.88;			<span class="comment">#下发的ip地址</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A10005.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1/005.png"></p>
 </li>
 </ul>
 <h1 id="4-开启服务"><a href="#4-开启服务" class="headerlink" title="4 开启服务"></a>4 开启服务</h1><p>开启dhcp服务</p>
@@ -2986,17 +2985,17 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
 
 <p>在虚拟网络编辑器中关闭本地dhcp服务</p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A10008.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1/006.png"></p>
 <p>在win客户端，使对应网卡重新自动获取ip地址。</p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A10009.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1/007.png"></p>
 <p>如下图，当dhcp和网卡的ip处于同一网段，则为成功</p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A10010.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1/008.png"></p>
 <h1 id="5-访问页面"><a href="#5-访问页面" class="headerlink" title="5 访问页面"></a>5 访问页面</h1><ul>
 <li><p>获取ip地址</p>
 <p>打开web服务器，获取ip地址</p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A10006.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1/009.png"></p>
 </li>
-<li><p>浏览器访问<br><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A10007.png"></p>
+<li><p>浏览器访问<br><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1/010.png"></p>
 </li>
 </ul>
 <hr>
