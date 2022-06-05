@@ -280,43 +280,6 @@
 <li><p>卸载软件（可选）</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf remove 软件名</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h1 id="2-设置静态IP"><a href="#2-设置静态IP" class="headerlink" title="2 设置静态IP"></a>2 设置静态IP</h1><p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BADNS%E6%9C%8D%E5%8A%A1/001.png"></p>
-<img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/服务器与存储技术/搭建DNS服务/002.png" alt="dhcp的配置文件" style="zoom:80%;">
-
-<blockquote>
-<p>此IP地址应该与dhcp配置文件中的option domain-name-servers一致</p>
-</blockquote>
-<h1 id="3-配置DNS"><a href="#3-配置DNS" class="headerlink" title="3 配置DNS"></a>3 配置DNS</h1><ul>
-<li><p>下载bind-chroot</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf install bind-chroot</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>编辑配置文件</p>
-<p>第一个：named.conf</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/named.conf</span><br></pre></td></tr></table></figure>
-
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BADNS%E6%9C%8D%E5%8A%A1/003.png"></p>
-<p>将11和19行的地址改为any</p>
-<p>第二个：named.rfc1912.zones</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/named.rfc1912.zones</span><br></pre></td></tr></table></figure>
-
-<p>我在末尾添加了如下内容</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">zone <span class="string">&quot;wian.com&quot;</span> IN &#123;</span><br><span class="line">        <span class="built_in">type</span> master;</span><br><span class="line">        file <span class="string">&quot;wian.com.zone&quot;</span>;</span><br><span class="line">        allow-update &#123; none; &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BADNS%E6%9C%8D%E5%8A%A1/004.png"></p>
-<p>第三个：</p>
-<p>切换到如下目录</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /var/named/</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> -p named.empty wian.com.zone</span><br></pre></td></tr></table></figure>
-
-<p>复制一份模板文件，文件名为named.rfc1912.zones中的file的值</p>
-<p>将文件编辑如下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$TTL</span> 3H</span><br><span class="line">@       IN SOA  wian.com. root.wian.com.  (</span><br><span class="line">                                        0       ; serial</span><br><span class="line">                                        1D      ; refresh</span><br><span class="line">                                        1H      ; retry</span><br><span class="line">                                        1W      ; expire</span><br><span class="line">                                        3H )    ; minimum</span><br><span class="line">        IN NS   ns1.wian.com.</span><br><span class="line">ns1     IN A    88.88.88.110</span><br><span class="line">www     IN A    88.88.88.88</span><br></pre></td></tr></table></figure>
-
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BADNS%E6%9C%8D%E5%8A%A1/005.png"></p>
-</li>
-</ul>
-<h1 id="4-开启服务"><a href="#4-开启服务" class="headerlink" title="4 开启服务"></a>4 开启服务</h1><p>开启dhcp服务</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/06/05/Redhat%E6%90%AD%E5%BB%BADNS%E6%9C%8D%E5%8A%A1/#more" rel="contents">

@@ -3020,6 +3020,10 @@
 <li><p>卸载软件（可选）</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dnf remove 软件名</span><br></pre></td></tr></table></figure></li>
 </ul>
+<span id="more"></span>
+
+
+
 <h1 id="2-设置静态IP"><a href="#2-设置静态IP" class="headerlink" title="2 设置静态IP"></a>2 设置静态IP</h1><p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BADNS%E6%9C%8D%E5%8A%A1/001.png"></p>
 <img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/服务器与存储技术/搭建DNS服务/002.png" alt="dhcp的配置文件" style="zoom:80%;" />
 
