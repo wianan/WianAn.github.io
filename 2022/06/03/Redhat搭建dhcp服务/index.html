@@ -46,10 +46,10 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1/010.png">
 <meta property="og:image" content="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png">
 <meta property="article:published_time" content="2022-06-03T02:20:22.000Z">
-<meta property="article:modified_time" content="2022-06-03T05:17:13.782Z">
+<meta property="article:modified_time" content="2022-06-05T12:41:01.939Z">
 <meta property="article:author" content="Wian">
+<meta property="article:tag" content="服务器">
 <meta property="article:tag" content="dhcp">
-<meta property="article:tag" content="服务器与存储技术">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1/001.png">
 
@@ -181,18 +181,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -276,11 +276,11 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">服务器与存储技术</span></a>
+          <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">服务器</span></a>
         </span>
           ，
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/dhcp%E6%9C%8D%E5%8A%A1/" itemprop="url" rel="index"><span itemprop="name">dhcp服务</span></a>
+          <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/dhcp%E6%9C%8D%E5%8A%A1/" itemprop="url" rel="index"><span itemprop="name">dhcp服务</span></a>
         </span>
     </span>
 
@@ -323,7 +323,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/dhcp/dhcpd.conf</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>我编辑了以下内容</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">subnet 88.88.88.0 netmask 255.255.255.0 &#123;	<span class="comment">#分配的ip地址所在网段和子网掩码</span></span><br><span class="line">  range 88.88.88.10 192.2.16.254;			<span class="comment">#分配的ip地址的范围</span></span><br><span class="line">  option domain-name-servers 88.88.88.110;	<span class="comment">#DNS服务器地址</span></span><br><span class="line">  option domain-name <span class="string">&quot;wq.com&quot;</span>;				<span class="comment">#域名服务器的名称，配置DNS后可以通过域名访问web服务器</span></span><br><span class="line">  option broadcast-address 88.88.88.255;	<span class="comment">#广播地址</span></span><br><span class="line">  default-lease-time 600;  					<span class="comment">#默认租约时间</span></span><br><span class="line">  max-lease-time 7200;						<span class="comment">#最大租约时间</span></span><br><span class="line">  host Web &#123;								<span class="comment">#为web服务器下发固定ip地址</span></span><br><span class="line">        hardware ethernet 00:0C:29:B1:8F:EC;<span class="comment">#web服务器的MAC地址</span></span><br><span class="line">        fixed-address 88.88.88.88;			<span class="comment">#下发的ip地址</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">subnet 88.88.88.0 netmask 255.255.255.0 &#123;	<span class="comment">#分配的ip地址所在网段和子网掩码</span></span><br><span class="line">  range 88.88.88.10 88.88.88.254;			<span class="comment">#分配的ip地址的范围</span></span><br><span class="line">  option domain-name-servers 88.88.88.110;	<span class="comment">#DNS服务器地址</span></span><br><span class="line">  option domain-name <span class="string">&quot;wq.com&quot;</span>;				<span class="comment">#域名服务器的名称，配置DNS后可以通过域名访问web服务器</span></span><br><span class="line">  option broadcast-address 88.88.88.255;	<span class="comment">#广播地址</span></span><br><span class="line">  default-lease-time 600;  					<span class="comment">#默认租约时间</span></span><br><span class="line">  max-lease-time 7200;						<span class="comment">#最大租约时间</span></span><br><span class="line">  host Web &#123;								<span class="comment">#为web服务器下发固定ip地址</span></span><br><span class="line">        hardware ethernet 00:0C:29:B1:8F:EC;<span class="comment">#web服务器的MAC地址</span></span><br><span class="line">        fixed-address 88.88.88.88;			<span class="comment">#下发的ip地址</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1/005.png"></p>
 </li>
@@ -367,8 +367,8 @@
 
     <footer class="post-footer">
           <div class="post-tags">
+              <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag"><i class="fa fa-tag"></i> 服务器</a>
               <a href="/tags/dhcp/" rel="tag"><i class="fa fa-tag"></i> dhcp</a>
-              <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/" rel="tag"><i class="fa fa-tag"></i> 服务器与存储技术</a>
           </div>
 
         
@@ -380,6 +380,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2022/06/05/Redhat%E6%90%AD%E5%BB%BADNS%E6%9C%8D%E5%8A%A1/" rel="next" title="Redhat搭建DNS服务">
+                  Redhat搭建DNS服务 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
