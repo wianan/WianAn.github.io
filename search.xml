@@ -2767,329 +2767,122 @@
       </tags>
   </entry>
   <entry>
-    <title>redhat搭建web服务器</title>
-    <url>/2022/06/02/Redhat%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
-    <content><![CDATA[<h1 id="1-创建服务器"><a href="#1-创建服务器" class="headerlink" title="1 创建服务器"></a>1 创建服务器</h1><p>安装Redhat虚拟机。</p>
-<p>最低硬件要求：</p>
-<ul>
-<li><p>一颗CPU</p>
-</li>
-<li><p>2G内存容量</p>
-</li>
-<li><p>500G硬盘容量。</p>
-<span id="more"></span></li>
-</ul>
-<p>安装后修改主机名(可选)。</p>
-<ul>
-<li>修改主机名：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hostnameclt set-hostname 名称</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>重启或者输入以下命令让其生效</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bash</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查看主机名及其他信息</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hostnamectl</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="2-搭建本地软件仓库"><a href="#2-搭建本地软件仓库" class="headerlink" title="2 搭建本地软件仓库"></a>2 搭建本地软件仓库</h1><ul>
-<li>进入软件仓库目录</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/yum.repos.d</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>创建本地软件仓库</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi local.repo</span><br></pre></td></tr></table></figure>
-
-<p>在其中输入并并保存以下内容</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[Base]</span><br><span class="line">name=BaseOS</span><br><span class="line">baseurl=file:///media/BaseOS</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[AppStream]</span><br><span class="line">name=AppStream</span><br><span class="line">baseurl=file:///media/AppStream</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="3-挂载镜像"><a href="#3-挂载镜像" class="headerlink" title="3 挂载镜像"></a>3 挂载镜像</h1><p>挂载镜像有两钟方式。为临时挂载和永久挂载，临时挂载在重启后便不会生效了</p>
-<h2 id="3-1-临时挂载"><a href="#3-1-临时挂载" class="headerlink" title="3.1 临时挂载"></a>3.1 临时挂载</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mount /dev/sr0 /media</span><br></pre></td></tr></table></figure>
-
-<p>可以通过以下命名查看是否挂载成功</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">df</span> -h</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="3-2-永久挂载"><a href="#3-2-永久挂载" class="headerlink" title="3.2 永久挂载"></a>3.2 永久挂载</h2><ul>
-<li>编辑相关文件</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /etc/fstab</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>输入以下内容</li>
-</ul>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8/001.png"></p>
-<ul>
-<li>挂载上，重启也可以</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mount -a</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="4-安装软件"><a href="#4-安装软件" class="headerlink" title="4 安装软件"></a>4 安装软件</h1><ul>
-<li>搭建web服务器所需，必须安装。</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dnf isntall httpd -y</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>文本编辑器，选择性安装。</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dnf install vim -y</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>通过以下命令可以查看是否安装成功</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dnf list installed | grep 软件名</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="5-创建web网页文件"><a href="#5-创建web网页文件" class="headerlink" title="5 创建web网页文件"></a>5 创建web网页文件</h1><ul>
-<li>在跟目录下创建web目录，存放web相关资源</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /web</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>在web下添加创建一个html文件。</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /web/index.html</span><br></pre></td></tr></table></figure>
-
-<p>​		我编辑了如下内容</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">title</span>&gt;</span>测试网页<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">p</span>&gt;</span>如果你看到此文字，则表示搭建成功<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">body</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span> </span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="6-修改配置"><a href="#6-修改配置" class="headerlink" title="6 修改配置"></a>6 修改配置</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/httpd/conf/httpd.conf</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>资源路径</p>
-<p>修改以下地方，均修改为&#x2F;web，就是web资源的存放位置</p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8/002.png"></p>
-<p>修改默认访问页面，默认为index.html，因为我创建的文件就是index.heml，所以我不需要改动</p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8/003.png"></p>
-</li>
-<li><p>修改端口号(可选)</p>
-<p>默认端口为80。在此，我修改为8080端口</p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8/004.png"></p>
-</li>
-</ul>
-<h1 id="7-开启服务"><a href="#7-开启服务" class="headerlink" title="7 开启服务"></a>7 开启服务</h1><p>开启httpd服务</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl start httpd</span><br></pre></td></tr></table></figure>
-
-<p>设置为开机自启</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> httpd</span><br></pre></td></tr></table></figure>
-
-<p>防火墙放行8080端口</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --permanent --add-port=8080/tcp</span><br></pre></td></tr></table></figure>
-
-<p>使其立即生效</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
-
-<p>查看防火墙放行信息</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --list-all</span><br></pre></td></tr></table></figure>
-
-<p>如果为以下内容，则放行成功</p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8/005.png"></p>
-<p>关闭linux第二道防火墙</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/selinux/config</span><br></pre></td></tr></table></figure>
-
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8/006.png"></p>
-<h1 id="8-访问页面"><a href="#8-访问页面" class="headerlink" title="8 访问页面"></a>8 访问页面</h1><ul>
-<li><p>获取ip</p>
-<p>查看网卡，获取网卡名字。如我的网卡名为ens160</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ip add</span><br></pre></td></tr></table></figure>
-
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8/007.png"></p>
-<p>为网卡配置ip</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nmcli con up ens160</span><br></pre></td></tr></table></figure>
-
-<p>查看ip</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ip add</span><br></pre></td></tr></table></figure>
-
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8/009.png"></p>
-</li>
-<li><p>浏览器访问</p>
-<p>在浏览器中输入ip和端口号</p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8/010.png"></p>
-<hr>
-<center><b>如果有什么，可以通过下面的邮箱和我联系！！！</b></center></li>
-</ul>
-<p><a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=VCM9NTo1OhQlJXo3Ozk"><img data-src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png" alt="img"></a></p>
-]]></content>
-      <categories>
-        <category>服务器</category>
-      </categories>
-      <tags>
-        <tag>服务器</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redhat搭建dhcp服务</title>
-    <url>/2022/06/03/Redhat%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1/</url>
-    <content><![CDATA[<h1 id="1-克隆虚拟机"><a href="#1-克隆虚拟机" class="headerlink" title="1 克隆虚拟机"></a>1 克隆虚拟机</h1><ul>
-<li><p>之前，我已经安装了web服务器的虚拟机。现在我们只需克隆即可。这样就不用再次安装一个虚拟机浪费时间了。</p>
-</li>
-<li><p>卸载软件（可选）</p>
+    <title>Java多线程-1</title>
+    <url>/2022/10/22/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-1/</url>
+    <content><![CDATA[<h1 id="1-创建多线程"><a href="#1-创建多线程" class="headerlink" title="1 创建多线程"></a>1 创建多线程</h1><p>创建多线程一共有两种方式。一个是继承Thread类，另一个是实现Runable接口。其原理是一样的，本质上都是实现了Runable接口。因为Thread类就是实现了Runable接口。</p>
 <span id="more"></span>
 
-<p>之前安装了http，可以卸载它</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dnf remove http</span><br></pre></td></tr></table></figure></li>
+<h2 id="1-实现Runable接口"><a href="#1-实现Runable接口" class="headerlink" title="1 实现Runable接口"></a>1 实现Runable接口</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">thread1</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//线程中将要执行操作</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-继承Thread类"><a href="#2-继承Thread类" class="headerlink" title="2 继承Thread类"></a>2 继承Thread类</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">thread1</span> <span class="keyword">extends</span> <span class="title class_">Thread</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//线程中将要执行操作</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-启动线程"><a href="#2-启动线程" class="headerlink" title="2 启动线程"></a>2 启动线程</h1><p>看下面，分别为两种不同创建线程方式的启动方法。可以看出在主方法中，最好都用了start方法启动了该线程。但是线程对象的创建方式却不同，Runable接口的是向Thread中注入了参数也就是下面的类t，而Thread类却直接创建了对象t。这是因为，Thread类已经实现了Runable接口，其实本质都是实现了Runable接口。</p>
+<p>为啥线程开启不是用run方法，而是start方法呢？这是因为，run方法其实就是一个定义在Runab接口的普通方法，如果直接调用run方法，就不能直接开启线程，直接在main方法的主线程中执行。start方法其本质是调用了底层start0方法来开启线程。</p>
+<h2 id="1-Runable"><a href="#1-Runable" class="headerlink" title="1 Runable"></a>1 Runable</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">thread</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">t</span> <span class="variable">t</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">t</span>();</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">thread</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(t);</span><br><span class="line">        thread.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">t</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//线程执行的操作</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-Thread"><a href="#2-Thread" class="headerlink" title="2 Thread"></a>2 Thread</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">thread</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">t</span> <span class="variable">t</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">t</span>();</span><br><span class="line">        t.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">t</span> <span class="keyword">extends</span> <span class="title class_">Thread</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//线程执行的操作</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-小案例"><a href="#3-小案例" class="headerlink" title="3 小案例"></a>3 小案例</h1><p>在银行中存放了10000元。有三个人分别取出里面的钱，一次取五百直到取完为止。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">thread</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">t</span> <span class="variable">t</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">t</span>();</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">thread1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(t);</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">thread2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(t);</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">thread3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(t);</span><br><span class="line">        thread1.start();</span><br><span class="line">        thread2.start();</span><br><span class="line">        thread3.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">t</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">int</span> <span class="variable">money</span> <span class="operator">=</span> <span class="number">10000</span>;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (money &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            money = money-<span class="number">500</span>;</span><br><span class="line">            <span class="comment">//Thread.currentThread().getName()获取当前线程的名字</span></span><br><span class="line">            System.out.println(Thread.currentThread().getName() + <span class="string">&quot;取走500还剩&quot;</span> + money );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是在运行的结果中，我们看到有些顺序反了，按理说不应该出现啊。而且还出现了，银行余额为负数，这不应该啊。其实这就是线程不安全，多个线程同时访问一个资源造成的。在后面我们会解决他的。</p>
+<p><a href="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/java%E5%A4%9A%E7%BA%BF%E7%A8%8B1/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%A1%88%E4%BE%8B.jpg"><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/java%E5%A4%9A%E7%BA%BF%E7%A8%8B1/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%A1%88%E4%BE%8B.jpg" alt="img"></a></p>
+<h1 id="4-线程常用方法"><a href="#4-线程常用方法" class="headerlink" title="4 线程常用方法"></a>4 线程常用方法</h1><h2 id="1-线程名字"><a href="#1-线程名字" class="headerlink" title="1 线程名字"></a>1 线程名字</h2><p>主线程的名字为main，后面的线程命为Thread-0，Thread-1…..</p>
+<p>获取线程名字</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>设置线程名字</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">    checkAccess();</span><br><span class="line">    <span class="keyword">if</span> (name == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NullPointerException</span>(<span class="string">&quot;name cannot be null&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="keyword">if</span> (threadStatus != <span class="number">0</span>) &#123;</span><br><span class="line">        setNativeName(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-线程优先级"><a href="#2-线程优先级" class="headerlink" title="2 线程优先级"></a>2 线程优先级</h2><p>线程的默认优先级为5，最高为10，最低为1。</p>
+<p><a href="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/java%E5%A4%9A%E7%BA%BF%E7%A8%8B1/%E7%BA%BF%E7%A8%8B%E4%BC%98%E5%85%88%E7%BA%A7.jpg"><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/java%E5%A4%9A%E7%BA%BF%E7%A8%8B1/%E7%BA%BF%E7%A8%8B%E4%BC%98%E5%85%88%E7%BA%A7.jpg" alt="img"></a></p>
+<p>获取当前优先级</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="type">int</span> <span class="title function_">getPriority</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> priority;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>设置优先级</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title function_">setPriority</span><span class="params">(<span class="type">int</span> newPriority)</span> &#123;</span><br><span class="line">    ThreadGroup g;</span><br><span class="line">    checkAccess();</span><br><span class="line">    <span class="keyword">if</span> (newPriority &gt; MAX_PRIORITY || newPriority &lt; MIN_PRIORITY) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>((g = getThreadGroup()) != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (newPriority &gt; g.getMaxPriority()) &#123;</span><br><span class="line">            newPriority = g.getMaxPriority();</span><br><span class="line">        &#125;</span><br><span class="line">        setPriority0(priority = newPriority);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-其他"><a href="#3-其他" class="headerlink" title="3 其他"></a>3 其他</h2><h3 id="sleep-long-n"><a href="#sleep-long-n" class="headerlink" title="sleep(long n)"></a>sleep(long n)</h3><p>让线程休眠，单位为毫秒</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">sleep</span><span class="params">(<span class="type">long</span> millis, <span class="type">int</span> nanos)</span></span><br><span class="line">        <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">    <span class="keyword">if</span> (millis &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;timeout value is negative&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (nanos &lt; <span class="number">0</span> || nanos &gt; <span class="number">999999</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(</span><br><span class="line">                <span class="string">&quot;nanosecond timeout value out of range&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (nanos &gt;= <span class="number">500000</span> || (nanos != <span class="number">0</span> &amp;&amp; millis == <span class="number">0</span>)) &#123;</span><br><span class="line">        millis++;</span><br><span class="line">    &#125;</span><br><span class="line">    sleep(millis);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="join"><a href="#join" class="headerlink" title="join()"></a>join()</h3><p>让当前线程立刻执行，直到执行完毕才能执行其他线程。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title function_">join</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">    join(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="yield"><a href="#yield" class="headerlink" title="yield()"></a>yield()</h3><p>让出当前线程的cpu，当时不一定让出。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title function_">yield</span><span class="params">()</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-守护线程"><a href="#5-守护线程" class="headerlink" title="5 守护线程"></a>5 守护线程</h1><p>守护线程是指为其他线程服务的线程。在JVM中，所有非守护线程都执行完毕后，无论有没有守护线程，虚拟机都会自动退出。因此JVM退出时，不必关心守护线程是否已结束。最经典的就是java的垃圾回收线程。</p>
+<p>设置守护线程一定得在开起线程之前。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Thread</span> <span class="variable">t</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(t);</span><br><span class="line">t.setDaemon(<span class="literal">true</span>);</span><br><span class="line">t.start();</span><br></pre></td></tr></table></figure>
+
+<h1 id="6-线程的六种状态"><a href="#6-线程的六种状态" class="headerlink" title="6 线程的六种状态"></a>6 线程的六种状态</h1><table>
+<thead>
+<tr>
+<th>状态</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>NEW</td>
+<td>尚未启动的线程状态，即线程创建，还未调用start方法</td>
+</tr>
+<tr>
+<td>RUNNABLE</td>
+<td>就绪状态（调用start，等待调度）+正在运行</td>
+</tr>
+<tr>
+<td>WAITING</td>
+<td>等待状态的线程正在等待另一线程执行特定的操作（如notify）</td>
+</tr>
+<tr>
+<td>TIME_WAITING</td>
+<td>具有指定等待时间的等待状态</td>
+</tr>
+<tr>
+<td>BLOCKED</td>
+<td>等待监视器锁时，陷入阻塞状态</td>
+</tr>
+<tr>
+<td>TERMINATED</td>
+<td>线程完成执行，终止状态</td>
+</tr>
+</tbody></table>
+<p>下面为图示</p>
+<p><a href="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/java%E5%A4%9A%E7%BA%BF%E7%A8%8B1/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81.png"><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/java%E5%A4%9A%E7%BA%BF%E7%A8%8B1/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81.png" alt="img"></a></p>
+<p>其中RUNABLE状态又分为就绪状态和运行状态，所有有的书本上说线程有七种状态。</p>
+<p>线程的主要路径为new—-&gt;runnable—&gt;terminated；而其他的三个状态都是在围绕着runnable。</p>
+<h1 id="7-synchronized"><a href="#7-synchronized" class="headerlink" title="7 synchronized"></a>7 synchronized</h1><p>线程同步机制是一套用于协调线程间的数据访问及活动的机制，该机制用于保障线程安全以及实现这些线程的共同目标</p>
+<p>synchronized便常用于线程同步。有两种用法</p>
+<h2 id="修饰部分代码"><a href="#修饰部分代码" class="headerlink" title="修饰部分代码"></a>修饰部分代码</h2><p>修饰一个代码块，被修饰的代码块称为同步语句块，其作用的范围是大括号{}括起来的代码，作用的对象是调用这个代码块的对象；</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">synchronized</span> (object o) &#123;</span><br><span class="line">    <span class="comment">//todo</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="修饰一个方法"><a href="#修饰一个方法" class="headerlink" title="修饰一个方法"></a>修饰一个方法</h2><ul>
+<li>修饰一个方法，被修饰的方法称为同步方法，其作用的范围是整个方法，作用的对象是调用这个方法的对象；</li>
+<li>修改一个静态的方法，其作用的范围是整个静态方法，作用的对象是这个类的所有对象；</li>
 </ul>
-<h1 id="2-设置静态ip"><a href="#2-设置静态ip" class="headerlink" title="2 设置静态ip"></a>2 设置静态ip</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nmtui</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="comment">// todo</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>输入以上命令，进入以下界面。</p>
-<p>选择编辑一个链接</p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1/001.png"></p>
-<p>选择ens160网卡</p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1/002.png"></p>
-<p>先将自动连接勾选上，再展示出细节</p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1/003.png"></p>
-<p>填入自定义的ip</p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1/004.png"></p>
-<p>退出重启即可。</p>
-<h1 id="3-配置dhcp"><a href="#3-配置dhcp" class="headerlink" title="3 配置dhcp"></a>3 配置dhcp</h1><ul>
-<li><p>下载dhcp</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dnf install dhcp-server</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>编辑配置文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/dhcp/dhcpd.conf</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>我编辑了以下内容</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">subnet 88.88.88.0 netmask 255.255.255.0 &#123;	<span class="comment">#分配的ip地址所在网段和子网掩码</span></span><br><span class="line">  range 88.88.88.10 88.88.88.254;			<span class="comment">#分配的ip地址的范围</span></span><br><span class="line">  option domain-name-servers 88.88.88.110;	<span class="comment">#DNS服务器地址</span></span><br><span class="line">  option domain-name <span class="string">&quot;wq.com&quot;</span>;				<span class="comment">#域名服务器的名称，配置DNS后可以通过域名访问web服务器</span></span><br><span class="line">  option broadcast-address 88.88.88.255;	<span class="comment">#广播地址</span></span><br><span class="line">  default-lease-time 600;  					<span class="comment">#默认租约时间</span></span><br><span class="line">  max-lease-time 7200;						<span class="comment">#最大租约时间</span></span><br><span class="line">  host Web &#123;								<span class="comment">#为web服务器下发固定ip地址</span></span><br><span class="line">        hardware ethernet 00:0C:29:B1:8F:EC;<span class="comment">#web服务器的MAC地址</span></span><br><span class="line">        fixed-address 88.88.88.88;			<span class="comment">#下发的ip地址</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1/005.png"></p>
-</li>
+<ul>
+<li>无论synchronized关键字加在方法上还是对象上，如果它作用的对象是非静态的，则它取得的锁是对象；如果synchronized作用的对象是一个静态方法或一个类，则它取得的锁是对类，该类所有的对象同一把锁。</li>
+<li>每个对象只有一个锁（lock）与之相关联，谁拿到这个锁谁就可以运行它所控制的那段代码。</li>
+<li>实现同步是要很大的系统开销作为代价的，甚至可能造成死锁，所以尽量避免无谓的同步控制</li>
 </ul>
-<h1 id="4-开启服务"><a href="#4-开启服务" class="headerlink" title="4 开启服务"></a>4 开启服务</h1><p>开启dhcp服务</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl start dhcpd</span><br></pre></td></tr></table></figure>
+<h1 id="8-案例完善"><a href="#8-案例完善" class="headerlink" title="8 案例完善"></a>8 案例完善</h1><p>只需要要上把锁就行</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">thread</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">t</span> <span class="variable">t</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">t</span>();</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">thread1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(t);</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">thread2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(t);</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">thread3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(t);</span><br><span class="line">        thread1.start();</span><br><span class="line">        thread2.start();</span><br><span class="line">        thread3.start();</span><br><span class="line"></span><br><span class="line">        System.out.println(thread1.getState());</span><br><span class="line">        System.out.println(thread2.getState());</span><br><span class="line">        System.out.println(thread3.getState());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">t</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">int</span> <span class="variable">money</span> <span class="operator">=</span> <span class="number">10000</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (o) &#123;</span><br><span class="line">            <span class="keyword">while</span> (money &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                money = money - <span class="number">500</span>;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//Thread.currentThread().getName()获取当前线程的名字</span></span><br><span class="line">                System.out.println(Thread.currentThread().getName() + <span class="string">&quot;取走500还剩&quot;</span> + money);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>设置为开机自启</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> dhcpd</span><br></pre></td></tr></table></figure>
-
-<p>防火墙放行</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --permanent --add-service=dhcp</span><br></pre></td></tr></table></figure>
-
-<p>使其立即生效</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
-
-<p>在虚拟网络编辑器中关闭本地dhcp服务</p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1/006.png"></p>
-<p>在win客户端，使对应网卡重新自动获取ip地址。</p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1/007.png"></p>
-<p>如下图，当dhcp和网卡的ip处于同一网段，则为成功</p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1/008.png"></p>
-<h1 id="5-访问页面"><a href="#5-访问页面" class="headerlink" title="5 访问页面"></a>5 访问页面</h1><ul>
-<li><p>获取ip地址</p>
-<p>打开web服务器，获取ip地址</p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1/009.png"></p>
-</li>
-<li><p>浏览器访问<br><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1/010.png"></p>
-</li>
-</ul>
 <hr>
-<center><b>如果有什么，可以通过下面的邮箱和我联系！！！</b></center>
-
-<p><a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=VCM9NTo1OhQlJXo3Ozk"><img data-src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png" alt="img"></a></p>
+<p><strong>如果有什么，可以通过下面的邮箱和我联系！！！</strong></p>
+<p><a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=VCM9NTo1OhQlJXo3Ozk"><img data-src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png" alt="img"></a></p>
 ]]></content>
       <categories>
-        <category>服务器</category>
-        <category>dhcp服务</category>
+        <category>Java</category>
+        <category>数据库</category>
+        <category>JDBC</category>
+        <category>JDBC</category>
       </categories>
       <tags>
-        <tag>服务器</tag>
-        <tag>dhcp</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redhat搭建DNS服务</title>
-    <url>/2022/06/05/Redhat%E6%90%AD%E5%BB%BADNS%E6%9C%8D%E5%8A%A1/</url>
-    <content><![CDATA[<h1 id="1-克隆虚拟机"><a href="#1-克隆虚拟机" class="headerlink" title="1 克隆虚拟机"></a>1 克隆虚拟机</h1><ul>
-<li><p>与上次一样，直接克隆虚拟机。减少虚拟机安装和创建软件仓库所需的时间</p>
-</li>
-<li><p>卸载软件（可选）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dnf remove 软件名</span><br></pre></td></tr></table></figure></li>
-</ul>
-<span id="more"></span>
-
-
-
-<h1 id="2-设置静态IP"><a href="#2-设置静态IP" class="headerlink" title="2 设置静态IP"></a>2 设置静态IP</h1><p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BADNS%E6%9C%8D%E5%8A%A1/001.png"></p>
-<img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/服务器与存储技术/搭建DNS服务/002.png" alt="dhcp的配置文件" style="zoom:80%;" />
-
-<blockquote>
-<p>此IP地址应该与dhcp配置文件中的option domain-name-servers一致</p>
-</blockquote>
-<h1 id="3-配置DNS"><a href="#3-配置DNS" class="headerlink" title="3 配置DNS"></a>3 配置DNS</h1><ul>
-<li><p>下载bind-chroot</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dnf install bind-chroot</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>编辑配置文件</p>
-<p>第一个：named.conf</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/named.conf</span><br></pre></td></tr></table></figure>
-
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BADNS%E6%9C%8D%E5%8A%A1/003.png"></p>
-<p>将11和19行的地址改为any</p>
-<p>第二个：named.rfc1912.zones</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /etc/named.rfc1912.zones</span><br></pre></td></tr></table></figure>
-
-<p>我在末尾添加了如下内容</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">zone <span class="string">&quot;wian.com&quot;</span> IN &#123;</span><br><span class="line">        <span class="built_in">type</span> master;</span><br><span class="line">        file <span class="string">&quot;wian.com.zone&quot;</span>;</span><br><span class="line">        allow-update &#123; none; &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BADNS%E6%9C%8D%E5%8A%A1/004.png"></p>
-<p>第三个：</p>
-<p>切换到如下目录</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /var/named/</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cp</span> -p named.empty wian.com.zone</span><br></pre></td></tr></table></figure>
-
-<p>复制一份模板文件，文件名为named.rfc1912.zones中的file的值</p>
-<p>将文件编辑如下</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="variable">$TTL</span> 3H</span><br><span class="line">@       IN SOA  wian.com. root.wian.com.  (</span><br><span class="line">                                        0       ; serial</span><br><span class="line">                                        1D      ; refresh</span><br><span class="line">                                        1H      ; retry</span><br><span class="line">                                        1W      ; expire</span><br><span class="line">                                        3H )    ; minimum</span><br><span class="line">        IN NS   ns1.wian.com.</span><br><span class="line">ns1     IN A    88.88.88.110</span><br><span class="line">www     IN A    88.88.88.88</span><br></pre></td></tr></table></figure>
-
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BADNS%E6%9C%8D%E5%8A%A1/005.png"></p>
-</li>
-</ul>
-<h1 id="4-开启服务"><a href="#4-开启服务" class="headerlink" title="4 开启服务"></a>4 开启服务</h1><p>开启dhcp服务</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl start dns</span><br></pre></td></tr></table></figure>
-
-<p>设置为开机自启</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl enable dns</span><br></pre></td></tr></table></figure>
-
-<p>防火墙放行</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --permanent --add-service=dns</span><br></pre></td></tr></table></figure>
-
-<p>使其立即生效</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
-
-<p>关闭selinux，将圈出的内容改为如下内容</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/selinux/config </span><br></pre></td></tr></table></figure>
-
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BADNS%E6%9C%8D%E5%8A%A1/006.png"></p>
-<h1 id="5-访问页面"><a href="#5-访问页面" class="headerlink" title="5 访问页面"></a>5 访问页面</h1><p>在浏览器中输入域名并且带上端口号<a href="http://www.wian.com:8080/">www.wian.com:8080</a></p>
-<p><img data-src="https://cdn.jsdelivr.net/gh/WianAn/imageBed/post/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/%E6%90%AD%E5%BB%BADNS%E6%9C%8D%E5%8A%A1/007.png"></p>
-<hr>
-<center><b>如果有什么，可以通过下面的邮箱和我联系！！！</b></center>
-
-<p><a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=VCM9NTo1OhQlJXo3Ozk"><img data-src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png" alt="img"></a></p>
-]]></content>
-      <categories>
-        <category>服务器</category>
-        <category>dhcp服务</category>
-      </categories>
-      <tags>
-        <tag>服务器</tag>
-        <tag>dhcp</tag>
+        <tag>Java</tag>
+        <tag>多线程</tag>
       </tags>
   </entry>
 </search>
